@@ -1,0 +1,68 @@
+{
+	"albania": "Albania",
+
+	"home": "Home",
+	"work": "Work",
+	"about": "About",
+	"blog": "Blog",
+	"aboutMe": "About me",
+	"contact": "Contact",
+
+	"menu": "Menu",
+	"clients": "Clients",
+
+	"haveAnIdea": "Have an idea?",
+	"getInTouch": "Get In touch",
+	"contactMe": "Contact Me",
+	"emailMe": "Send me an email",
+
+	"contactThroughEmail": "Contact through Email:",
+	"whereToFindMe": "Where you can find me:",
+
+	"skills": "Skills",
+	"projects": "Projects",
+
+	"viewAll": "View All",
+	"viewAllClients": "View All Clients",
+
+	"fullstackDeveloper": "Fullstack Developer",
+	"uiuxDesigner": "UI/UX Designer",
+
+	"development": "Development",
+	"uiuxDesign": "UI/UX Design",
+	"graphicDesign": "Graphic Design",
+	"3DDesign": "3D Design",
+	"soundDesign": "Sound Design",
+	"other": "Other",
+
+	"phone": "Mobile Phone",
+
+	"loveToHearFromYou": "Love to hear from you",
+
+	"allCategories": "All Categories",
+	"filter": "Filter",
+
+	"visitPage": "Visit Page",
+	"viewProject": "View Project",
+	"viewProjects": "View Projects",
+
+	"view": "View",
+	"more": "more",
+	"less": "less",
+
+	"contactCTATitle": "Interested in working together?",
+	"contactCTADescription": "We should queue up a chat. I’ll buy the coffee.",
+
+	"searchButtonPlaceholder": "Search",
+	"searchPlaceholder": "Project Name / Details",
+	"close": "Close",
+	"unknown": "Unknown",
+	"never": "Never",
+
+	"noResults": "Sorry, there are no results matching your filters.",
+
+	"thankYou": "Thank You",
+
+	"published": "Published",
+	"updated": "Updated"
+}

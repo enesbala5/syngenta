@@ -1,0 +1,23 @@
+services:
+  frontend:
+    # Container Name & Image Name not set here - Declared on .prod & .development files
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - PUBLIC_UMAMI_SCRIPT=${PUBLIC_UMAMI_SCRIPT}
+      - PUBLIC_UMAMI_DATA_WEBSITE_ID=${PUBLIC_UMAMI_DATA_WEBSITE_ID}
+    build:
+      context: ./frontend/
+      args:
+        - PORT=${PORT}
+        - DATABASE_URL=${DATABASE_URL}
+        - RESEND_API_KEY=${RESEND_API_KEY}
+        - PUBLIC_UMAMI_SCRIPT=${PUBLIC_UMAMI_SCRIPT}
+        - PUBLIC_UMAMI_DATA_WEBSITE_ID=${PUBLIC_UMAMI_DATA_WEBSITE_ID}
+    restart: unless-stopped
+    cpus: 6
+    ports:
+      - 5180:5173
+      - 5555:5555

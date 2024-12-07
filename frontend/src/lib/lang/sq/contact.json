@@ -1,0 +1,15 @@
+{
+	"title": "Suport",
+	"phName": "Emri Mbiemër",
+	"email": "Adresa juaj e emailit",
+	"phEmail": "emri@email.com",
+	"interest": "Për çfarë jeni të interesuar",
+
+	"message": "Mesazhi",
+	"phMessage": "Pershkruani shkurt projektin tuaj",
+
+	"send": "Dërgoje",
+
+	"location": "Ku ndodhem:",
+	"contact": "Mund të më kontaktoni edhe përmes:"
+}

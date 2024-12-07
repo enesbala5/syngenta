@@ -1,0 +1,6 @@
+- [ ] Export as Markdown
+- [ ] Export as LaTeX
+- [ ] Examples Section - display formatted and fully prepared PDF documents  
+- [ ] Prepare Latex Templates Section
+- [ ] Linkedin Integration for Company Search Results
+	- [ ] Autocomplete Positions listed on Linkedin

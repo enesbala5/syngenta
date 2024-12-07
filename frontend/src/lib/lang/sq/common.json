@@ -1,0 +1,69 @@
+{
+	"albania": "Shqipëri",
+
+	"home": "Kryefaqja",
+	"work": "Projekte",
+	"about": "Rreth Meje",
+	"blog": "Blog",
+	"aboutMe": "Rreth Meje",
+	"contact": "Kontakt",
+
+	"haveAnIdea": "Keni një ide?",
+	"getInTouch": "Më kontaktoni",
+	"contactMe": "Më kontaktoni",
+	"emailMe": "Më nis një email",
+
+	"menu": "Menu",
+	"clients": "Klientët",
+
+	"contactThroughEmail": "Kontaktoni përmes email-it",
+	"whereToFindMe": "Ku mund te më gjeni",
+
+	"skills": "Aftësi",
+	"projects": "Projekte",
+
+	"viewAll": "Shiko të gjitha",
+	"viewAllClients": "Shiko të gjithë klientët",
+
+	"fullstackDeveloper": "Programues Fullstack",
+	"uiuxDesigner": "Dizajner UI/UX",
+
+	"development": "Programim",
+	"uiuxDesign": "Dizajn UI/UX",
+	"graphicDesign": "Dizajn Grafik",
+	"3DDesign": "Dizajn 3D",
+	"soundDesign": "Dizajn Zëri",
+	"other": "Të Tjera",
+
+	"phone": "Telefon",
+
+	"loveToHearFromYou": "Do të doja të dëgjoja nga ju",
+
+	"allCategories": "Gjithë Kategoritë",
+	"filter": "Filtro",
+
+	"visitPage": "Vizito Faqen",
+	"viewProject": "Shiko Projektet",
+	"viewProjects": "Shiko Projektet",
+
+	"view": "Shiko",
+	"more": "më shumë",
+	"less": "më pak",
+
+	"contactCTATitle": "Të interesuar për të punuar së bashku?",
+	"contactCTADescription": "Hajde bejme nje bisede. Kafen e kam une.",
+
+	"searchButtonPlaceholder": "Kërkoni",
+	"searchPlaceholder": "Emri / Detajet e Projektit",
+	"close": "Mbyll",
+
+	"unknown": "E panjohur",
+	"never": "Kurrë",
+
+	"noResults": "Nuk ka rezultate që përputhen me filtrët tuaj.",
+
+	"thankYou": "Faleminderit",
+
+	"published": "Publikuar",
+	"updated": "Përditësuar"
+}

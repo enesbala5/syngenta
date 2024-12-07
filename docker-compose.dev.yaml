@@ -1,0 +1,52 @@
+services:
+  database:
+    image: mysql:8.0
+    container_name: dell-database-c
+    ports:
+      - 3307:3307
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_TCP_PORT=${MYSQL_TCP_PORT}
+    volumes:
+      - databaseData:/var/lib/mysql # Persistent data volume for MySQL
+
+  frontend:
+    image: dell-frontend-dev-i:latest
+    env_file:
+      - .env.dev
+    depends_on:
+      database:
+        condition: service_started
+    build:
+      dockerfile: Dockerfile.dev
+      args:
+        - PUBLIC_NODE_ENV=${PUBLIC_NODE_ENV}
+        - PUBLIC_PAGE_URL=${PUBLIC_PAGE_URL}
+        - PUBLIC_BACKEND_URL=${PUBLIC_BACKEND_URL}
+    container_name: dell-frontend-dev-c
+    volumes:
+      - ./frontend:/frontend
+      - node_modules:/frontend/node_modules/
+
+  # ngrok:
+  #   container_name: dell-ngrok-c
+  #   image: ngrok/ngrok:latest
+  #   env_file:
+  #     - .env.dev
+  #   environment:
+  #     NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+  #     PUBLIC_BACKEND_URL: ${PUBLIC_BACKEND_URL}
+  #   command:
+  #     - "http"
+  #     - "backend:6003"
+  #     - --domain=secretly-good-aphid.ngrok-free.app
+  #   # ports:
+  #   #   - 3307:3306
+
+volumes:
+  node_modules:
+  databaseData:

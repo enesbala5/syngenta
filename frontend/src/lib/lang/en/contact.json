@@ -1,0 +1,15 @@
+{
+	"title": "Contact",
+	"phName": "Name Surname",
+	"email": "Your Email Address",
+	"phEmail": "name@email.com",
+	"interest": "What are you interested in",
+
+	"message": "Message",
+	"phMessage": "Briefly describe your project",
+
+	"send": "Just Send",
+
+	"location": "Where I am located",
+	"contact": "You can also contact me through:"
+}
