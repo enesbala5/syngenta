@@ -3,14 +3,14 @@ import { FacebookIcon, InstagramIcon, TwitterIcon } from 'lucide-svelte';
 
 export const navigation = {
 	solutions: [
-		{ name: 'Cover Letter Generator', href: route('/(app)/(homepage)') },
+		{ name: 'Homepage', href: route('/(app)/(homepage)') },
 	],
 	support: [
-		{ name: 'Pricing', href: route('/(app)/pricing') },
+		{ name: 'Knowledge Center', href: route('/(app)/knowledge') },
 		{ name: 'Privacy Policy', href: route('/(app)/privacy') },
 	],
 	company: [
-		{ name: 'Frequently Asked Questions', href: route('/(app)/faq') },
+		{ name: 'Startups', href: route('/(app)/startups') },
 	],
 	legal: [
 		{ name: 'Contact', href: route('/(app)/contact') },
