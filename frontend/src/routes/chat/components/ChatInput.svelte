@@ -11,7 +11,7 @@
 	// Default props
 
 	// Spread the rest of the props
-	let { ref = $bindable(), value = $bindable(), placeholder, ...props }: ChatInputProps = $props();
+	let { ref = $bindable(), value = $bindable(), placeholder, onkeydown, ...props }: ChatInputProps = $props();
 </script>
 
 <!-- {...props} -->
@@ -21,8 +21,9 @@
 	name="message"
 	autocomplete="off"
 	{placeholder}
+	{onkeydown}
 	class={cn(
-		'focus-visible:!ring-0-visible:ring-0 flex h-16 max-h-12 w-full resize-none items-center rounded-md bg-background px-4 py-3 text-sm !outline-none placeholder:text-muted-foreground focus-visible:!outline-none focus-visible:outline-transparent disabled:cursor-not-allowed disabled:opacity-50',
+		'focus-visible:!ring-0-visible:ring-0  flex h-16 max-h-12 w-full resize-none items-center rounded-md bg-background px-4 py-3 text-sm !outline-none placeholder:text-muted-foreground focus-visible:!outline-none focus-visible:outline-transparent disabled:cursor-not-allowed disabled:opacity-50',
 		props.class
 	)}
 >

@@ -3,19 +3,21 @@
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { Button } from '$lib/components/ui/button';
 	import { route } from '$lib/services/routeHandler';
-	import { DownloadIcon } from 'lucide-svelte';
+	import { DownloadIcon, FileCodeIcon, FileSpreadsheetIcon, InfoIcon } from 'lucide-svelte';
 	import type { PageData } from './$types';
 	import { mode } from 'mode-watcher';
 	import { onMount } from 'svelte';
 	import DatePickerWithRange from './components/DatePickerWithRange.svelte';
-	import Table from './Table/Table.svelte';
-
+	import ConversationsTable from './Table/ConversationsTable.svelte';
+	import { columns } from './Table/columns';
+	import Terminal from 'lucide-svelte/icons/terminal';
+	import * as Alert from '$lib/components/ui/alert/index.js';
 	interface Props {
 		data: PageData;
 	}
 
 	const { data }: Props = $props();
-	const { user, leads } = data;
+	const { user, conversations } = data;
 </script>
 
 <main class="container-width-sm !px-0 pt-2 md:px-4 lg:pb-24">
@@ -26,19 +28,29 @@
 		</div>
 	</section> -->
 
-	<div class="flex items-center justify-between space-y-2">
-		<h2 class="text-3xl font-bold tracking-tight">Conversations</h2>
+	<div class="flex flex-col space-y-2">
+		<h2 class="h2">Conversations</h2>
+
 		<div class="flex items-center space-x-2">
-			<DatePickerWithRange />
-			<Button size="sm">
-				<DownloadIcon class="mr-2 h-4 w-4" />
-				Download
+			<p>View conversations with your startups.</p>
+		</div>
+
+		<div class="flex items-center space-x-2 pt-4">
+			<!-- <DatePickerWithRange /> -->
+			<Button size="sm" variant="outline">
+				<FileCodeIcon class="mr-2 h-4 w-4" />
+				Download JSON
+			</Button>
+			<Button size="sm" >
+				<FileSpreadsheetIcon class="mr-2 h-4 w-4" />
+				Export as CSV
 			</Button>
 		</div>
 	</div>
 
+	<!-- <pre>{JSON.stringify(leads.data)}</pre> -->
 	<section class="relative mt-6 lg:mt-8">
-		<Table data={leads} />
+		<ConversationsTable {columns} {...conversations} />
 
 		<!-- {#ief !user}
 			<div

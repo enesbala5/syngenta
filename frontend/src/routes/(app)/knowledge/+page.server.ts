@@ -1,7 +1,4 @@
-
-import type { PageServerLoad } from "./$types.js";
-import OpenAI from 'openai';
-import { OPENAI_API_KEY } from '$env/static/private';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals, cookies }) => {
 	const key = 'temporaryId'
@@ -24,8 +21,3 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 		temporaryId: temporaryId
 	};
 };
-
-const openai = new OpenAI({
-	apiKey: OPENAI_API_KEY
-});
-

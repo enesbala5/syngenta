@@ -121,7 +121,7 @@
 				</form>
 
 				<!-- ? SOCIAL LOGIN -->
-				<div class="relative my-5 flex items-center justify-center text-sm">
+				<!-- <div class="relative my-5 flex items-center justify-center text-sm">
 					<div
 						class="z-10 bg-neutral-50 px-4 transition-all duration-300 ease-in-out dark:bg-neutral-900 lg:bg-neutral-100"
 					>
@@ -130,7 +130,7 @@
 					<div
 						class="absolute left-1/2 top-1/2 h-px w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-300 transition-all duration-300 ease-in-out dark:bg-neutral-700"
 					></div>
-				</div>
+				</div> -->
 				<!-- TODO: Implement 0AUTH -->
 				<!-- <div
 					class="mb-2 flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-2 md:space-y-0"

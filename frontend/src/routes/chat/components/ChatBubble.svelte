@@ -66,6 +66,7 @@
 		// 	return child;
 		// });
 	}
+
 </script>
 
 <div class={chatBubbleVariant({ variant, layout, className })}>

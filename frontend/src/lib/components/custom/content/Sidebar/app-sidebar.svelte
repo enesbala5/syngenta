@@ -5,6 +5,7 @@
 		HomeIcon,
 		ListOrderedIcon,
 		MessageCircleIcon,
+		MessagesSquareIcon,
 		UserIcon,
 		UsersIcon,
 		VideoIcon
@@ -30,7 +31,7 @@
 				{
 					title: 'Conversations',
 					url: route('/(app)/conversations'),
-					icon: ListOrderedIcon
+					icon: MessagesSquareIcon
 				},
 				{
 					title: 'Knowledge Base',
@@ -82,12 +83,12 @@
 							<img
 								src={company.brand.main.white.svg}
 								alt={company.brand.main.alt}
-								class="hidden dark:block md:h-6 lg:h-7 xl:h-8"
+								class="hidden dark:block md:h-6 lg:h-7 xl:h-8 object-contain"
 							/>
 							<img
 								src={company.brand.main.primary.svg}
 								alt={company.brand.main.alt}
-								class="block dark:hidden md:h-6 lg:h-7 xl:h-8"
+								class="block dark:hidden md:h-6 lg:h-7 xl:h-8 object-contain"
 							/>
 						</a>
 					{/snippet}

@@ -9,6 +9,7 @@
 	import { InfoIcon } from 'lucide-svelte';
 	import { navigation } from './data';
 	import { cn } from '$lib/utils';
+	import { route } from '$lib/services/routeHandler';
 
 	interface Props {
 		class?: string;
@@ -21,11 +22,23 @@
 </script>
 
 <footer
-	class={cn(' relative z-20 bg-neutral-50 dark:bg-neutral-950', className)}
+	class={cn(' relative z-20 border border-primary/10 bg-white dark:bg-neutral-950', className)}
 	aria-labelledby="footer-heading"
 >
 	<h2 id="footer-heading" class="sr-only">Footer</h2>
 	<div class={cn('container-width-sm py-12 lg:py-16', inner?.class)}>
+		<a href={route('/(app)/(homepage)')} class="w-fit ">
+			<img
+				src={company.brand.main.white.svg}
+				alt={company.brand.main.alt}
+				class="hidden object-contain dark:block h-16 mb-12"
+			/>
+			<img
+				src={company.brand.main.primary.svg}
+				alt={company.brand.main.alt}
+				class="block object-contain dark:hidden h-16 mb-12"
+			/>
+		</a>
 		<div class="grid w-full grid-cols-2 gap-8 pb-8 lg:pb-12 xl:col-span-2">
 			<div class="flex flex-col">
 				<h3 class=" font-medium">Solutions</h3>
@@ -79,7 +92,7 @@
 					</form>
 				</div>
 			</div> -->
-		<div
+		<!-- <div
 			class="border-t border-neutral-200 pt-8 dark:border-neutral-800 lg:flex lg:items-center lg:justify-between xl:mt-0"
 		>
 			<div>
@@ -109,7 +122,7 @@
 			</div>
 
 			<SubscribeEmail />
-		</div>
+		</div> -->
 		<div
 			class="mt-8 items-center border-t border-neutral-200 pt-8 dark:border-neutral-800 md:flex md:justify-between"
 		>

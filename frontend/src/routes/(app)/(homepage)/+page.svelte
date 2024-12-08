@@ -15,7 +15,7 @@
 	}
 
 	const { data }: Props = $props();
-	const { user } = data;
+	const { user, dashboardData } = data;
 </script>
 
 <main class="container-width-sm !px-0 pt-2 md:px-4 lg:pb-24">
@@ -26,32 +26,20 @@
 		</div>
 	</section> -->
 
-	<div class="flex items-center justify-between space-y-2">
-		<h2 class="text-3xl font-bold tracking-tight">Dashboard</h2>
+	<div class="flex flex-col space-y-2">
+		<h2 class="h2">Dashboard</h2>
+
 		<div class="flex items-center space-x-2">
-			<DatePickerWithRange />
-			<Button size="sm">
+			<p>Explore the data and insights of registered startups at a glance.</p>
+			<!-- <DatePickerWithRange /> -->
+			<!-- <Button size="sm">
 				<DownloadIcon class="mr-2 h-4 w-4" />
 				Download
-			</Button>
+			</Button> -->
 		</div>
 	</div>
 
 	<section class="relative mt-6 lg:mt-8">
-		<InsightsSection />
-
-		<!-- {#ief !user}
-			<div
-				class="pointer-events-none absolute -top-12 right-8 z-10 hidden rotate-6 flex-col md:flex"
-			>
-				<p
-					class="-translate-x-6 -translate-y-3 font-cursive text-3xl leading-none text-primary dark:text-violet-400"
-				>
-					Easy Process!
-				</p>
-				<Arrow class="size-24 translate-x-2 rotate-[25deg] fill-primary dark:fill-violet-500" />
-			</div>
-		{/if} -->
-		<!-- <CoverLetterForm {data} /> -->
+		<InsightsSection data={dashboardData as any} />
 	</section>
 </main>

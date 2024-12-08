@@ -6,7 +6,7 @@
 	// Prop type definition
 	interface ChatMessageListProps extends HTMLAttributes<HTMLDivElement> {
 		children: Snippet;
-		ref: HTMLDivElement | undefined | null;
+		ref?: HTMLDivElement | undefined | null;
 	}
 
 	let { children, ref = $bindable(), ...props }: ChatMessageListProps = $props();

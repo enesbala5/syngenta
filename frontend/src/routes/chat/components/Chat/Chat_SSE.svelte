@@ -4,9 +4,7 @@
 		CornerDownLeft,
 		Mic,
 		Paperclip,
-		PhoneIcon,
 		RefreshCcw,
-		StarIcon,
 		StopCircleIcon,
 		UserIcon,
 		Volume2
@@ -20,7 +18,7 @@
 	import ChatRating from '../ChatRating/ChatRating.svelte';
 	import ChatMessageList from '../ChatMessageList.svelte';
 	import { PUBLIC_BACKEND_URL } from '$env/static/public';
-	import { cn, returnNameOrPlaceholder } from '$lib/utils';
+	import { returnNameOrPlaceholder } from '$lib/utils';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { Button } from '$lib/components/ui/button';
 	import { company, RequestMethod } from '$lib/data/generic';
@@ -28,29 +26,23 @@
 	import { fade, fly } from 'svelte/transition';
 	import ChatInput from '../ChatInput.svelte';
 	import { quartInOut } from 'svelte/easing';
+	import { copyText } from 'svelte-copy';
+	import client from '$lib/services/api';
 	import { flip } from 'svelte/animate';
 	import { toast } from 'svelte-sonner';
 	import { ChatAiIcons } from './data';
 	import { PressedKeys } from 'runed';
 	import type { User } from 'lucia';
+	import { SSE } from 'sse.js';
 	import type { Message } from './types';
 	import { buildSearchParamsString } from '$lib/services/routeHandler';
-	import client from '$lib/services/api';
-	import Command from '$lib/components/ui/command/command.svelte';
-	import CommandShortcut from '$lib/components/ui/command/command-shortcut.svelte';
-	import { chatState } from './state.svelte';
 
 	interface Props {
-		class?: string;
-		innerContainer?: string;
 		user?: User;
-		endpoint?: string;
 		temporaryId: string;
 	}
 
-	let { class: className, user, temporaryId, innerContainer, ...props }: Props = $props();
-
-	const endpoint = props?.endpoint ?? '/ai/';
+	let { user, temporaryId }: Props = $props();
 
 	const keys = new PressedKeys();
 	// State
@@ -81,14 +73,9 @@
 		e.preventDefault();
 
 		if (isLoading) {
-			toast.error('Please wait. You will be able to request a new message in a few seconds.');
-			return;
 		}
 
-		if (!input) {
-			toast.error('Something went wrong. Please try again later');
-			return;
-		}
+		if (!input) return;
 
 		// Add user message
 		messages.push({
@@ -98,6 +85,10 @@
 			role: 'user',
 			message: input
 		});
+
+		// Reset input
+		input = '';
+		formEl?.reset();
 
 		// ---------------------------
 		isLoading = true;
@@ -109,54 +100,76 @@
 
 		console.log(searchParamsString);
 
-		cachedInputValue = input;
-		// Reset input
-		input = '';
-		formEl?.reset();
-
-		const { data, error } = await client.POST(endpoint as any, {
-			body: {
-				chat_id: user?.id ?? temporaryId,
-				text: cachedInputValue
-			},
+		const eventSource = new SSE(`${PUBLIC_BACKEND_URL}/ai_sse` + searchParamsString, {
 			headers: {
 				'Content-Type': 'application/json',
 				'ngrok-skip-browser-warning': 'true'
-			}
+			},
+			method: RequestMethod.GET
 		});
 
-		if (error || !data) {
-			toast.error('Something went wrong - please try again');
-			handleError(error);
-		}
+		cachedInputValue = input;
+		input = '';
 
-		console.log('data', data);
+		messages.push({
+			id: messages.length + 1,
+			// avatar: '',
+			name: 'ChatBot',
+			role: 'ai',
+			message: ''
+		});
 
-		if (data) {
+		eventSource.addEventListener('error', handleError);
+
+		eventSource.addEventListener('message', (e: any) => {
 			scrollToBottom();
 
-			console.log({ data });
+			console.log('streamed res', { e });
 
-			isLoading = false;
+			try {
+				isLoading = false;
 
-			messages.push({
-				id: messages.length + 1,
-				name: 'Dell Virtual Assistant',
-				role: 'ai',
-				message: String(data)
-			});
-		}
+				if (e.data === '[DONE]') {
+					isLoading = false;
+					return;
+				}
 
+				const completionResponse = JSON.parse(e.data);
+				const [{ delta }] = completionResponse.choices;
+
+				// Update the answer to include the content
+				if (delta.content) {
+					(messages[messages.length] as Message).message =
+						(messages[messages.length]?.message ?? '') + delta.content;
+				}
+			} catch (err) {
+				handleError(err);
+			}
+		});
+		eventSource.stream();
 		scrollToBottom();
+
+		// const { data, error } = await client.POST('/ai/', {
+		// 	body: {
+		// 		chat_id: user?.id ?? temporaryId,
+		// 		text: input
+		// 	},
+
+		// });
+
+		// if (error || !data) {
+		// 	toast.error('Something went wrong - please try again');
+		// }
+
+		// console.log('data', data);
 
 		isLoading = false;
 		hasInitialAIResponse = true;
 	}
 
 	function handleError<T>(err: T) {
-		toast.error('Something went wrong. Please try again.');
 		isLoading = false;
-		input = cachedInputValue;
+		input = '';
 		// Remove the last message entirely
 		messages.splice(-1, 1);
 		console.error(err);
@@ -171,19 +184,8 @@
 
 	// Handle key down for message submission
 	function handleKeyDown(e: KeyboardEvent) {
-		console.log('e.key', e.key);
 		if (e.key === 'Enter' && !e.shiftKey) {
-			if (!input) {
-				toast.error('You have not entered a query - please complete the details');
-				return;
-			}
-
-			if (!submitButtonEl) {
-				toast.error('Something went wrong while submitting the form. Please try again.');
-				return;
-			} else {
-				submitButtonEl?.click();
-			}
+			handleSendMessage(e);
 		}
 	}
 
@@ -224,15 +226,15 @@
 			if (inputEl) inputEl.focus();
 		}
 	});
+
+	let showChatRating = $state(false);
 </script>
 
-<div class={cn('mx-auto h-[100dvh] w-full', className)}>
-	<div
-		class={cn(
-			'relative flex h-full flex-col rounded-xl bg-muted/40 p-4 lg:col-span-2',
-			innerContainer
-		)}
-	>
+<button onclick={() => (showChatRating = true)}>show</button>
+<button onclick={() => (showChatRating = false)}>hide</button>
+
+<div class="mx-auto h-[100dvh] w-full max-w-lg">
+	<div class="relative flex h-full flex-col rounded-xl bg-muted/40 p-4 lg:col-span-2">
 		<ChatMessageList bind:ref={messagesContainerEl}>
 			{#each messages as message, index (message.id)}
 				<div
@@ -242,7 +244,7 @@
 					out:fade={{ duration: 200 }}
 				>
 					<ChatBubble layout="ai">
-						<Avatar.Root class="size-12">
+						<Avatar.Root class="size-8 border">
 							<Avatar.Image
 								src={message.role === 'ai' ? '' : '/media/avatars/fallback_profile_picture.jpg'}
 								alt="Avatar"
@@ -262,7 +264,7 @@
 						</Avatar.Root>
 						<ChatBubbleMessage message={message.message} isLoading={message.isLoading}>
 							{#if message.role === 'ai'}
-								<div class="mt-1.5 flex items-center gap-1 empty:hidden">
+								<div class="mt-1.5 flex items-center gap-1">
 									{#if !message.isLoading}
 										{#each ChatAiIcons as icon}
 											<ChatBubbleAction class="size-6" onclick={(e) => icon.onclick?.(e, message)}>
@@ -283,19 +285,19 @@
 
 		<div class="flex-1"></div>
 
-		{#if chatState.showChatRating}
+		{#if showChatRating}
 			<div
 				class="z-20 mb-4 flex items-center justify-center"
 				transition:fly={{ duration: 150, easing: quartInOut, y: 50 }}
 			>
-				<ChatRating chat_id={user?.id ?? temporaryId} />
+				<ChatRating />
 			</div>
 		{/if}
 		<div bind:this={scrollToDiv}></div>
 		<form
 			bind:this={formEl}
 			onsubmit={handleSendMessage}
-			class="relative z-30 rounded-lg border bg-background shadow-sm shadow-primary/20 transition-all duration-300 ease-in-out focus-within:shadow-primary/40 focus-within:ring-1 focus-within:ring-ring"
+			class="relative z-30 rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
 		>
 			<ChatInput
 				bind:ref={inputEl}
@@ -305,30 +307,12 @@
 				class="min-h-12 resize-none rounded-lg border-0 bg-background p-3 shadow-none focus-visible:ring-0"
 			/>
 			<div class="flex items-center p-3 pt-0">
-				<Button href={'tel:+15642323655'} variant="ghost" size="icon">
-					<PhoneIcon class="size-4" />
-					<span class="sr-only">Talk on the Phone</span>
-				</Button>
-				<Button
-					class="opacity-30"
-					onclick={() => {
-						toast.error('Feature is coming soon. Thank you for your patience.');
-					}}
-					variant="ghost"
-					size="icon"
-				>
+				<Button variant="ghost" size="icon">
 					<Paperclip class="size-4" />
 					<span class="sr-only">Attach file</span>
 				</Button>
 
-				<Button
-					class="opacity-30"
-					onclick={() => {
-						toast.error('Feature is coming soon. Thank you for your patience.');
-					}}
-					variant="ghost"
-					size="icon"
-				>
+				<Button variant="ghost" size="icon">
 					<Mic class="size-4" />
 					<span class="sr-only">Use Microphone</span>
 				</Button>
@@ -345,12 +329,7 @@
 						<!-- <Spinner class="size-3.5" /> -->
 						<StopCircleIcon class="size-3.5" />
 					{:else}
-						<div class="flex flex-col items-start text-left">
-							<p>Send Message</p>
-							<!-- <CommandShortcut class="block w-full !text-left text-inherit"
-								>⌘ + Enter</CommandShortcut
-							> -->
-						</div>
+						Sending
 						<CornerDownLeft class="size-3.5" />
 					{/if}
 				</Button>

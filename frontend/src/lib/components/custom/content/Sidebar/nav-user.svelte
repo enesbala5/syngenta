@@ -13,10 +13,12 @@
 		CreditCardIcon,
 		LogOutIcon,
 		SettingsIcon,
-		SparklesIcon
+		SparklesIcon,
+		UserIcon
 	} from 'lucide-svelte';
 	import { Badge } from '$lib/components/ui/badge';
 	import Logout from '../../general/Logout/Logout.svelte';
+	import { returnNameOrPlaceholder } from '$lib/utils';
 
 	let {
 		user
@@ -40,13 +42,15 @@
 					>
 						<Avatar.Root class="size-8 rounded-full">
 							<Avatar.Image alt={user?.firstName} />
-							<Avatar.Fallback class="rounded-full">
-								{user ? user?.lastName?.charAt(0) : '-'}
+							<Avatar.Fallback class="overflow-hidden rounded-full bg-primary/10">
+								<UserIcon class="origin-top scale-[130%] fill-primary stroke-primary opacity-30" />
 							</Avatar.Fallback>
 						</Avatar.Root>
 						<div class="grid flex-1 text-left text-sm leading-tight">
-							<span class="truncate font-semibold">{`${user?.firstName} ${user?.lastName}`}</span>
-							<span class="truncate text-xs text-muted-foreground">{user?.username}</span>
+							<span class="truncate font-semibold"
+								>{returnNameOrPlaceholder(user?.firstName, user?.lastName)}</span
+							>
+							<span class="truncate text-xs text-muted-foreground">{user?.email}</span>
 						</div>
 						<ChevronsUpDownIcon class="ml-auto size-3 stroke-[1.5px] text-muted-foreground/50" />
 					</Sidebar.MenuButton>
@@ -60,14 +64,16 @@
 			>
 				<DropdownMenu.Label class="p-0 font-normal">
 					<div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-						<Avatar.Root class="size-8 rounded-lg">
-							<Avatar.Image alt={`${user?.firstName} ${user?.lastName}`} />
-							<Avatar.Fallback class="rounded-lg"
-								>{user ? user?.firstName?.charAt(0) : '-'}</Avatar.Fallback
-							>
+						<Avatar.Root class="size-8 rounded-full">
+							<Avatar.Image alt={user?.firstName} />
+							<Avatar.Fallback class="overflow-hidden rounded-full bg-primary/10">
+								<UserIcon class="origin-top scale-[130%] fill-primary stroke-primary opacity-30" />
+							</Avatar.Fallback>
 						</Avatar.Root>
 						<div class="grid flex-1 text-left text-sm leading-tight">
-							<span class="truncate font-semibold">{user?.firstName} {user?.lastName}</span>
+							<span class="truncate font-semibold"
+								>{returnNameOrPlaceholder(user?.firstName, user?.lastName)}</span
+							>
 							<span class="truncate text-xs">{user?.email}</span>
 						</div>
 					</div>

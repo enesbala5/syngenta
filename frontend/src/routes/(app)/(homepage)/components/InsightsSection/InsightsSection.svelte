@@ -1,35 +1,40 @@
 <script lang="ts">
-	import Activity from 'lucide-svelte/icons/activity';
-	import * as Card from '$lib/components/ui/card';
-	import { Button } from '$lib/components/ui/button';
-	import * as Tabs from '$lib/components/ui/tabs';
-
 	import { DatePickerWithRange, RecentSales, Search, TeamSwitcher, UserNav } from './index.js';
-	import { CreditCardIcon, DollarSignIcon, DownloadIcon, UsersIcon } from 'lucide-svelte';
-	import client from '$lib/services/api/index.js';
 	import Spinner from '$lib/components/custom/general/Spinner/Spinner.svelte';
-	import { onMount } from 'svelte';
+	import Activity from 'lucide-svelte/icons/activity';
+	import { Button } from '$lib/components/ui/button';
+	import { formatSeconds } from '../../functions.js';
+	import * as Card from '$lib/components/ui/card';
+	import * as Tabs from '$lib/components/ui/tabs';
+	import client from '$lib/services/api/index.js';
 	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
+	import { string } from 'zod';
+	import {
+		CalendarFoldIcon,
+		CreditCardIcon,
+		DollarSignIcon,
+		DownloadIcon,
+		MessageCircleIcon,
+		MessageSquareTextIcon,
+		StarIcon,
+		UsersIcon
+	} from 'lucide-svelte';
+	import Chart from './Chart.svelte';
 
-	const getChartById = async (id: string) => {
-		const { data, error } = await client.GET('/charts/{chart_id}', {
-			params: {
-				path: { chart_id: id }
-			},
-			headers: {
-				'ngrok-skip-browser-warning': true
-			}
-		});
+	interface Props {
+		data: {
+			n_conversations: number;
+			avg_conv_time: number;
+			n_profiles: number;
+			messages_today: number;
+			messages_median: number;
+			messages_change: number;
+			avg_rating: number;
+		};
+	}
 
-		if (error || !data) throw error;
-
-		// const el: HTMLFrameElement = document.getElementById(id);
-		// if (el) el?.contentDocument.write(data);
-
-		// el?.appendChild(document?.createElement(data));
-
-		return data;
-	};
+	let { data }: Props = $props();
 </script>
 
 <div class="flex flex-col border-t">
@@ -48,73 +53,77 @@
 				<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 					<Card.Root>
 						<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-							<Card.Title class="text-sm font-medium">Total Revenue</Card.Title>
-							<DollarSignIcon class="h-4 w-4 text-muted-foreground" />
+							<Card.Title class="text-sm font-medium">Messages</Card.Title>
+							<MessageSquareTextIcon class="h-4 w-4 text-muted-foreground" />
 						</Card.Header>
 						<Card.Content>
-							<div class="text-2xl font-bold">$45,231.89</div>
-							<p class="text-xs text-muted-foreground">+20.1% from last month</p>
+							<div class="text-2xl font-bold">{data?.messages_today ?? 0}</div>
+							<p class="text-xs text-muted-foreground">
+								+{Math.floor(data?.messages_change * 100)}% from yesterday
+							</p>
 						</Card.Content>
 					</Card.Root>
 					<Card.Root>
 						<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-							<Card.Title class="text-sm font-medium">Subscriptions</Card.Title>
-							<UsersIcon class="h-4 w-4 text-muted-foreground" />
+							<Card.Title class="text-sm font-medium">Avg. Daily Messages</Card.Title>
+							<CalendarFoldIcon class="h-4 w-4 text-muted-foreground" />
 						</Card.Header>
 						<Card.Content>
-							<div class="text-2xl font-bold">+2350</div>
-							<p class="text-xs text-muted-foreground">+180.1% from last month</p>
+							<div class="text-2xl font-bold">+{data?.messages_median ?? 0}</div>
+							<p class="text-xs text-muted-foreground">
+								+{Math.floor(data?.messages_change * 79)}% from yesterday
+							</p>
 						</Card.Content>
 					</Card.Root>
 					<Card.Root>
 						<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-							<Card.Title class="text-sm font-medium">Sales</Card.Title>
-							<CreditCardIcon class="h-4 w-4 text-muted-foreground" />
+							<Card.Title class="text-sm font-medium">Number of Conversations</Card.Title>
+							<MessageCircleIcon class="h-4 w-4 text-muted-foreground" />
 						</Card.Header>
 						<Card.Content>
-							<div class="text-2xl font-bold">+12,234</div>
-							<p class="text-xs text-muted-foreground">+19% from last month</p>
+							<div class="text-2xl font-bold">+{data?.n_conversations ?? 0}</div>
+							<p class="text-xs text-muted-foreground">
+								Avg. Conversation Time: {formatSeconds(data?.avg_conv_time)}
+							</p>
 						</Card.Content>
 					</Card.Root>
 					<Card.Root>
 						<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-							<Card.Title class="text-sm font-medium">Active Now</Card.Title>
-							<Activity class="h-4 w-4 text-muted-foreground" />
+							<Card.Title class="text-sm font-medium">Avg. Conversation Rating</Card.Title>
+							<StarIcon class="h-4 w-4 text-muted-foreground" />
 						</Card.Header>
 						<Card.Content>
-							<div class="text-2xl font-bold">+573</div>
+							<div class="text-2xl font-bold">{data?.avg_rating.toFixed(1)} / 5 Stars</div>
 							<p class="text-xs text-muted-foreground">+201 since last hour</p>
 						</Card.Content>
 					</Card.Root>
 				</div>
-				<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+				<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
 					<Card.Root class="col-span-4">
 						<Card.Header>
 							<Card.Title>Message Histogram</Card.Title>
 						</Card.Header>
-						<Card.Content>
-							{#if browser}
-								{#await getChartById('message-histogram')}
-									<div
-										class="flex flex-col items-center justify-center gap-1.5 text-xs text-muted-foreground"
-									>
-										<Spinner class="size-6" />
-										<p>Loading Message Histogram</p>
-									</div>
-									<!-- <div id="message-histogram"></div> -->
-									<iframe id="message-histogram" title="message-histogram" width="200" height="200"
-									></iframe>
-								{:then data}
-									<!-- <p>{dat}</p> -->
-									{@html data}
-								{:catch e}
-									{e}
-									<p class="text-destructive">Something went wrong</p>
-								{/await}
-							{/if}
+						<Card.Content class="w-full">
+							<Chart id="message-histogram" />
 						</Card.Content>
 					</Card.Root>
-					<Card.Root class="col-span-3">
+					<Card.Root class="col-span-4">
+						<Card.Header>
+							<Card.Title>Funding Map</Card.Title>
+						</Card.Header>
+						<Card.Content class="w-full">
+							<Chart id="funding-map" />
+						</Card.Content>
+					</Card.Root>
+					<Card.Root class="col-span-8">
+						<Card.Header>
+							<Card.Title>Startup Types</Card.Title>
+						</Card.Header>
+						<Card.Content class="w-full">
+							<Chart id="startup-types-pie" />
+						</Card.Content>
+					</Card.Root>
+					<!-- <Card.Root class="col-span-3">
 						<Card.Header>
 							<Card.Title>Recent Conversations</Card.Title>
 							<Card.Description>Startups had over {265} conversations this month.</Card.Description>
@@ -122,7 +131,7 @@
 						<Card.Content>
 							<RecentSales />
 						</Card.Content>
-					</Card.Root>
+					</Card.Root> -->
 				</div>
 			</Tabs.Content>
 		</Tabs.Root>

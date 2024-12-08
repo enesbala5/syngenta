@@ -1,8 +1,9 @@
-import { CopyIcon, RefreshCcwIcon, Volume2Icon } from 'lucide-svelte';
+import { CopyIcon, RefreshCcwIcon, StarIcon, Volume2Icon } from 'lucide-svelte';
 import type { Message } from './types';
 import { toast } from 'svelte-sonner';
 import { copyText } from 'svelte-copy';
 import type { Component, Snippet, SvelteComponent } from 'svelte';
+import { chatState } from './state.svelte';
 
 interface ChatIcon {
 	icon: any,
@@ -27,12 +28,17 @@ export const ChatAiIcons: ChatIcon[] = [
 	},
 	{
 		icon: RefreshCcwIcon, label: 'Refresh', onclick: (e, message) => {
-			toast.message('Feature is coming soon. Thank you for your patience.')
+			toast.message('Refresh Message is coming soon. Thank you for your patience.')
 		}
 	},
 	{
 		icon: Volume2Icon, label: 'Read Aloud', onclick: (e, message) => {
-			toast.message('Feature is coming soon. Thank you for your patience.')
+			toast.message('Read Aloud is coming soon. Thank you for your patience.')
+		}
+	},
+	{
+		icon: StarIcon, label: 'Rate Conversation', onclick: (e, message,) => {
+			chatState.showChatRating = true;
 		}
 	}
 ];

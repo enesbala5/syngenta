@@ -3,22 +3,23 @@
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { Button } from '$lib/components/ui/button';
 	import { route } from '$lib/services/routeHandler';
-	import { DownloadIcon } from 'lucide-svelte';
+	import { DownloadIcon, FileCodeIcon, FileSpreadsheetIcon } from 'lucide-svelte';
 	import type { PageData } from './$types';
 	import { mode } from 'mode-watcher';
 	import { onMount } from 'svelte';
 	import DatePickerWithRange from './components/DatePickerWithRange.svelte';
-	import Table from './Table/Table.svelte';
+	import { columns } from './Table/columns';
+	import StartupsTable from './Table/StartupsTable.svelte';
 
 	interface Props {
 		data: PageData;
 	}
 
 	const { data }: Props = $props();
-	const { user, leads } = data;
+	const { user, startups } = data;
 </script>
 
-<main class="container-width-sm !px-0 pt-2 md:px-4 lg:pb-24">
+<main class=" !px-0 pt-2 md:px-4 lg:pb-24">
 	<!-- <section class="flex flex-col gap-3 lg:gap-4">
 		<h1 class="h1">Insights</h1>
 		<div class="relative flex flex-col">
@@ -27,18 +28,22 @@
 	</section> -->
 
 	<div class="flex items-center justify-between space-y-2">
-		<h2 class="text-3xl font-bold tracking-tight">Lead Management</h2>
+		<h2 class="h2">Startups</h2>
 		<div class="flex items-center space-x-2">
-			<DatePickerWithRange />
+			<!-- <DatePickerWithRange /> -->
+			<Button size="sm" variant="outline">
+				<FileCodeIcon class="mr-2 h-4 w-4" />
+				Download JSON
+			</Button>
 			<Button size="sm">
-				<DownloadIcon class="mr-2 h-4 w-4" />
-				Download
+				<FileSpreadsheetIcon class="mr-2 h-4 w-4" />
+				Export as CSV
 			</Button>
 		</div>
 	</div>
 
 	<section class="relative mt-6 lg:mt-8">
-		<Table data={leads} />
+		<StartupsTable {columns} {...startups} />
 
 		<!-- {#ief !user}
 			<div

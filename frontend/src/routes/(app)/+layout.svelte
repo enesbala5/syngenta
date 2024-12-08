@@ -105,9 +105,9 @@
 		</header>
 
 		<section
-			class={'container-width-base mx-auto mt-4 flex max-w-[1200px] flex-1 flex-col gap-4 overflow-hidden rounded-b-xl py-4 pt-0 transition-all duration-300 ease-in-out lg:mt-8'}
+			class={'container-width-base mx-auto mt-4 flex max-w-[1200px] flex-1 shrink flex-col gap-4 overflow-auto rounded-b-xl py-4 pt-0 transition-all duration-300 ease-in-out lg:mt-8'}
 		>
-			<div class="min-h-[100vh] w-full flex-1 overflow-y-auto md:min-h-min">
+			<div class="min-h-[100vh] w-full flex-1 md:min-h-min">
 				{@render children()}
 				<Footer />
 			</div>

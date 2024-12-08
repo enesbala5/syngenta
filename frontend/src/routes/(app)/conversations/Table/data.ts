@@ -6,7 +6,7 @@ type Payment = {
 	email: string;
 };
 
-export const data: Payment[] = [
+export const payments: Payment[] = [
 	{
 		id: "728ed52f",
 		amount: 100,

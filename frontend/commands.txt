@@ -1,0 +1,3 @@
+Running NGROK to serve 
+---
+docker run --net=host -it -e NGROK_AUTHTOKEN="2dzyUO3dX0yw81kVC2cRn3Q4015_yJz2kgyxuVMZ4BEfZeNm" ngrok/ngrok:latest http 5180 --url=dell.ngrok.dev

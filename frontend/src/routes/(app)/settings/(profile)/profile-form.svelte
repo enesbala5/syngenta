@@ -114,7 +114,7 @@
 
 	<Form.Button>Update profile</Form.Button>
 </form>
-
+<!-- 
 {#if browser}
 	<SuperDebug data={$formData} />
-{/if}
+{/if} -->

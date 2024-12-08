@@ -1,18 +1,14 @@
 <script lang="ts">
+	import type { ReturnButtonProps } from '../Buttons/ReturnButton/types';
+	import ReturnButton from '../Buttons/ReturnButton/ReturnButton.svelte';
+	import type { AlertVariant } from '$lib/components/ui/alert';
+	import * as Alert from '$lib/components/ui/alert/index.js';
 	import { LogOut, InfoIcon } from 'lucide-svelte';
+	import Logout from '../Logout/Logout.svelte';
+	import type { Snippet } from 'svelte';
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
-	import type { AlertVariant } from '$lib/components/ui/alert';
-	import type { ReturnButtonProps } from '../Buttons/ReturnButton/types';
-	import type { Snippet } from 'svelte';
-	import * as Alert from '$lib/components/ui/alert/index.js';
-	import ReturnButton from '../Buttons/ReturnButton/ReturnButton.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
-	import { invalidateAll } from '$app/navigation';
-	import { route } from '$lib/services/routeHandler';
-	import { RequestMethod } from '$lib/data/generic';
-	import { toast } from 'svelte-sonner';
-	import Logout from '../Logout/Logout.svelte';
 
 	interface Props {
 		className?: string;
@@ -73,11 +69,11 @@
 				<ReturnButton {...returnButtonProps} />
 
 				{#if $page.data?.user && showLogout}
-					<Logout class="w-full">
-						<button class="w-full text-left">
+					<Logout class="flex w-full ">
+						<Button class="items-center gap-1.5 text-left w-fit flex" variant='outline'>
 							<LogOut class={'h-4 w-4'} />
 							Log Out
-						</button>
+						</Button>
 					</Logout>
 				{/if}
 			{/if}

@@ -5,9 +5,9 @@
 	import { PUBLIC_UMAMI_DATA_WEBSITE_ID, PUBLIC_UMAMI_SCRIPT } from '$env/static/public';
 	import { Toaster } from '$lib/components/ui/sonner/index.js';
 	import type { LayoutData, LayoutServerData } from './$types';
-	import { ModeWatcher, mode } from 'mode-watcher';
 	import { dev } from '$app/environment';
 	import type { Snippet } from 'svelte';
+	import { mode } from 'mode-watcher';
 
 	interface Props {
 		data: LayoutData & LayoutServerData;

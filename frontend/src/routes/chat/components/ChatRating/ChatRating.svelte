@@ -5,15 +5,17 @@
 	import { fly } from 'svelte/transition';
 	import StarRating from '../StarRating/StarRating.svelte';
 	import { quartInOut } from 'svelte/easing';
-	import { CheckIcon } from 'lucide-svelte';
+	import { CheckIcon, XIcon } from 'lucide-svelte';
 	import client from '$lib/services/api';
 	import { toast } from 'svelte-sonner';
+	import { chatState } from '../Chat/state.svelte';
 
 	interface Props {
+		chat_id: string;
 		rating?: number | undefined;
 	}
 
-	let { rating = $bindable() } = $props();
+	let { rating = $bindable(), chat_id }: Props = $props();
 </script>
 
 <Card.Root class="w-full p-0.5">
@@ -28,10 +30,27 @@
 	</Card.Content>
 	<Card.Footer class="flex flex-wrap gap-2">
 		<Button
-			onclick={() => {
-				if (!rating) toast.error('Please select a rating before submitting form');
+			onclick={async () => {
+				if (!rating) {
+					toast.error('Please select a rating before submitting form');
+					return;
+				}
 
-				// client.GET('')
+				const { data, error } = await client.POST('/rating/', {
+					body: {
+						chat_id,
+						rating
+					}
+				});
+
+				if (error || !data) {
+					toast.error('Something went wrong. Please try to submit again.');
+					return;
+				}
+
+				toast.success('Rating submitted successfully. Thank you!');
+				chatState.showChatRating = false;
+				return;
 			}}
 		>
 			<CheckIcon />
@@ -42,13 +61,24 @@
 				</div>
 			{/if}
 		</Button>
-		<Button
+		<!-- <Button
 			variant="outline"
 			onclick={() => {
 				rating = undefined;
 			}}
 		>
 			Reset
+		</Button> -->
+		<Button
+			variant="outline"
+			class="ml-auto"
+			onclick={() => {
+				rating = undefined;
+				chatState.showChatRating = false;
+			}}
+		>
+			<XIcon class="size-4 " />
+			Cancel
 		</Button>
 	</Card.Footer>
 </Card.Root>
