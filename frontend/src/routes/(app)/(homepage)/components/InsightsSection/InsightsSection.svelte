@@ -6,30 +6,37 @@
 
 	import { DatePickerWithRange, RecentSales, Search, TeamSwitcher, UserNav } from './index.js';
 	import { CreditCardIcon, DollarSignIcon, DownloadIcon, UsersIcon } from 'lucide-svelte';
+	import client from '$lib/services/api/index.js';
+	import Spinner from '$lib/components/custom/general/Spinner/Spinner.svelte';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+
+	const getChartById = async (id: string) => {
+		const { data, error } = await client.GET('/charts/{chart_id}', {
+			params: {
+				path: { chart_id: id }
+			},
+			headers: {
+				'ngrok-skip-browser-warning': true
+			}
+		});
+
+		if (error || !data) throw error;
+
+		// const el: HTMLFrameElement = document.getElementById(id);
+		// if (el) el?.contentDocument.write(data);
+
+		// el?.appendChild(document?.createElement(data));
+
+		return data;
+	};
 </script>
 
-<div class="flex flex-col">
-	<div class="border-b">
-		<div class="flex h-16 items-center px-4">
+<div class="flex flex-col border-t">
+	<!-- <div class="flex h-16 items-center">
 			<TeamSwitcher />
-			<!-- <DashboardMainNav class="mx-6" /> -->
-			<div class="ml-auto flex items-center space-x-4">
-				<Search />
-				<UserNav />
-			</div>
-		</div>
-	</div>
-	<div class="flex-1 space-y-4 p-8 pt-6">
-		<div class="flex items-center justify-between space-y-2">
-			<h2 class="text-3xl font-bold tracking-tight">Dashboard</h2>
-			<div class="flex items-center space-x-2">
-				<DatePickerWithRange />
-				<Button size="sm">
-					<DownloadIcon class="mr-2 h-4 w-4" />
-					Download
-				</Button>
-			</div>
-		</div>
+		</div> -->
+	<div class="flex-1 space-y-4 pt-6">
 		<Tabs.Root value="overview" class="space-y-4">
 			<Tabs.List>
 				<Tabs.Trigger value="overview">Overview</Tabs.Trigger>
@@ -83,16 +90,34 @@
 				<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
 					<Card.Root class="col-span-4">
 						<Card.Header>
-							<Card.Title>Overview</Card.Title>
+							<Card.Title>Message Histogram</Card.Title>
 						</Card.Header>
 						<Card.Content>
-							<!-- <Overview /> -->
+							{#if browser}
+								{#await getChartById('message-histogram')}
+									<div
+										class="flex flex-col items-center justify-center gap-1.5 text-xs text-muted-foreground"
+									>
+										<Spinner class="size-6" />
+										<p>Loading Message Histogram</p>
+									</div>
+									<!-- <div id="message-histogram"></div> -->
+									<iframe id="message-histogram" title="message-histogram" width="200" height="200"
+									></iframe>
+								{:then data}
+									<!-- <p>{dat}</p> -->
+									{@html data}
+								{:catch e}
+									{e}
+									<p class="text-destructive">Something went wrong</p>
+								{/await}
+							{/if}
 						</Card.Content>
 					</Card.Root>
 					<Card.Root class="col-span-3">
 						<Card.Header>
-							<Card.Title>Recent Sales</Card.Title>
-							<Card.Description>You made 265 sales this month.</Card.Description>
+							<Card.Title>Recent Conversations</Card.Title>
+							<Card.Description>Startups had over {265} conversations this month.</Card.Description>
 						</Card.Header>
 						<Card.Content>
 							<RecentSales />

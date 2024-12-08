@@ -4,6 +4,7 @@
 		CompassIcon,
 		HomeIcon,
 		ListOrderedIcon,
+		MessageCircleIcon,
 		UserIcon,
 		UsersIcon,
 		VideoIcon
@@ -22,8 +23,13 @@
 					isActive: true
 				},
 				{
-					title: 'Leads',
-					url: route('/(app)/leads'),
+					title: 'Startups',
+					url: route('/(app)/startups'),
+					icon: ListOrderedIcon
+				},
+				{
+					title: 'Conversations',
+					url: route('/(app)/conversations'),
 					icon: ListOrderedIcon
 				},
 				{
@@ -72,28 +78,16 @@
 			<Sidebar.MenuItem>
 				<Sidebar.MenuButton size="lg" class="!h-14 bg-background !py-2 hover:bg-background/50">
 					{#snippet child({ props })}
-						<a href={route('/(app)/(homepage)')} {...props}>
+						<a href={route('/(app)/(homepage)')} class="w-fit" {...props}>
 							<img
 								src={company.brand.main.white.svg}
 								alt={company.brand.main.alt}
-								class="hidden md:h-6 md:dark:block lg:h-7 xl:h-8"
+								class="hidden dark:block md:h-6 lg:h-7 xl:h-8"
 							/>
 							<img
-								src={company.brand.main.black.svg}
+								src={company.brand.main.primary.svg}
 								alt={company.brand.main.alt}
-								class="hidden md:block md:h-6 md:dark:hidden lg:h-7 xl:h-8"
-							/>
-
-							<!-- Mobile -->
-							<img
-								src={company.brand.small.white.svg}
-								alt={company.brand.small.alt}
-								class="hidden h-7 dark:block md:!hidden"
-							/>
-							<img
-								src={company.brand.small.black.svg}
-								alt={company.brand.small.alt}
-								class="block h-7 dark:hidden md:!hidden"
+								class="block dark:hidden md:h-6 lg:h-7 xl:h-8"
 							/>
 						</a>
 					{/snippet}

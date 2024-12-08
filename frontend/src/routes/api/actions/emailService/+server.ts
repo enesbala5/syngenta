@@ -37,7 +37,7 @@ export const POST: RequestHandler = async ({ request, url }) => {
 		toEmail: to,
 		baseURL: url.origin,
 		unsubscribeURL,
-		iconURL: `/media/${company.brand.small.black.svg}`,
+		iconURL: `/media/${company.brand.icon.black.svg}`,
 		logoURL: `/media/${company.brand.main.black.svg}`,
 		companyName: company.name,
 		data: data,

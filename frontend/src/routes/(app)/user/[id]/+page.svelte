@@ -114,12 +114,12 @@
 						</Card.Root>
 					</Card.Content>
 
-					<Card.Footer class="flex flex-wrap gap-2 px-4 pb-4">
+					<!-- <Card.Footer class="flex flex-wrap gap-2 px-4 pb-4">
 						<Button onclick={topUpCredits} variant="secondary">Upgrade Membership</Button>
-						<Button onclick={topUpCredits} variant="ghostSecondary" href={route('/(app)/pricing')}
+						<Button onclick={topUpCredits} variant="ghost" href={route('/(app)/pricing')}
 							>View Plans</Button
 						>
-					</Card.Footer>
+					</Card.Footer> -->
 				</Card.Root>
 			</div>
 		</div></Card.Root

@@ -45,7 +45,7 @@
 	{/if}
 </svelte:head>
 
-<ModeWatcher />
+<!-- <ModeWatcher defaultMode={"light"} track={false} /> -->
 <Toaster />
 
 {@render children()}

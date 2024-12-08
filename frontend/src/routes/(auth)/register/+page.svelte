@@ -48,24 +48,12 @@
 					<img
 						src={company.brand.main.white.svg}
 						alt={company.brand.main.alt}
-						class="hidden md:h-6 md:dark:block lg:h-7 xl:h-8"
+						class="hidden dark:block md:h-6 lg:h-7 xl:h-8"
 					/>
 					<img
 						src={company.brand.main.black.svg}
 						alt={company.brand.main.alt}
-						class="hidden md:block md:h-6 md:dark:hidden lg:h-7 xl:h-8"
-					/>
-
-					<!-- Mobile -->
-					<img
-						src={company.brand.small.white.svg}
-						alt={company.brand.small.alt}
-						class="hidden h-7 dark:block md:!hidden"
-					/>
-					<img
-						src={company.brand.small.black.svg}
-						alt={company.brand.small.alt}
-						class="block h-7 dark:hidden md:!hidden"
+						class="block dark:hidden md:h-6 lg:h-7 xl:h-8"
 					/>
 				</a>
 			</section>
@@ -129,7 +117,7 @@
 					<UserAuthForm {form} {isLoading} />
 				</form>
 			</section>
-			<p class="mt-7 text-xs max-w-lg">
+			<p class="mt-7 max-w-lg text-xs">
 				<span class="opacity-80">By clicking on Complete Signup, you agree to our</span>
 				<a href={route('/(app)/terms')} class="underline underline-offset-2">Terms of Use</a>
 				<span class="opacity-80">and you acknowledge having read our</span>

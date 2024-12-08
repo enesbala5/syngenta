@@ -24,26 +24,12 @@
 		<img
 			src={company.brand.main.white.svg}
 			alt={company.brand.main.alt}
-			class="hidden md:h-6 md:dark:block lg:h-7 xl:h-8"
+			class="hidden dark:block md:h-6 lg:h-7 xl:h-8"
 		/>
 		<img
 			src={company.brand.main.black.svg}
 			alt={company.brand.main.alt}
-			class="hidden md:block md:h-6 md:dark:hidden lg:h-7 xl:h-8"
-		/>
-
-		<!-- Mobile -->
-		<img
-			src={company.brand.small.white.svg}
-			alt={company.brand.small.alt}
-			class="hidden h-7 dark:block md:!hidden"
-		/>
-		<img
-			src={company.brand.small.black.svg}
-			alt={company.brand.small.alt}
-			class="block h-7 dark:hidden md:!hidden"
+			class="block dark:hidden md:h-6 lg:h-7 xl:h-8"
 		/>
 	</a>
-
-	
 </div>

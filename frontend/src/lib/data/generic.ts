@@ -37,37 +37,23 @@ export const company = {
 			white: {
 				svg: '/brand/logo/white.svg',
 			},
-		},
-		integrated: {
-			alt: 'Integrated Logo',
-			black: {
-				svg: '/brand/integrated/black.svg',
-			},
-			white: {
-				svg: '/brand/integrated/white.svg',
-			},
-		},
-		small: {
-			alt: 'Small Logo',
-			black: {
-				svg: '/brand/small/black.svg',
-			},
-			white: {
-				svg: '/brand/small/white.svg',
-			},
-		},
-		wordmark: {
-			alt: 'Wordmark Logo',
-			black: {
-				svg: '/brand/wordmark/black.svg',
-			},
-			white: {
-				svg: '/brand/wordmark/white.svg',
+			primary: {
+				svg: '/brand/logo/primary.svg',
 			},
 		},
 		icon: {
-			alt: 'Icon Logo',
-			svg: '/brand/icon.svg',
+			primary: {
+				alt: 'Icon Logo',
+				svg: '/brand/icon/primary.svg',
+			},
+			white: {
+				alt: 'Icon Logo',
+				svg: '/brand/icon/white.svg',
+			},
+			black: {
+				alt: 'Icon Logo',
+				svg: '/brand/icon/black.svg',
+			},
 		},
 	},
 	social: {

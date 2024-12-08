@@ -1,8 +1,18 @@
 <script lang="ts">
 	import * as Avatar from '$lib/components/ui/avatar';
+	import { route } from '$lib/services/routeHandler';
+	import StartupCard from './StartupCard.svelte';
 </script>
 
 <div class="space-y-8">
+	<StartupCard
+		id="123"
+		details={`
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quae itaque, praesentium distinctio rem nulla beatae corporis excepturi quo`}
+		link={route('/(app)/leads')}
+		name="Startup Name"
+		date={new Date()}
+	/>
 	<div class="flex items-center">
 		<Avatar.Root class="h-9 w-9">
 			<Avatar.Image src="https://vercel.com/avatars/01.png" alt="Avatar" />

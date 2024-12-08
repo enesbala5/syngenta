@@ -53,24 +53,12 @@
 					<img
 						src={company.brand.main.white.svg}
 						alt={company.brand.main.alt}
-						class="hidden md:h-5 md:dark:block lg:h-6 xl:h-7"
+						class="hidden dark:block md:h-6 lg:h-7 xl:h-8"
 					/>
 					<img
 						src={company.brand.main.black.svg}
 						alt={company.brand.main.alt}
-						class="hidden md:block md:h-5 md:dark:hidden lg:h-6 xl:h-7"
-					/>
-
-					<!-- Mobile -->
-					<img
-						src={company.brand.small.white.svg}
-						alt={company.brand.small.alt}
-						class="hidden h-7 dark:block md:!hidden"
-					/>
-					<img
-						src={company.brand.small.black.svg}
-						alt={company.brand.small.alt}
-						class="block h-7 dark:hidden md:!hidden"
+						class="block dark:hidden md:h-6 lg:h-7 xl:h-8"
 					/>
 				</a>
 			</section>
@@ -114,7 +102,9 @@
 					<h1 class=" text-4xl font-semibold">Welcome back!</h1>
 					<p class="mt-4 opacity-80">
 						Sign in to <span class="font-medium">{company.name}</span> or
-						<a href={route('/(auth)/register')} class="whitespace-nowrap text-primary underline underline-offset-4 hover:text-primary"
+						<a
+							href={route('/(auth)/register')}
+							class="whitespace-nowrap text-primary underline underline-offset-4 hover:text-primary"
 							>create an account</a
 						>
 					</p>
