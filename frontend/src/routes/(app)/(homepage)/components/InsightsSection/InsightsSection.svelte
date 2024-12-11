@@ -59,7 +59,7 @@
 						<Card.Content>
 							<div class="text-2xl font-bold">{data?.messages_today ?? 0}</div>
 							<p class="text-xs text-muted-foreground">
-								+{Math.floor(data?.messages_change * 100)}% from yesterday
+								{Math.floor(data?.messages_change * 100)}% from yesterday
 							</p>
 						</Card.Content>
 					</Card.Root>
@@ -71,7 +71,7 @@
 						<Card.Content>
 							<div class="text-2xl font-bold">+{data?.messages_median ?? 0}</div>
 							<p class="text-xs text-muted-foreground">
-								+{Math.floor(data?.messages_change * 79)}% from yesterday
+								{Math.floor(data?.messages_change * 79)}% from yesterday
 							</p>
 						</Card.Content>
 					</Card.Root>
@@ -83,7 +83,7 @@
 						<Card.Content>
 							<div class="text-2xl font-bold">+{data?.n_conversations ?? 0}</div>
 							<p class="text-xs text-muted-foreground">
-								Avg. Conversation Time: {formatSeconds(data?.avg_conv_time)}
+								Total Duration: {formatSeconds(data?.avg_conv_time)}
 							</p>
 						</Card.Content>
 					</Card.Root>
@@ -94,7 +94,7 @@
 						</Card.Header>
 						<Card.Content>
 							<div class="text-2xl font-bold">{data?.avg_rating.toFixed(1)} / 5 Stars</div>
-							<p class="text-xs text-muted-foreground">+201 since last hour</p>
+							<p class="text-xs text-muted-foreground">Based on {data?.n_conversations} conversations</p>
 						</Card.Content>
 					</Card.Root>
 				</div>

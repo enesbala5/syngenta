@@ -103,7 +103,7 @@
 										</Avatar.Fallback>
 									</Avatar.Root>
 									<ChatBubbleMessage message={message.content} isLoading={false}>
-										{message.content}
+										{''}
 									</ChatBubbleMessage>
 								</ChatBubble>
 							</div>

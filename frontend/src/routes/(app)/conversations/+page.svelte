@@ -20,7 +20,7 @@
 	const { user, conversations } = data;
 </script>
 
-<main class="container-width-sm !px-0 pt-2 md:px-4 lg:pb-24">
+<main class="!px-0 pt-2 md:px-4 lg:pb-24">
 	<!-- <section class="flex flex-col gap-3 lg:gap-4">
 		<h1 class="h1">Insights</h1>
 		<div class="relative flex flex-col">

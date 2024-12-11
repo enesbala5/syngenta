@@ -59,14 +59,14 @@ export const columns: ColumnDef<Partial<Startup>>[] = [
 		accessorKey: "ph_number",
 		header: 'Phone Number',
 		cell: ({ row }) => {
-			const emailSnippet = createRawSnippet<[string]>((getPhoneNumber) => {
+			const phoneSnippet = createRawSnippet<[string]>((getPhoneNumber) => {
 				const email = getPhoneNumber();
 				return {
 					render: () => `<div class="lowercase">${email}</div>`
 				};
 			});
 
-			return renderSnippet(emailSnippet, row.getValue('ph_number'));
+			return renderSnippet(phoneSnippet, row.getValue('ph_number'));
 		}
 	},
 	{
@@ -106,9 +106,7 @@ export const columns: ColumnDef<Partial<Startup>>[] = [
 		cell: ({ row }) => {
 			return renderComponent(DataTooltip, { value: row?.original?.accelerator_need });
 		},
-
 	},
-
 	{
 		id: "actions",
 		cell: ({ row }) => {
