@@ -2,7 +2,7 @@
 // For example when user writes a character wrong it will make sure that the user is redirected to the correct path
 
 import { route } from '$lib/services/routeHandler';
-import type { RedirectInterface } from '$lib/types/generic';
+import type { RedirectIntercface } from '$lib/types/generic';
 
 // ---
 export const initialRedirects: RedirectInterface[] = [
