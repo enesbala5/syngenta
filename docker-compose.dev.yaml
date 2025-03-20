@@ -1,7 +1,7 @@
 services:
   database:
     image: mysql:8.0
-    container_name: dell-database-c
+    container_name: syngenta-database-c
     ports:
       - 3307:3307
     restart: unless-stopped
@@ -15,7 +15,7 @@ services:
       - databaseData:/var/lib/mysql # Persistent data volume for MySQL
 
   frontend:
-    image: dell-frontend-dev-i:latest
+    image: syngenta-frontend-dev-i:latest
     env_file:
       - .env.dev
     depends_on:
@@ -27,13 +27,13 @@ services:
         - PUBLIC_NODE_ENV=${PUBLIC_NODE_ENV}
         - PUBLIC_PAGE_URL=${PUBLIC_PAGE_URL}
         - PUBLIC_BACKEND_URL=${PUBLIC_BACKEND_URL}
-    container_name: dell-frontend-dev-c
+    container_name: syngenta-frontend-dev-c
     volumes:
       - ./frontend:/frontend
       - node_modules:/frontend/node_modules/
 
   # ngrok:
-  #   container_name: dell-ngrok-c
+  #   container_name: syngenta-ngrok-c
   #   image: ngrok/ngrok:latest
   #   env_file:
   #     - .env.dev

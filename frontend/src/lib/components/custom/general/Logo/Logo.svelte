@@ -8,7 +8,7 @@
 	}
 
 	interface Props {
-		className: string;
+		class: string;
 		modeOverride?: 'light' | 'dark';
 		colors?: {
 			light: Colors;
@@ -17,7 +17,7 @@
 	}
 
 	let {
-		className,
+		class: className,
 		colors = {
 			light: {
 				primary: '#FF5964',

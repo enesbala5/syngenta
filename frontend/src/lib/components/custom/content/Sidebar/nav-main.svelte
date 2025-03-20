@@ -1,14 +1,18 @@
 <script lang="ts">
-	import * as Collapsible from '$lib/components/ui/collapsible';
+	import { page } from '$app/state';
+	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
+	import type { Component } from 'svelte';
+	import type { SidebarInsert } from './custom/content/Sidebar/types';
 
 	let {
-		items
+		items,
 	}: {
 		items: {
 			title: string;
 			url: string;
+			suffix?: SidebarInsert;
 			// This should be `Component` after lucide-svelte updates types
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			icon: any;
@@ -16,19 +20,28 @@
 			items?: {
 				title: string;
 				url: string;
+				suffix?: SidebarInsert;
 			}[];
 		}[];
 	} = $props();
+
+	let sidebar = Sidebar.useSidebar();
 </script>
 
 <Sidebar.Group>
 	<!-- <Sidebar.GroupLabel>Platform</Sidebar.GroupLabel> -->
 	<Sidebar.Menu>
 		{#each items as mainItem (mainItem.title)}
+			{@const isActive = page.url.pathname === mainItem.url}
 			<Collapsible.Root open={mainItem.isActive}>
 				{#snippet child({ props })}
 					<Sidebar.MenuItem {...props}>
-						<Sidebar.MenuButton size="lg">
+						<Sidebar.MenuButton
+							size="lg"
+							class={isActive
+								? 'text-primary bg-primary/[3%] dark:text-white dark:[&>svg]:text-primary dark:hover:bg-primary/5 hover:text-primary/80 active:bg-primary/[2%] active:text-primary border border-primary/10 hover:bg-primary/[4%]'
+								: 'border border-transparent hover:!bg-primary/[3%] dark:hover:bg-primary/5 active:bg-primary-[3%] dark:hover:text-white  dark:hover:border-primary/10 hover:text-primary/80 hover:border-primary/5 active:text-primary'}
+						>
 							{#snippet tooltipContent()}
 								{mainItem.title}
 							{/snippet}
@@ -36,6 +49,9 @@
 								<a href={mainItem.url} {...props}>
 									<mainItem.icon />
 									<span>{mainItem.title}</span>
+									{#if mainItem?.suffix}
+										<mainItem.suffix {isActive} sidebarOpen={sidebar?.open} />
+									{/if}
 								</a>
 							{/snippet}
 						</Sidebar.MenuButton>

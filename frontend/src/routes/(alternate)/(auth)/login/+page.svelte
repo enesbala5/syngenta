@@ -1,9 +1,11 @@
 <script lang="ts">
 	import ReturnButton from '$lib/components/custom/general/Buttons/ReturnButton/ReturnButton.svelte';
-	import LanguagePicker from '$lib/components/custom/general/LanguagePicker/LanguagePicker.svelte';
 	import DarkModeToggle from '$lib/components/custom/general/DarkModeToggle/DarkModeToggle.svelte';
+	import LanguagePicker from '$lib/components/custom/general/LanguagePicker/LanguagePicker.svelte';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import { UserPlus2Icon, GlobeIcon, HomeIcon } from 'lucide-svelte';
+	import Icon from '$lib/components/custom/general/Logo/Icon.svelte';
+	import Logo from '$lib/components/custom/general/Logo/Logo.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import UserAuthForm from './components/UserAuthForm.svelte';
 	import { company, RequestMethod } from '$lib/data/generic';
@@ -13,8 +15,6 @@
 	import { enhance } from '$app/forms';
 	import { cn } from '$lib/utils';
 	import { toast } from 'svelte-sonner';
-	import image from '$lib/assets/media/auth/light.png?as=run';
-	import Img from '@zerodevx/svelte-img';
 
 	interface Props {
 		form: ActionData;
@@ -42,6 +42,8 @@
 	});
 </script>
 
+<title>Login - {company.name}</title>
+
 <article class="flex h-full w-full grow items-center space-x-4 lg:p-4">
 	<section
 		aria-roledescription="wrapper"
@@ -49,33 +51,16 @@
 	>
 		<nav class="flex w-full items-center justify-between">
 			<section class="flex items-center">
-				<a href={route('/')} class="mr-4 w-full font-bold">
-					<img
-						src={company.brand.main.white.svg}
-						alt={company.brand.main.alt}
-						class="hidden dark:block md:h-6 lg:h-7 xl:h-8"
-					/>
-					<img
-						src={company.brand.main.black.svg}
-						alt={company.brand.main.alt}
-						class="block dark:hidden md:h-6 lg:h-7 xl:h-8"
-					/>
+				<a href="/" class="h-8 w-8">
+					<Icon class="h-full w-full fill-neutral-900 dark:fill-neutral-50" />
 				</a>
 			</section>
 
 			<div class="flex items-center">
-				<Button
-					variant="ghost"
-					onclick={() => {
-						toast.info('Other Languages are coming soon. Thank you for your patience.');
-					}}
-				>
+				<LanguagePicker buttonProps={{ size: 'default', variant: 'ghost' }}>
 					<GlobeIcon class="size-5" />
-				</Button>
-				<!-- <LanguagePicker buttonProps={{ size: 'default', variant: 'ghost' }}>
-					<GlobeIcon class="size-5" />
-				</LanguagePicker> -->
-				<!-- <DarkModeToggle buttonProps={{ size: 'default', variant: 'ghost' }} /> -->
+				</LanguagePicker>
+				<DarkModeToggle buttonProps={{ size: 'default', variant: 'ghost' }} />
 
 				<!-- <div class="ml-4 mr-6 hidden h-5 w-0.5 rounded-full bg-neutral-300 lg:block" /> -->
 				<Separator
@@ -96,21 +81,19 @@
 			</div>
 		</nav>
 		<!-- Main Actions -->
-		<section class="h-full w-full overflow-y-auto px-1">
-			<div class="mt-24 flex w-full flex-col md:mt-32">
+		<section class="h-full w-full overflow-y-auto px-1 md:max-w-lg">
+			<div class="mt-20 flex w-full flex-col md:mt-24">
 				<div class="mb-10 w-full max-w-lg">
 					<h1 class=" text-4xl font-semibold">Welcome back!</h1>
 					<p class="mt-4 opacity-80">
 						Sign in to <span class="font-medium">{company.name}</span> or
-						<a
-							href={route('/(auth)/register')}
-							class="whitespace-nowrap text-primary underline underline-offset-4 hover:text-primary"
+						<a href={route('/(alternate)/(auth)/register')} class="underline underline-offset-4"
 							>create an account</a
 						>
 					</p>
 				</div>
 			</div>
-			<section class="flex w-full flex-col">
+			<section class="flex w-full flex-col space-y-5 md:max-w-lg">
 				<form
 					class="w-full"
 					action="?/login"
@@ -121,7 +104,7 @@
 				</form>
 
 				<!-- ? SOCIAL LOGIN -->
-				<!-- <div class="relative my-5 flex items-center justify-center text-sm">
+				<div class="relative mb-4 flex items-center justify-center text-sm">
 					<div
 						class="z-10 bg-neutral-50 px-4 transition-all duration-300 ease-in-out dark:bg-neutral-900 lg:bg-neutral-100"
 					>
@@ -130,35 +113,18 @@
 					<div
 						class="absolute left-1/2 top-1/2 h-px w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-300 transition-all duration-300 ease-in-out dark:bg-neutral-700"
 					></div>
-				</div> -->
+				</div>
 				<!-- TODO: Implement 0AUTH -->
 				<!-- <div
-					class="mb-2 flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-2 md:space-y-0"
+					class="my-2 flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-2 md:space-y-0"
 				>
-					<Button
-						href={route('/(auth)/login/github')}
-						size={'default'}
-						variant={'outline'}
-						class="w-full gap-x-2"
-					>
-						<img src="media/logos/github/icon.svg" alt="Github Icon" class="size-4 dark:invert" />
-						Sign In with GitHub
-					</Button>
-					<Button
-						href={route('/(auth)/login/google')}
-						size={'default'}
-						variant={'outline'}
-						class="w-full gap-x-2"
-					>
-						<img src="media/logos/google/icon.svg" alt="Google Icon" class="size-4 dark:invert" />
-						Sign In with Google
-					</Button>
-
+					<GoogleButton />
+					<FacebookButton />
 				</div> -->
-				<!-- <Button size="default" variant="outline" href={route('/(auth)/register')}>
+				<Button size="default" variant="outline" href={route('/(alternate)/(auth)/register')}>
 					<UserPlus2Icon class="icon iconWhite wGroup wHover h-5 w-5" />
 					<p>Create your {company.name} Account</p>
-				</Button> -->
+				</Button>
 
 				<!-- END -->
 			</section>
@@ -181,11 +147,18 @@
 	<div
 		class="innerContainerSizing relative hidden w-1/2 items-center justify-center overflow-hidden rounded-xl lg:flex"
 	>
-		<Img src={image} class="h-full min-h-screen w-full object-cover" alt="Abstract Image" />
-		<!-- <div class={'absolute inset-0 z-10 flex items-center justify-center bg-black/60'}>
-			<Logo className="w-48 lg:w-64 " modeOverride={'dark'} />
+		<img src="images/auth/image.jpg" class="h-full w-full object-cover" alt="" />
+		<!-- svelte-ignore element_invalid_self_closing_tag -->
+		<video
+			src="images/auth/video.mp4"
+			class="absolute inset-0 h-full w-full object-cover"
+			autoplay
+			loop
+			muted
+		/>
+		<div class={'absolute inset-0 z-10 flex items-center justify-center bg-black/60'}>
+			<Logo class="w-48 lg:w-64 " modeOverride={'dark'} />
 		</div>
-	</div> -->
 	</div>
 </article>
 

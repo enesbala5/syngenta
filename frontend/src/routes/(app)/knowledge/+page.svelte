@@ -86,7 +86,7 @@
 			</Card.Header>
 			<Card.Content class="h-fit w-full p-3 pt-6">
 				<Chat
-					endpoint="/dell-ai/"
+					endpoint="/syngenta-ai/"
 					temporaryId={user?.id ?? temporaryId}
 					class="h-[60vh] w-full max-w-none border border-primary/10"
 					innerContainer="p-0"

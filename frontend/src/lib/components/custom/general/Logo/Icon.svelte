@@ -8,7 +8,7 @@
 	}
 
 	interface Props {
-		className: string;
+		class: string;
 		colors?: {
 			light: Colors;
 			dark: Colors;
@@ -16,7 +16,7 @@
 	}
 
 	let {
-		className,
+		class: className,
 		colors = {
 			light: {
 				primary: '#FF5964',

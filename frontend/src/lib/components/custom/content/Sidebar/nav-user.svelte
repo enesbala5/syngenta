@@ -9,16 +9,15 @@
 	import { invalidateAll } from '$app/navigation';
 	import {
 		BellIcon,
+		ChartPieIcon,
 		ChevronsUpDownIcon,
 		CreditCardIcon,
 		LogOutIcon,
 		SettingsIcon,
-		SparklesIcon,
-		UserIcon
+		SparklesIcon
 	} from 'lucide-svelte';
+	import { toast } from 'svelte-sonner';
 	import { Badge } from '$lib/components/ui/badge';
-	import Logout from '../../general/Logout/Logout.svelte';
-	import { returnNameOrPlaceholder } from '$lib/utils';
 
 	let {
 		user
@@ -41,16 +40,16 @@
 						class="group border bg-background hover:bg-background/50 data-[state=open]:border-primary data-[state=open]:bg-background data-[state=open]:text-sidebar-accent-foreground"
 					>
 						<Avatar.Root class="size-8 rounded-full">
-							<Avatar.Image alt={user?.firstName} />
-							<Avatar.Fallback class="overflow-hidden rounded-full bg-primary/10">
-								<UserIcon class="origin-top scale-[130%] fill-primary stroke-primary opacity-30" />
+							<!-- <Avatar.Image src={user?.mediaUrl} alt={`${user?.name} Profile Picture`} /> -->
+							<Avatar.Fallback class="rounded-full">
+								{#if user?.name}
+								{user ? user?.name?.charAt(0) : '-'}
+								{/if}
 							</Avatar.Fallback>
 						</Avatar.Root>
 						<div class="grid flex-1 text-left text-sm leading-tight">
-							<span class="truncate font-semibold"
-								>{returnNameOrPlaceholder(user?.firstName, user?.lastName)}</span
-							>
-							<span class="truncate text-xs text-muted-foreground">{user?.email}</span>
+							<span class="truncate font-semibold">{`${user?.name}`}</span>
+							<span class="truncate text-xs text-muted-foreground">{user?.userName}</span>
 						</div>
 						<ChevronsUpDownIcon class="ml-auto size-3 stroke-[1.5px] text-muted-foreground/50" />
 					</Sidebar.MenuButton>
@@ -64,28 +63,26 @@
 			>
 				<DropdownMenu.Label class="p-0 font-normal">
 					<div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-						<Avatar.Root class="size-8 rounded-full">
-							<Avatar.Image alt={user?.firstName} />
-							<Avatar.Fallback class="overflow-hidden rounded-full bg-primary/10">
-								<UserIcon class="origin-top scale-[130%] fill-primary stroke-primary opacity-30" />
-							</Avatar.Fallback>
+						<Avatar.Root class="size-8 rounded-lg">
+							<Avatar.Image src={user?.mediaUrl} alt={`${user?.name} Profile Picture`} />
+							<Avatar.Fallback class="rounded-lg"
+								>{user ? user?.name.charAt(0) : '-'}</Avatar.Fallback
+							>
 						</Avatar.Root>
 						<div class="grid flex-1 text-left text-sm leading-tight">
-							<span class="truncate font-semibold"
-								>{returnNameOrPlaceholder(user?.firstName, user?.lastName)}</span
-							>
+							<span class="truncate font-semibold">{user?.name}</span>
 							<span class="truncate text-xs">{user?.email}</span>
 						</div>
 					</div>
 				</DropdownMenu.Label>
 				<DropdownMenu.Separator />
-				<!-- <DropdownMenu.Group>
+				<DropdownMenu.Group>
 					<DropdownMenu.Item>
 						<SparklesIcon />
 						Upgrade
 						<Badge variant="outline">Coming Soon</Badge>
 					</DropdownMenu.Item>
-				</DropdownMenu.Group> -->
+				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
 					<DropdownMenu.Item>
@@ -96,15 +93,40 @@
 							</a>
 						{/snippet}
 					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						{#snippet child({ props })}
+							<a href={route('/(app)/dashboard')} {...props}>
+								<ChartPieIcon />
+								Dashboard
+							</a>
+						{/snippet}
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						{#snippet child({ props })}
+							<a href={route('/(app)/settings/billing')} {...props}>
+								<CreditCardIcon />
+								Billing
+							</a>
+						{/snippet}
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						<BellIcon />
+						Notifications
+					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
-				<DropdownMenu.Item>
-					<Logout class="w-full">
-						<button type="submit" class="flex w-full items-center gap-2">
-							<LogOutIcon class="size-4" />
-							Logout
-						</button>
-					</Logout>
+				<DropdownMenu.Item
+					onclick={async () => {
+						await fetch(route('/(alternate)/(auth)/logout'), {
+							method: RequestMethod.GET
+						});
+
+						invalidateAll();
+						toast.success('Successfully logged out');
+					}}
+				>
+					<LogOutIcon />
+					Log out
 				</DropdownMenu.Item>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>

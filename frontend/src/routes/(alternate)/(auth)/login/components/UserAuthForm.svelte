@@ -1,15 +1,14 @@
 <script lang="ts">
-	import Spinner from '$lib/components/custom/general/Spinner/Spinner.svelte';
-	import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
+	import { AlertCircleIcon, RotateCwIcon } from 'lucide-svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
-	import * as Dialog from '$lib/components/ui/dialog/index.js';
+	import { removeFromDomTimeout } from '$lib/actions';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
-	import { removeFromDomTimeout } from '$lib/actions';
 	import * as Alert from '$lib/components/ui/alert';
-	import { AlertCircleIcon, ClockIcon, InfoIcon } from 'lucide-svelte';
 	import type { ActionData } from '../$types';
 	import { cn } from '$lib/utils';
+	import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
+	import Spinner from '$lib/components/custom/general/Spinner/Spinner.svelte';
 
 	interface Props {
 		className?: string;
@@ -41,7 +40,7 @@
 			<input type="text" hidden name="email" value={email} />
 		</div> -->
 		<div class="grid gap-2.5">
-			<Label for="username">Username or Email Address</Label>
+			<Label for="username">Username</Label>
 			<Input
 				id="username"
 				name="username"
@@ -54,7 +53,7 @@
 			/>
 		</div>
 		<div class="grid gap-2.5">
-			<Label for="password">Password</Label>
+			<Label for="email">Password</Label>
 			<Input
 				id="password"
 				name="password"
@@ -72,11 +71,11 @@
 			<div class="grid -translate-y-0.5 gap-1 leading-none">
 				<Label
 					for="rememberMe"
-					class="text-xs font-medium leading-none text-neutral-800/80 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-neutral-100/80"
+					class="text-sm font-medium leading-none text-neutral-800/80 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-neutral-100/80"
 				>
 					Remember Me
 				</Label>
-				<p class="text-xs text-muted-foreground">
+				<p class="text-sm text-muted-foreground">
 					Check this box if you want to be remembered on this computer.
 				</p>
 			</div>
@@ -95,54 +94,9 @@
 			<p>Log In</p>
 		</Button>
 
-		<!--TODO: Implement forgot password-->
-		<script lang="ts">
-			import { Button, buttonVariants } from '$lib/components/ui/button/index.js';
-			import * as Dialog from '$lib/components/ui/dialog/index.js';
-			import { Input } from '$lib/components/ui/input/index.js';
-			import { Label } from '$lib/components/ui/label/index.js';
-		</script>
-
-		<Dialog.Root>
-			<Dialog.Trigger class={'w-1/2 text-right text-sm text-muted-foreground hover:underline'}>
-				Forgot Password?
-			</Dialog.Trigger>
-			<Dialog.Content class="sm:max-w-xl">
-				<Dialog.Header class="space-y-2 md:!space-y-3">
-					<Dialog.Title>Forgot Password?</Dialog.Title>
-					<Dialog.Description class="dark:text-card/70">
-						Enter your email address and our support team will be in touch soon to reset your
-						password.
-					</Dialog.Description>
-
-					<Alert.Root class="translate-y-2 gap-3 p-3">
-						<ClockIcon class="!left-3 !top-3 size-5" />
-						<Alert.Title>Heads up!</Alert.Title>
-						<Alert.Description>
-							Please allow up to 24 hours for the reset to be completed. Sorry for the
-							inconvenience.
-						</Alert.Description>
-						<Alert.Root class="mt-4 gap-0 !p-2">
-							<InfoIcon class="!left-3 !top-3 size-4 opacity-70" />
-							<Alert.Description>
-								We are working on a new feature to make this process easier. Thanks for your
-								patience.
-							</Alert.Description>
-						</Alert.Root>
-					</Alert.Root>
-				</Dialog.Header>
-
-				<div class="grid gap-4 py-4">
-					<div class="grid grid-cols-4 items-center gap-4">
-						<Label for="name" class="text-right">Email Address</Label>
-						<Input id="name" value="" class="col-span-3" />
-					</div>
-				</div>
-				<Dialog.Footer>
-					<Button type="submit">Save changes</Button>
-				</Dialog.Footer>
-			</Dialog.Content>
-		</Dialog.Root>
+		<a href="forgotPassword" class="w-1/2 text-right text-sm text-muted-foreground hover:underline"
+			>Forgot Password?</a
+		>
 	</div>
 	{#if form?.invalid}
 		<div class="my-4" use:removeFromDomTimeout>
@@ -162,4 +116,31 @@
 			</Alert.Root>
 		</div>
 	{/if}
+
+	<!-- <div class=" flex space-x-2">
+    <Button
+      variant="outline"
+      type="button"
+      disabled={isLoading}
+      class="m-0 h-11 w-full"
+    >
+      {#if isLoading}
+        <RotateCwIcon class="mr-2 h-4 w-4 animate-spin" />
+      {:else}
+        <EAlbaniaLogo classNames="h-6" dark />
+      {/if}
+    </Button>
+    <Button
+      variant="outline"
+      type="button"
+      disabled={isLoading}
+      class="m-0 h-11 w-full"
+    >
+      {#if isLoading}
+        <RotateCwIcon class="mr-2 h-4 w-4 animate-spin" />
+      {:else}
+        <MicrosoftLogo classNames="h-5" />
+      {/if}
+    </Button>
+  </div> -->
 </div>

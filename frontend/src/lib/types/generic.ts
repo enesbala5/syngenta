@@ -1,5 +1,3 @@
-import type { User } from '@prisma/client';
-
 export type FetchFunction = (input: URL | RequestInfo, init?: RequestInit | undefined) => Promise<Response>;
 
 export interface RedirectInterface {
@@ -7,4 +5,4 @@ export interface RedirectInterface {
 	redirect: string;
 }
 
-export type PageUser = Pick<User, 'id' | 'firstName' | 'lastName' | 'username' | 'email'>
+export type PageUser = Pick<User, 'id' | 'name' | 'username' | 'email'>

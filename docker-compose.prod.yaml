@@ -1,7 +1,7 @@
 services:
   database:
     image: mysql:8.0
-    container_name: dell-database-c
+    container_name: syngenta-database-c
     ports:
       - 3307:3307
     deploy:
@@ -17,8 +17,8 @@ services:
       - databaseData:/var/lib/mysql # Persistent data volume for MySQL
 
   frontend:
-    image: dell-frontend-prod-i:latest
-    container_name: dell-frontend-prod-c
+    image: syngenta-frontend-prod-i:latest
+    container_name: syngenta-frontend-prod-c
     env_file:
       - .env.prod
     depends_on:

@@ -21,7 +21,7 @@
 
 <div class={cn('grid gap-6', className)} {...props}>
 	<div class="grid gap-4">
-		<!-- <div class="grid gap-4 lg:grid-cols-2">
+		<div class="grid gap-4 lg:grid-cols-2">
 			<div class="grid gap-2.5">
 				<Label for="name">First Name</Label>
 				<Input
@@ -44,8 +44,8 @@
 					disabled={isLoading}
 				/>
 			</div>
-		</div> -->
-		<!-- <div class="grid gap-2.5">
+		</div>
+		<div class="grid gap-2.5">
 			<Label for="username">Username</Label>
 			<Input
 				id="username"
@@ -57,14 +57,13 @@
 				autocorrect="off"
 				disabled={isLoading}
 			/>
-		</div> -->
-		
+		</div>
 		<div class="grid gap-2.5">
 			<Label for="email">Email</Label>
 			<Input
 				id="email"
 				name="email"
-				placeholder="name@domain.com"
+				placeholder="emri@shembull.com"
 				type="email"
 				autocapitalize="none"
 				autocomplete="email"
@@ -72,7 +71,6 @@
 				disabled={isLoading}
 			/>
 		</div>
-
 		<div class="grid gap-2.5">
 			<Label for="email">Password</Label>
 			<Input
@@ -92,11 +90,11 @@
 			<div class="grid -translate-y-0.5 gap-1 leading-none">
 				<Label
 					for="rememberMe"
-					class="max-w-sm text-xs font-medium text-neutral-800/80 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-neutral-100/80"
+					class="max-w-sm text-sm font-medium text-neutral-800/80 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-neutral-100/80"
 				>
 					Receive weekly promotional emails, with special discount and limited-time offerings.
 				</Label>
-				<p class="text-xs text-muted-foreground">
+				<p class="text-sm text-muted-foreground">
 					We will never share your email with third-parties, or send you spam.
 				</p>
 			</div>

@@ -89,7 +89,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/dell-ai/": {
+    "/syngenta-ai/": {
         parameters: {
             query?: never;
             header?: never;

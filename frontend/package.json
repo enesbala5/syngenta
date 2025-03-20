@@ -15,7 +15,7 @@
 	"devDependencies": {
 		"@internationalized/date": "^3.6.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.0.0",
+		"@sveltejs/kit": "^2.12.1",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@tailwindcss/typography": "^0.5.15",
 		"autoprefixer": "^10.4.20",
@@ -29,7 +29,7 @@
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.8",
 		"prisma": "5.22.0",
-		"svelte": "^5.0.0",
+		"svelte": "5.19.9",
 		"svelte-check": "^4.0.0",
 		"svelte-dnd-action": "^0.9.52",
 		"svelte-sonner": "^0.3.28",
@@ -67,6 +67,7 @@
 		"sse.js": "^2.5.0",
 		"svelte-copy": "^2.0.0",
 		"svelte-markdown": "^0.4.1",
+		"svelte-media-queries": "^1.6.2",
 		"svelte-plotly.js": "^1.2.0",
 		"sveltekit-i18n": "^2.4.2"
 	},
