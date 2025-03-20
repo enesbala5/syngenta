@@ -43,6 +43,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const session = event.cookies.get('session');
 	const pathname = event.url.pathname;
 
+	event.locals.language = 'en';
 	event.locals.session = session;
 
 	const openAPIMiddleware: Middleware = {

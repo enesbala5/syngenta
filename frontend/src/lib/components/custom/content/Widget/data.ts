@@ -1,22 +1,62 @@
-import type { SvelteComponent } from 'svelte';
+import type { Component, SvelteComponent } from 'svelte';
+import HelloWidget from './components/HelloWidget.svelte';
+import LocationWidget from './components/LocationWidget.svelte';
+import HarvestWidget from './components/HarvestWidget.svelte';
+import RiskProfileWidget from './components/RiskProfileWidget.svelte';
+import ExpectedYieldWidget from './components/ExpectedYieldWidget.svelte';
+import ImageWidget from './components/ImageWidget.svelte';
+import VideoWidget from './components/VideoWidget.svelte';
+import WeatherWidget from './components/WeatherWidget.svelte';
+import ExplanationWidget from './components/ExplanationWidget.svelte';
+import StoryWidget from './components/StoryWidget.svelte';
+import WelcomeWidget from './components/WelcomeWidget.svelte';
 
 // Define widget types
-export type WidgetType = 'quality' | 'temperature' | 'moisture' | 'explanation' | 'chart';
+export type WidgetType = 
+  | 'hello'
+  | 'location'
+  | 'harvest'
+  | 'riskProfile'
+  | 'expectedYield'
+  | 'image'
+  | 'video'
+  | 'weather'
+  | 'explanation'
+  | 'story'
+  | 'quality'
+  | 'temperature'
+  | 'moisture'
+  | 'welcome'
+  | 'chart';
+
 export type WidgetDirection = 'positive' | 'negative' | 'neutral';
 
 // Widget content interface
 export interface WidgetContent {
-  title: string;
+  title?: string;
+  subtitle?: string;
   expanded?: boolean;
   change?: string;
+  symbol?: string;
   direction?: WidgetDirection;
-  widget?: Widget;
+  widgets?: WidgetInterface[];
   steps?: string[];
+  name?: string;
+  location?: string;
+  imageUrl?: string;
+  videoUrl?: string;
+  slides?: Array<{title: string; content: string; imageUrl?: string}>;
+  scores?: {
+    stress?: number;
+    yield?: number;
+    nutrient?: number;
+  };
+  progress?: number;
   [key: string]: any;
 }
 
 // Widget interface
-export interface Widget {
+export interface WidgetInterface {
   type: WidgetType;
   content: WidgetContent;
   expanded?: boolean;
@@ -24,60 +64,115 @@ export interface Widget {
 
 // Component mapping interface
 export interface WidgetComponentMapping {
-  component?: typeof SvelteComponent;
+  component: Component<any>;
   props?: Record<string, any>;
-  styles: {
-    container: string;
-    title: string;
-    badge: string;
-    icon?: string;
-  };
 }
 
-// Widget component mappings
+// Simplified widget mappings
 export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => {
   return {
-    quality: {
-      styles: {
-        container: 'border-green-600/80 dark:border-green-400/40 bg-green-100/50 dark:bg-green-900/30',
-        title: 'text-green-800 dark:text-green-300',
-        badge: 'bg-green-600 dark:bg-green-500 text-white',
-        icon: 'soil'
+    hello: {
+      component: HelloWidget,
+      props: {
+        colorTheme: 'indigo',
+        icon: 'user'
       }
     },
-    
-    temperature: {
-      styles: {
-        container: 'border-red-600/80 dark:border-red-400/40 bg-red-100/50 dark:bg-red-900/30',
-        title: 'text-red-800 dark:text-red-300',
-        badge: 'bg-red-600 dark:bg-red-500 text-white',
-        icon: 'thermometer'
+    location: {
+      component: LocationWidget,
+      props: {
+        colorTheme: 'emerald',
+        icon: 'map-pin'
       }
     },
-    
-    moisture: {
-      styles: {
-        container: 'border-blue-600/80 dark:border-blue-400/40 bg-blue-100/50 dark:bg-blue-900/30',
-        title: 'text-blue-800 dark:text-blue-300',
-        badge: 'bg-blue-600 dark:bg-blue-500 text-white',
-        icon: 'droplet'
+    harvest: {
+      component: HarvestWidget,
+      props: {
+        colorTheme: 'amber',
+        icon: 'wheat'
       }
     },
-    
+    riskProfile: {
+      component: RiskProfileWidget,
+      props: {
+        colorTheme: 'rose',
+        icon: 'alert-triangle'
+      }
+    },
+    expectedYield: {
+      component: ExpectedYieldWidget,
+      props: {
+        colorTheme: 'lime',
+        icon: 'trending-up'
+      }
+    },
+    image: {
+      component: ImageWidget,
+      props: {
+        colorTheme: 'sky',
+        icon: 'image'
+      }
+    },
+    video: {
+      component: VideoWidget,
+      props: {
+        colorTheme: 'violet',
+        icon: 'video'
+      }
+    },
+    weather: {
+      component: WeatherWidget,
+      props: {
+        colorTheme: 'cyan',
+        icon: 'cloud'
+      }
+    },
     explanation: {
-      styles: {
-        container: 'border-yellow-600/80 dark:border-yellow-400/40 bg-yellow-100/50 dark:bg-yellow-900/30',
-        title: 'text-yellow-800 dark:text-yellow-300',
-        badge: 'bg-yellow-600 dark:bg-yellow-500 text-white',
+      component: ExplanationWidget,
+      props: {
+        colorTheme: 'yellow',
         icon: 'info'
       }
     },
-    
+    story: {
+      component: StoryWidget,
+      props: {
+        colorTheme: 'fuchsia',
+        icon: 'book-open'
+      }
+    },
+    quality: {
+      component: ExplanationWidget,
+      props: {
+        colorTheme: 'green',
+        icon: 'soil'
+      }
+    },
+    temperature: {
+      component: WeatherWidget,
+      props: {
+        colorTheme: 'red',
+        icon: 'thermometer'
+      }
+    },
+    moisture: {
+      component: WeatherWidget,
+      props: {
+        colorTheme: 'blue',
+        icon: 'droplet'
+      }
+    },
     chart: {
-      styles: {
-        container: 'border-purple-600/80 dark:border-purple-400/40 bg-purple-100/50 dark:bg-purple-900/30',
-        title: 'text-purple-800 dark:text-purple-300',
-        badge: 'bg-purple-600 dark:bg-purple-500 text-white',
+      component: ExplanationWidget,
+      props: {
+        colorTheme: 'purple',
+        icon: 'bar-chart'
+      }
+    },
+		welcome: {
+      component: WelcomeWidget,
+      props: {
+        colorTheme: 'purple',
         icon: 'bar-chart'
       }
     }
@@ -101,14 +196,4 @@ export const directionStyles = {
     icon: 'minus',
     iconClass: 'text-gray-600 dark:text-gray-400'
   }
-};
-
-// Helper function to get widget styling based on type
-export const getWidgetStyles = (type: WidgetType): WidgetComponentMapping => {
-  return widgetMappings()[type] || widgetMappings().quality;
-};
-
-// Helper function to get direction styling
-export const getDirectionStyles = (direction: WidgetDirection) => {
-  return directionStyles[direction] || directionStyles.neutral;
 };

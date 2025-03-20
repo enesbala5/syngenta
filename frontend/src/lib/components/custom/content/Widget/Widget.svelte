@@ -1,57 +1,65 @@
 <script lang="ts">
+	import { Widget } from './Widget';
 	import { buttonVariants } from '$lib/components/ui/button/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import * as Popover from '$lib/components/ui/popover/index.js';
-	import type { Widget, WidgetType, WidgetDirection } from './data';
-	import { getWidgetStyles, getDirectionStyles } from './data';
-	
-	export let widget: Widget;
-	
-	$: styles = getWidgetStyles(widget.type);
-	$: directionStyles = widget.content.direction 
-		? getDirectionStyles(widget.content.direction as WidgetDirection) 
-		: getDirectionStyles('neutral');
-	$: expanded = widget.content.expanded || false;
-	
+	import type { WidgetInterface } from './data';
+	import { widgetMappings } from './data';
+
+	interface Props {
+		widget: WidgetInterface;
+	}
+
+	const { widget }: Props = $props();
+
+	const getExpanded = (widget: WidgetInterface): boolean => {
+		if (widget.expanded !== undefined) return widget.expanded;
+		if (widget.content.expanded !== undefined) return widget.content.expanded;
+		return false;
+	};
+
+	let expanded = $state(getExpanded(widget));
+	const WidgetComponent = $derived(widgetMappings()[widget.type]?.component);
+
 	const toggleExpanded = () => {
 		expanded = !expanded;
 	};
 </script>
 
-<div class={`widget-container p-4 rounded-lg border ${styles.styles.container}`}>
-	<div class="flex justify-between items-center">
-		<h3 class={`text-lg font-medium ${styles.styles.title}`}>{widget.content.title}</h3>
-		
-		{#if widget.content.change}
-			<div class="flex items-center gap-1">
-				<span class={directionStyles.text}>{widget.content.change}</span>
-				<span class={`inline-block ${directionStyles.iconClass}`}>
-					<!-- Icon would go here -->
-				</span>
-			</div>
-		{/if}
-	</div>
-	
-	{#if widget.content.widget && expanded}
-		<div class="mt-4 p-3 rounded-md bg-white/50 dark:bg-black/20">
-			{#if widget.content.widget.type === 'explanation'}
-				<h4 class="font-medium">{widget.content.widget.content.title}</h4>
-				{#if widget.content.widget.content.steps}
-					<ul class="mt-2 space-y-1 list-disc list-inside">
-						{#each widget.content.widget.content.steps as step}
-							<li>{step}</li>
-						{/each}
-					</ul>
-				{/if}
-			{/if}
+<div class={`widget-container rounded-lg border p-4`}>
+	{#if WidgetComponent}
+		<WidgetComponent content={widget.content} />
+	{:else}
+		<div class="flex items-center justify-between">
+			<h3 class={`text-lg font-medium`}>
+				{widget.content.title || 'Widget'}
+			</h3>
+		</div>
+
+		<p class="mt-2 text-sm text-muted-foreground">
+			No component found for widget type: {widget.type}
+		</p>
+	{/if}
+
+	{#if widget.content.widgets && widget.content.widgets.length > 0}
+		<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+			{#each widget.content.widgets as childWidget}
+				<Widget widget={childWidget} />
+			{/each}
 		</div>
 	{/if}
-	
-	<button 
-		class={`mt-3 ${buttonVariants({ variant: 'outline', size: 'sm' })}`}
-		on:click={toggleExpanded}
-	>
-		{expanded ? 'Hide Details' : 'Show Details'}
-	</button>
+
+	{#if widget.content.widget}
+		<button
+			class={`mt-3 ${buttonVariants({ variant: 'outline', size: 'sm' })}`}
+			onclick={toggleExpanded}
+		>
+			{expanded ? 'Hide Details' : 'Show Details'}
+		</button>
+
+		{#if expanded}
+			<div class="mt-4 rounded-md bg-white/50 p-3 dark:bg-black/20">
+				<svelte:self widget={widget.content.widget} />
+				<Widget widget={childWidget} />
+			</div>
+		{/if}
+	{/if}
 </div>
