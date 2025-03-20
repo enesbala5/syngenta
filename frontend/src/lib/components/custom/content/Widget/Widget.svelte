@@ -1,32 +1,46 @@
 <script lang="ts">
-	import { Widget } from './Widget';
-	import { buttonVariants } from '$lib/components/ui/button/index.js';
+	import Widget from './Widget.svelte';
 	import type { WidgetInterface } from './data';
 	import { widgetMappings } from './data';
+	import { cn } from '$lib/utils';
 
 	interface Props {
 		widget: WidgetInterface;
+		onclick?: () => void;
 	}
 
-	const { widget }: Props = $props();
+	const { widget, onclick }: Props = $props();
 
-	const getExpanded = (widget: WidgetInterface): boolean => {
-		if (widget.expanded !== undefined) return widget.expanded;
-		if (widget.content.expanded !== undefined) return widget.content.expanded;
-		return false;
-	};
+	let expanded = $state(false);
 
-	let expanded = $state(getExpanded(widget));
-	const WidgetComponent = $derived(widgetMappings()[widget.type]?.component);
+	const { component: WidgetComponent, props: widgetProps } = $derived(
+		widgetMappings()[widget.type]
+	);
 
-	const toggleExpanded = () => {
-		expanded = !expanded;
-	};
+	let prefix = $state({
+		expanded: false
+	});
+
+	let suffix = $state({
+		expanded: false
+	});
 </script>
 
-<div class={`widget-container rounded-lg border p-4`}>
+{#snippet nestedWidgets({ widgets }: { widgets: WidgetInterface[] })}
+	<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+		{#each widgets as widget}
+			<Widget {widget} />
+		{/each}
+	</div>
+{/snippet}
+
+{#snippet content()}
+	{#if widget?.content?.prefix && widget?.content?.prefix?.length > 0}
+		{@render nestedWidgets({ widgets: widget?.content?.prefix })}
+	{/if}
+
 	{#if WidgetComponent}
-		<WidgetComponent content={widget.content} />
+		<WidgetComponent content={widget.content} {...widgetProps} />
 	{:else}
 		<div class="flex items-center justify-between">
 			<h3 class={`text-lg font-medium`}>
@@ -39,27 +53,17 @@
 		</p>
 	{/if}
 
-	{#if widget.content.widgets && widget.content.widgets.length > 0}
-		<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-			{#each widget.content.widgets as childWidget}
-				<Widget widget={childWidget} />
-			{/each}
-		</div>
+	{#if widget?.content?.suffix && widget?.content?.suffix?.length > 0}
+		{@render nestedWidgets({ widgets: widget?.content?.suffix })}
 	{/if}
+{/snippet}
 
-	{#if widget.content.widget}
-		<button
-			class={`mt-3 ${buttonVariants({ variant: 'outline', size: 'sm' })}`}
-			onclick={toggleExpanded}
-		>
-			{expanded ? 'Hide Details' : 'Show Details'}
-		</button>
-
-		{#if expanded}
-			<div class="mt-4 rounded-md bg-white/50 p-3 dark:bg-black/20">
-				<svelte:self widget={widget.content.widget} />
-				<Widget widget={childWidget} />
-			</div>
-		{/if}
-	{/if}
-</div>
+{#if onclick}
+	<button {onclick} class={cn(`size-full overflow-hidden  rounded-lg`, widgetProps?.class)}>
+		{@render content()}
+	</button>
+{:else}
+	<div class={cn(`size-full overflow-hidden rounded-lg`, widgetProps?.class)}>
+		{@render content()}
+	</div>
+{/if}

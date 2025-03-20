@@ -32,9 +32,6 @@
 	let { children, buttonProps }: Props = $props();
 </script>
 
-<!-- <p>{lang}</p> -->
-<p>{page.data.language}</p>
-
 <Popover.Root bind:open>
 	<Popover.Trigger bind:ref={triggerRef}>
 		{#snippet child({ props })}
@@ -78,7 +75,7 @@
 				<!-- <Command.Group> -->
 				{#each languageOptions as languageOption (languageOption.value)}
 					<Command.Item
-						value={languageOption.value}
+						value={`${languageOption.value} ${languageOption.name}`}
 						onSelect={() => {
 							value = languageOption.value;
 							handleLanguageChange(languageOption.value);

@@ -1,57 +1,58 @@
 <script lang="ts">
-  import type { WidgetContent, WidgetInterface } from '../data';
-  import { buttonVariants } from '$lib/components/ui/button/index.js';
-  import * as Card from "$lib/components/ui/card/index.js";
-  import * as Carousel from "$lib/components/ui/carousel/index.js";
-  
-  interface Props {
-    content: WidgetContent;
-  }
+	import * as Card from '$lib/components/ui/card/index.js';
+	import * as Carousel from '$lib/components/ui/carousel/index.js';
+	import type { BackendSchema } from '$lib/types/generic';
 
-  const { content }: Props = $props();
-  
-  const slides = $derived(content.slides || []);
-  const totalSlides = $derived(slides.length);
+	interface Props {
+		content: BackendSchema['StoryContent'];
+	}
+
+	const { content }: Props = $props();
+
+	const slides = $derived(content.slides || []);
+	const totalSlides = $derived(slides.length);
 </script>
 
 <div class="story-widget">
-  <h3 class="text-xl font-medium mb-2">{content.title || 'Story'}</h3>
-  
-  {#if slides.length > 0}
-    <div class="mt-3 relative">
-      <Carousel.Root class="w-full">
-        <Carousel.Content>
-          {#each slides as slide, i (i)}
-            <Carousel.Item>
-              <div class="p-1">
-                <Card.Root>
-                  {#if slide.imageUrl}
-                    <img 
-                      src={slide.imageUrl} 
-                      alt={slide.title || ''} 
-                      class="w-full h-40 object-cover rounded-t-md"
-                    />
-                  {/if}
-                  
-                  <Card.Content class="p-3 bg-white/90 dark:bg-black/90">
-                    <h4 class="font-medium">{slide.title || ''}</h4>
-                    <p class="text-sm mt-1">{slide.content || ''}</p>
-                  </Card.Content>
-                </Card.Root>
-              </div>
-            </Carousel.Item>
-          {/each}
-        </Carousel.Content>
-        
-        {#if totalSlides > 1}
-          <div class="flex items-center justify-center mt-2">
-            <Carousel.Previous class="mr-2" />
-            <Carousel.Next />
-          </div>
-        {/if}
-      </Carousel.Root>
-    </div>
-  {:else}
-    <p class="text-muted-foreground">No story slides available.</p>
-  {/if}
-</div> 
+	<h3 class="mb-2 text-xl font-medium">{content.title || 'Story'}</h3>
+
+	{#if slides.length > 0}
+		<div class="relative mt-3">
+			<Carousel.Root class="w-full">
+				<Carousel.Content>
+					{#each slides as slide, i (i)}
+						<Carousel.Item>
+							<div class="p-1">
+								<Card.Root class="relative">
+									{#if slide.imageUrl}
+										<img
+											src={slide.imageUrl}
+											alt={slide.title || ''}
+											class="absolute inset-0 w-full rounded-t-md object-cover opacity-10 mix-blend-multiply"
+										/>
+									{/if}
+
+									<Card.Content
+										class="absolute inset-0 flex items-center justify-center gap-2 bg-white/90 p-3 dark:bg-black/90"
+									>
+										<h4 class="font-medium">{slide.title || ''}</h4>
+										<p class="mt-1 text-sm">{slide.content || ''}</p>
+									</Card.Content>
+								</Card.Root>
+							</div>
+						</Carousel.Item>
+					{/each}
+				</Carousel.Content>
+
+				{#if totalSlides > 1}
+					<div class="mt-2 flex scale-90 items-center justify-center">
+						<Carousel.Previous class="mr-2" />
+						<Carousel.Next />
+					</div>
+				{/if}
+			</Carousel.Root>
+		</div>
+	{:else}
+		<p class="text-muted-foreground">No story slides available.</p>
+	{/if}
+</div>

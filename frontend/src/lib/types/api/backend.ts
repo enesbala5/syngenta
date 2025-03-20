@@ -4,15 +4,32 @@
  */
 
 export interface paths {
-    "/": {
+    "/update-fields/": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Read Home */
-        get: operations["read_home__get"];
+        get?: never;
+        /** Update Field */
+        put: operations["update_field_update_fields__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/fields/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Fields */
+        get: operations["get_fields_fields__get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -21,15 +38,32 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/conversation/{chat_id}": {
+    "/token": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Get Conversation */
-        get: operations["get_conversation_conversation__chat_id__get"];
+        get?: never;
+        put?: never;
+        /** Login */
+        post: operations["login_token_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/protected": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Protected Route */
+        get: operations["protected_route_protected_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -38,83 +72,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/conversations/": {
+    "/user/": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
-        put?: never;
-        /** Get Conversations */
-        post: operations["get_conversations_conversations__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/ai/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Prompt */
-        post: operations["prompt_ai__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/follow-up/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Prompt */
-        post: operations["prompt_follow_up__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/syngenta-ai/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Prompt */
-        post: operations["prompt_dell_ai__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/charts/{chart_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Chart */
-        get: operations["get_chart_charts__chart_id__get"];
+        /** Get User */
+        get: operations["get_user_user__get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -123,58 +89,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/rating/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Rate Conversation */
-        post: operations["rate_conversation_rating__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/db-download/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Process File */
-        post: operations["process_file_db_download__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/startups/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Get Profiles */
-        post: operations["get_profiles_startups__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/metrics": {
+    "/widgets/{widget_type}": {
         parameters: {
             query?: never;
             header?: never;
@@ -182,19 +97,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Get Metrics
-         * @description Input Key Metrics for the dashboard:
-         *     - Number of conversations (int)
-         *     - Average time of conversations (double)
-         *     - Number of Costumer profiles (int)
-         *     - Number of messages today (int)
-         *     - Median number of messages per day (int)
-         *     - Number of messages dynamics:
-         *         messages today compared to median (double, change percentage)
-         *         (e.g. 0.2 for 20% more messages today than median)
-         *     - Average satisfaction rating (double)
+         * Get Widget
+         * @description Retrieve a widget of the specified type.
          */
-        get: operations["get_metrics_metrics_get"];
+        get: operations["get_widget_widgets__widget_type__get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -203,7 +109,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/incoming-call": {
+    "/widgets/": {
         parameters: {
             query?: never;
             header?: never;
@@ -211,16 +117,12 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Handle Incoming Call
-         * @description Handle incoming call and return TwiML response to connect to Media Stream.
+         * Get Widgets
+         * @description Retrieve a list of widgets, including weather data for the user's location.
          */
-        get: operations["handle_incoming_call_incoming_call_get"];
+        get: operations["get_widgets_widgets__get"];
         put?: never;
-        /**
-         * Handle Incoming Call
-         * @description Handle incoming call and return TwiML response to connect to Media Stream.
-         */
-        post: operations["handle_incoming_call_incoming_call_get"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -231,36 +133,405 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        /** FilterRequest */
-        FilterRequest: {
-            /** Pagenumber */
-            pageNumber: number;
+        /** Change */
+        Change: {
             /**
-             * Pagesize
-             * @default 20
+             * Unit
+             * @description The unit of measurement for the change (e.g., kg, tons)
              */
-            pageSize: number;
-            /** Filters */
-            filters?: Record<string, never> | null;
+            unit: string;
+            /**
+             * Amount
+             * @description The amount of change
+             */
+            amount: number;
+        };
+        /** ChartContent */
+        ChartContent: {
+            /**
+             * Title
+             * @description The title of the chart widget
+             */
+            title: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the chart widget
+             */
+            subtitle: string;
+            /**
+             * Description
+             * @description An optional description of the chart
+             */
+            description?: string | null;
+            /**
+             * Data
+             * @description The json data from plotly.
+             */
+            data: string | null;
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
+        };
+        /** ChartWidgetModel */
+        ChartWidgetModel: {
+            /**
+             * Type
+             * @default chart
+             * @constant
+             */
+            type: "chart";
+            content: components["schemas"]["ChartContent"];
+        };
+        /** ExplanationContent */
+        ExplanationContent: {
+            /**
+             * Title
+             * @description The title of the explanation widget
+             */
+            title: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the explanation widget
+             */
+            subtitle: string;
+            /**
+             * Steps
+             * @description A list of steps or instructions
+             */
+            steps: string[];
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
+        };
+        /** ExplanationWidgetModel */
+        ExplanationWidgetModel: {
+            /**
+             * Type
+             * @default explanation
+             * @constant
+             */
+            type: "explanation";
+            content: components["schemas"]["ExplanationContent"];
+        };
+        /** FieldModel */
+        FieldModel: {
+            /** Label */
+            label: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            size: components["schemas"]["SizeModel"];
+            /** Crop Id */
+            crop_id: string;
+            /** Owner Id */
+            owner_id: string;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
-        /** PromptRequest */
-        PromptRequest: {
-            /** Chat Id */
-            chat_id: string;
-            /** Text */
-            text: string;
+        /** HarvestContent */
+        HarvestContent: {
+            /**
+             * Title
+             * @description The title of the harvest widget
+             */
+            title: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the harvest widget
+             */
+            subtitle: string;
+            /**
+             * Direction
+             * @description The direction of change (increase, decrease, or neutral)
+             * @enum {string}
+             */
+            direction: "increase" | "decrease" | "neutral";
+            /** @description The change in harvest metrics */
+            change: components["schemas"]["Change"];
+            /** @description The progress of harvest metrics */
+            progress: components["schemas"]["Progress"];
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
         };
-        /** RatingRequest */
-        RatingRequest: {
-            /** Chat Id */
-            chat_id: string;
-            /** Rating */
-            rating: number;
+        /** HarvestWidgetModel */
+        HarvestWidgetModel: {
+            /**
+             * Type
+             * @default harvest
+             * @constant
+             */
+            type: "harvest";
+            content: components["schemas"]["HarvestContent"];
+        };
+        /** ImageContent */
+        ImageContent: {
+            /**
+             * Title
+             * @description The title of the image widget
+             */
+            title: string;
+            /**
+             * Src
+             * @description The source URL of the image
+             */
+            src: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the image widget
+             */
+            subtitle: string;
+            /**
+             * Description
+             * @description An optional description of the image
+             */
+            description?: string | null;
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
+        };
+        /** ImageWidgetModel */
+        ImageWidgetModel: {
+            /**
+             * Type
+             * @default image
+             * @constant
+             */
+            type: "image";
+            content: components["schemas"]["ImageContent"];
+        };
+        /** LocationContent */
+        LocationContent: {
+            /**
+             * Title
+             * @description The title of the location widget
+             */
+            title: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the location widget
+             */
+            subtitle: string;
+            /**
+             * Description
+             * @description An optional description of the location
+             */
+            description?: string | null;
+            /**
+             * Location
+             * @description The coordinates of the location (latitude, longitude)
+             */
+            location: [
+                number,
+                number
+            ];
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
+        };
+        /** LocationWidgetModel */
+        LocationWidgetModel: {
+            /**
+             * Type
+             * @default location
+             * @constant
+             */
+            type: "location";
+            content: components["schemas"]["LocationContent"];
+        };
+        /** LoginRequest */
+        LoginRequest: {
+            /** Phone Number */
+            phone_number: string;
+            /** Otp */
+            otp: string;
+        };
+        /** Progress */
+        Progress: {
+            /**
+             * Unit
+             * @description The unit of measurement for the progress (e.g., kg, tons)
+             */
+            unit: string;
+            /**
+             * Amount
+             * @description The amount of progress
+             */
+            amount: number;
+        };
+        /** RiskProfileContent */
+        RiskProfileContent: {
+            /**
+             * Title
+             * @description The title of the risk profile widget
+             */
+            title: string;
+            /**
+             * Description
+             * @description The description of the risk profile widget
+             */
+            description: string;
+            /** @description Optional scores for stress, yield, and nutrient */
+            scores?: components["schemas"]["Scores"] | null;
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
+        };
+        /** RiskProfileWidgetModel */
+        RiskProfileWidgetModel: {
+            /**
+             * Type
+             * @default risk_profile
+             * @constant
+             */
+            type: "risk_profile";
+            content: components["schemas"]["RiskProfileContent"];
+        };
+        /** Scores */
+        Scores: {
+            /**
+             * Stress
+             * @description The stress score
+             */
+            stress?: number | null;
+            /**
+             * Yyield
+             * @description The yield score
+             */
+            yyield?: number | null;
+            /**
+             * Nutrient
+             * @description The nutrient score
+             */
+            nutrient?: number | null;
+        };
+        /** SizeModel */
+        SizeModel: {
+            /** Area */
+            area: number;
+        };
+        /** Slide */
+        Slide: {
+            /**
+             * Title
+             * @description The title of the slide
+             */
+            title: string;
+            /**
+             * Content
+             * @description The content of the slide
+             */
+            content: string;
+            /**
+             * Imageurl
+             * @description An optional image URL for the slide
+             */
+            imageUrl?: string | null;
+        };
+        /** StoryContent */
+        StoryContent: {
+            /**
+             * Title
+             * @description The title of the story widget
+             */
+            title: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the story widget
+             */
+            subtitle: string;
+            /**
+             * Slides
+             * @description A list of slides in the story
+             */
+            slides: components["schemas"]["Slide"][];
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
+        };
+        /** StoryWidgetModel */
+        StoryWidgetModel: {
+            /**
+             * Type
+             * @default story
+             * @constant
+             */
+            type: "story";
+            content: components["schemas"]["StoryContent"];
+        };
+        /** Token */
+        Token: {
+            /** Access Token */
+            access_token: string;
+            /** Token Type */
+            token_type: string;
+        };
+        /** UserModel */
+        UserModel: {
+            /** Phone Number */
+            phone_number: string;
+            /** Name */
+            name?: string | null;
+            /** Lat */
+            lat?: number | null;
+            /** Lon */
+            lon?: number | null;
+            /** Token */
+            token?: string | null;
         };
         /** ValidationError */
         ValidationError: {
@@ -271,6 +542,126 @@ export interface components {
             /** Error Type */
             type: string;
         };
+        /** VideoContent */
+        VideoContent: {
+            /**
+             * Title
+             * @description The title of the video widget
+             */
+            title: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the video widget
+             */
+            subtitle: string;
+            /**
+             * Description
+             * @description An optional description of the video
+             */
+            description?: string | null;
+            /**
+             * Videourl
+             * @description The URL of the video
+             */
+            videoUrl: string;
+            /**
+             * Autoplay
+             * @description Whether the video should autoplay
+             * @default false
+             */
+            autoplay: boolean;
+            /**
+             * Muted
+             * @description Whether the video should be muted
+             * @default false
+             */
+            muted: boolean;
+            /**
+             * Loop
+             * @description Whether the video should loop
+             * @default false
+             */
+            loop: boolean;
+            /**
+             * Controls
+             * @description Whether the video controls should be displayed
+             * @default true
+             */
+            controls: boolean;
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
+        };
+        /** VideoWidgetModel */
+        VideoWidgetModel: {
+            /**
+             * Type
+             * @default video
+             * @constant
+             */
+            type: "video";
+            content: components["schemas"]["VideoContent"];
+        };
+        /** WeatherContent */
+        WeatherContent: {
+            /**
+             * Title
+             * @description The title of the weather widget
+             */
+            title: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the weather widget
+             */
+            subtitle: string;
+            /**
+             * Description
+             * @description A description of the weather widget
+             */
+            description: string | null;
+            /**
+             * Location
+             * @description The location for the weather data
+             */
+            location?: string | null;
+            /**
+             * Temperature
+             * @description The temperature in degrees Celsius
+             */
+            temperature?: number | null;
+            /**
+             * Condition
+             * @description The weather icon.
+             */
+            condition?: string | null;
+            /**
+             * Humidity
+             * @description The humidity percentage
+             */
+            humidity?: number | null;
+            /**
+             * Wind Speed
+             * @description The wind speed in km/h
+             */
+            wind_speed?: number | null;
+        };
+        /** WeatherWidgetModel */
+        WeatherWidgetModel: {
+            /**
+             * Type
+             * @default weather
+             * @constant
+             */
+            type: "weather";
+            content: components["schemas"]["WeatherContent"];
+        };
     };
     responses: never;
     parameters: never;
@@ -280,7 +671,93 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    read_home__get: {
+    update_field_update_fields__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FieldModel"][];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_fields_fields__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FieldModel"][];
+                };
+            };
+        };
+    };
+    login_token_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoginRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Token"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    protected_route_protected_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -300,12 +777,32 @@ export interface operations {
             };
         };
     };
-    get_conversation_conversation__chat_id__get: {
+    get_user_user__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserModel"];
+                };
+            };
+        };
+    };
+    get_widget_widgets__widget_type__get: {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                chat_id: string;
+                widget_type: "weather" | "image" | "video" | "location" | "explanation" | "story" | "risk_profile" | "harvest";
             };
             cookie?: never;
         };
@@ -317,7 +814,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": unknown;
+                    "application/json": components["schemas"]["WeatherWidgetModel"] | components["schemas"]["ImageWidgetModel"] | components["schemas"]["VideoWidgetModel"] | components["schemas"]["LocationWidgetModel"] | components["schemas"]["ExplanationWidgetModel"] | components["schemas"]["StoryWidgetModel"] | components["schemas"]["RiskProfileWidgetModel"] | components["schemas"]["HarvestWidgetModel"] | components["schemas"]["ChartWidgetModel"];
                 };
             };
             /** @description Validation Error */
@@ -331,73 +828,7 @@ export interface operations {
             };
         };
     };
-    get_conversations_conversations__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["FilterRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    prompt_ai__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PromptRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    prompt_follow_up__post: {
+    get_widgets_widgets__get: {
         parameters: {
             query?: never;
             header?: never;
@@ -412,230 +843,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": unknown;
-                };
-            };
-        };
-    };
-    prompt_dell_ai__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PromptRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    get_chart_charts__chart_id__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                chart_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": string;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    rate_conversation_rating__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["RatingRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    process_file_db_download__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["FilterRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    get_profiles_startups__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["FilterRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    get_metrics_metrics_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-        };
-    };
-    handle_incoming_call_incoming_call_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-        };
-    };
-    handle_incoming_call_incoming_call_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
+                    "application/json": components["schemas"]["WeatherWidgetModel"] | components["schemas"]["ImageWidgetModel"] | components["schemas"]["VideoWidgetModel"] | components["schemas"]["LocationWidgetModel"] | components["schemas"]["ExplanationWidgetModel"] | components["schemas"]["StoryWidgetModel"] | components["schemas"]["RiskProfileWidgetModel"] | components["schemas"]["HarvestWidgetModel"] | components["schemas"]["ChartWidgetModel"];
                 };
             };
         };

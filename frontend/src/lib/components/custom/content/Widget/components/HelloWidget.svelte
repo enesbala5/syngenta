@@ -1,26 +1,20 @@
 <script lang="ts">
-  import type { WidgetContent, WidgetInterface } from '../data';
-  
-  interface Props {
-    content: WidgetContent
-    colorTheme: string
-    icon: string
-  }
+	import { cn } from '$lib/utils';
 
-  const { content, colorTheme, icon } = $props<Props>();
+	interface Props {
+		content: any;
+	}
 
-  // Define styles internally
-  const styles = {
-    container: `border-${colorTheme}-600/80 dark:border-${colorTheme}-400/40 bg-${colorTheme}-100/50 dark:bg-${colorTheme}-900/30`,
-    title: `text-${colorTheme}-800 dark:text-${colorTheme}-300`,
-    badge: `bg-${colorTheme}-600 dark:bg-${colorTheme}-500 text-white`
-  };
+	const { content }: Props = $props();
 </script>
 
-<div class={styles.container}>
-  <h2 class={styles.title}>
-    <div class={styles.badge}>
-      <!-- Icon and content -->
-    </div>
-  </h2>
-</div> 
+<div class={cn('  ')}>
+	<h2 class={cn('text-7xl font-semibold text-amber-800 dark:text-amber-300')}>
+		{content?.title}
+
+		<span class={cn('font-bold text-amber-600 dark:text-amber-500')}>
+			{content?.name}
+			<!-- Icon and content -->
+		</span>
+	</h2>
+</div>

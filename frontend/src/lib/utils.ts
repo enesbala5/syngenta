@@ -30,9 +30,8 @@ export const getFileNameAndType = (fileName: string | undefined | null) => {
  * @param lastName - The last name of the user.
  * @returns The full name if both first name and last name are provided, otherwise a placeholder.
  */
-export const returnNameOrPlaceholder = (firstName: string | undefined | null, lastName: string | undefined | null) => {
-	if (firstName && lastName) {
-		return `${firstName} ${lastName}`;
-	}
+export const returnNameOrPlaceholder = (name: string | undefined | null) => {
+	if (name) return name;
+
 	return `${company.name} User`;
 };

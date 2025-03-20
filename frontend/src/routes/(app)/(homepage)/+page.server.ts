@@ -5,10 +5,10 @@ import { OPENAI_API_KEY } from '$env/static/private';
 import client from '$lib/services/api/index.js';
 
 export const load: PageServerLoad = async ({ locals }) => {
-	const { data: dashboardData, error } = await client.GET('/metrics')
+	const { data: widgets, error } = await client.GET('/widgets/')
 
 	return {
-		dashboardData,
+		widgets,
 		user: locals?.user
 	};
 };

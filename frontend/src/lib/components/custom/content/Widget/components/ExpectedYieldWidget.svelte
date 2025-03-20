@@ -1,9 +1,8 @@
 <script lang="ts">
-	import type { WidgetContent, WidgetInterface } from '../data';
 	import { directionStyles } from '../data';
 
 	interface Props {
-		content: WidgetContent;
+		content: any;
 	}
 
 	const { content }: Props = $props();

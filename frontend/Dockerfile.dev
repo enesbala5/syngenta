@@ -47,9 +47,7 @@ ENV GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
 
 # -----------------------------------
 
-# RUN pnpm run generate-types
-
-RUN pnpx prisma generate
+RUN pnpm run generate-types
 
 RUN pnpx @sveltejs/kit sync
 

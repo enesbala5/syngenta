@@ -20,6 +20,7 @@
 	import type { Page } from '@sveltejs/kit';
 	import BottomBar from '$lib/components/custom/content/BottomBar/BottomBar.svelte';
 	import AppSidebar from '$lib/components/custom/content/Sidebar/app-sidebar.svelte';
+	import AuthenticationComponent from '$lib/components/custom/content/AuthenticationComponent/AuthenticationComponent.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -50,6 +51,7 @@
 </script>
 
 <svelte:window bind:scrollY />
+
 <Sidebar.Provider controlledOpen={tailwindBreakpointMet('md', $screenSize)}>
 	<AppSidebar collapsible={'icon'} />
 	<Sidebar.Inset>
@@ -120,3 +122,5 @@
 		</main>
 	</Sidebar.Inset>
 </Sidebar.Provider>
+
+<AuthenticationComponent {user} />

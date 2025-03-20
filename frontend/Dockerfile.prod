@@ -47,9 +47,7 @@ ENV GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
 ENV GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
 # --------------------------
 
-# RUN pnpm run generate-types
-
-RUN npx prisma generate
+RUN pnpm run generate-types
 
 RUN pnpx @sveltejs/kit sync
 
@@ -99,7 +97,6 @@ WORKDIR /frontend
 COPY --from=build /frontend/build ./build
 COPY --from=build /frontend/package.json ./package.json
 COPY --from=build /frontend/node_modules ./node_modules
-COPY --from=build /frontend/prisma ./prisma
 RUN ulimit -c unlimited
 
 ENTRYPOINT ["node", "--max-old-space-size=8192", "build"]

@@ -32,18 +32,18 @@
 	import { toast } from 'svelte-sonner';
 	import { ChatAiIcons } from './data';
 	import { PressedKeys } from 'runed';
-	import type { User } from 'lucia';
 	import type { Message } from './types';
 	import { buildSearchParamsString } from '$lib/services/routeHandler';
 	import client from '$lib/services/api';
 	import Command from '$lib/components/ui/command/command.svelte';
 	import CommandShortcut from '$lib/components/ui/command/command-shortcut.svelte';
 	import { chatState } from './state.svelte';
+	import type { PageUser } from '$lib/types/generic';
 
 	interface Props {
 		class?: string;
 		innerContainer?: string;
-		user?: User;
+		user?: PageUser;
 		endpoint?: string;
 		temporaryId: string;
 	}
@@ -94,7 +94,7 @@
 		messages.push({
 			id: messages.length + 1,
 			// avatar: selectedUser.avatar,
-			name: returnNameOrPlaceholder(user?.firstName, user?.lastName),
+			name: returnNameOrPlaceholder(user?.name),
 			role: 'user',
 			message: input
 		});

@@ -1,29 +1,29 @@
 <script lang="ts">
-  import type { WidgetContent, WidgetInterface } from '../data';
-  
-  interface Props {
-    content: WidgetContent
-}
+	import type { BackendSchema } from '$lib/types/generic';
 
-const { content }: Props = $props()
+	interface Props {
+		content: BackendSchema['LocationContent'];
+	}
+	
+	const { content }: Props = $props();
 </script>
 
 <div class="location-widget">
-  <h3 class="text-xl font-medium mb-2">{content.title || 'Location'}</h3>
-  
-  {#if content.location}
-    <div class="flex items-center gap-2 mt-2">
-      <span class="inline-block">📍</span>
-      <span class="text-lg">{content.location}</span>
-    </div>
-  {/if}
-  
-  {#if content.subtitle}
-    <p class="text-sm text-muted-foreground mt-2">{content.subtitle}</p>
-  {/if}
-  
-  <!-- Map placeholder - would be replaced with actual map component -->
-  <div class="mt-3 bg-gray-200 dark:bg-gray-700 rounded-md h-32 flex items-center justify-center">
-    <span class="text-gray-500 dark:text-gray-400">Map View</span>
-  </div>
-</div> 
+	<h3 class="mb-2 text-xl font-medium">{content.title || 'Location'}</h3>
+
+	{#if content.location}
+		<div class="mt-2 flex items-center gap-2">
+			<span class="inline-block">📍</span>
+			<span class="text-lg">{content.location}</span>
+		</div>
+	{/if}
+
+	{#if content.subtitle}
+		<p class="mt-2 text-sm text-muted-foreground">{content.subtitle}</p>
+	{/if}
+
+	<!-- Map placeholder - would be replaced with actual map component -->
+	<div class="mt-3 flex h-32 items-center justify-center rounded-md bg-gray-200 dark:bg-gray-700">
+		<span class="text-gray-500 dark:text-gray-400">Map View</span>
+	</div>
+</div>

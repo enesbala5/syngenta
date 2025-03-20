@@ -4,6 +4,7 @@
 	import type { PageUser } from '$lib/types/generic';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { route } from '$lib/services/routeHandler';
+	import { authenticationState } from '../../AuthenticationComponent/state.svelte';
 
 	interface Props {}
 
@@ -17,10 +18,17 @@
 		<Card.Root>
 			<Card.Header class="p-3">
 				<!-- <Card.Title class="text-base">Card Title</Card.Title> -->
-				<Card.Description>Log in to follow creators, like videos, and view comments.</Card.Description>
+				<Card.Description
+					>Log in to follow creators, like videos, and view comments.</Card.Description
+				>
 			</Card.Header>
 			<Card.Content class="p-3">
-				<Button size="lg" class="w-full" variant="default" href={route('/(alternate)/(auth)/login')}>Log In</Button>
+				<Button
+					size="lg"
+					class="w-full"
+					variant="default"
+					onclick={() => (authenticationState.showPreview = false)}>Log In</Button
+				>
 			</Card.Content>
 		</Card.Root>
 	</Sidebar.Group>

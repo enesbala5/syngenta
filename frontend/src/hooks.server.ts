@@ -17,11 +17,10 @@ export const fetchUserInfo = async (session: string, fetchFn: FetchFunction): Pr
 	try {
 		if (building) return;
 
-		const { data, error } = await client.GET('/api/User/userDetails', {
+		const { data, error } = await client.GET('/user/', {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			// cache: 'reload',
 		});
 
 		if (!data || error) {
@@ -100,7 +99,3 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	return await resolve(event)
 };
-
-// export const init: ServerInit = async () => {
-
-// }
