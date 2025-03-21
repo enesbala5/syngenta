@@ -1,18 +1,36 @@
 <script lang="ts">
 	import { directionStyles, getRiskStyle } from '../data';
+	import * as Card from '$lib/components/ui/card';
 	import { cn } from '$lib/utils';
+	import WeatherDisplay from '$lib/components/custom/general/WeatherDisplay/WeatherDisplay.svelte';
+	import type { BackendSchema } from '$lib/types/generic';
 
 	interface Props {
-		content: any;
+		content: BackendSchema['HarvestContent'];
 	}
 
 	const { content }: Props = $props();
 	const directionStyle = $derived(directionStyles[content.direction ?? 'neutral']);
+
+	// Function to get appropriate icon based on progress score
+	function getHarvestIcon(progress: number): string {
+		if (progress >= 90) return 'code-green';
+		if (progress >= 75) return 'code-green';
+		if (progress >= 50) return 'code-yellow';
+		if (progress >= 25) return 'code-orange';
+		return 'code-red';
+	}
+
+	const harvestIcon = $derived(getHarvestIcon(content.progress || 0));
 </script>
 
-<p>content.direction: {content.direction}</p>
+<div class="flex w-full flex-col items-center bg-gradient-to-tr from-red-50 to-red-100 text-center p-4 ">
+	{#if harvestIcon}
+		<Card.Root class="size-28 !p-2 mb-4">
+			<WeatherDisplay icon={harvestIcon} class="object-fill " />
+		</Card.Root>
+	{/if}
 
-<div class="flex w-full flex-col items-start">
 	<h3 class="mb-2 text-xl font-medium">{content?.title || 'Harvest'}</h3>
 
 	{#if content?.subtitle}
@@ -31,15 +49,26 @@
 		</div>
 	{/if}
 
-	<div class="h-5 rounded-full bg-gray-200 dark:bg-gray-700">
-		<div
-			class={cn('h-5 rounded-full bg-gradient-to-r', getRiskStyle(content.progress).gradient)}
-			style="width: {Math.min(content.progress, 100)}%"
-		></div>
+	<div class="mt-4 flex items-center gap-2">
+		<div class="h-5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+			<div
+				class={cn(
+					'h-5 rounded-full bg-gradient-to-r',
+					getRiskStyle(content.progress.amount).gradient
+				)}
+				style="width: {Math.min(content.progress.amount, 100)}%"
+			></div>
+		</div>
+		<span class={cn('text-2xl', getRiskStyle(content.progress.amount).text)}>
+			<!-- <i class={`wi wi-${harvestIcon}`}></i> -->
+			<p>{content.progress}</p>
+		</span>
 	</div>
 
-	<div class="flex w-full items-center bg-red-500 justify-between">
-		<p class="text-sm text-neutral-800 opacity-70">{Math.min(content.progress, 0)}$</p>
-		<p class="text-sm text-neutral-800 opacity-70">100%</p>
+	<div class="flex w-full items-center justify-between">
+		<p class="text-sm text-neutral-800 opacity-70 dark:text-neutral-200">
+			{Math.min(content.progress.amount, 100)}%
+		</p>
+		<p class="text-sm text-neutral-800 opacity-70 dark:text-neutral-200">100%</p>
 	</div>
 </div>

@@ -36,9 +36,7 @@
 			</Tabs.List>
 
 			<Tabs.Content value="overview" class="absolute inset-x-0 space-y-4 overflow-auto"> -->
-		<div
-			class="insight-section-grid !flex w-full flex-col px-2 md:!grid md:grid-cols-2 lg:!grid-cols-6"
-		>
+		<div class="grid w-full md:grid-cols-2">
 			{@render children?.()}
 
 			{#await getWidgetByType('general_risk')}
@@ -135,9 +133,8 @@
 			<TeamSwitcher />
 		</div> -->
 
-			{#each widgets as widget, i}
-				<div class="flex-1 space-y-4 pt-6">
-					<!-- <Tabs.Root value="overview" class="relative space-y-4">
+			<div class="flex-1 space-y-4 pt-6">
+				<!-- <Tabs.Root value="overview" class="relative space-y-4">
 			<Tabs.List>
 				<Tabs.Trigger value="overview">Overview</Tabs.Trigger>
 				<Tabs.Trigger value="analytics" disabled>Analytics</Tabs.Trigger>
@@ -146,131 +143,129 @@
 			</Tabs.List>
 
 			<Tabs.Content value="overview" class="absolute inset-x-0 space-y-4 overflow-auto"> -->
-					<div
-						class="insight-section-grid relative !flex w-full flex-col px-2 md:grid md:grid-cols-2"
-					>
-						{@render children?.()}
+				<div class="relative !flex w-full flex-col px-2">
+					{@render children?.()}
 
-						{#await getWidgetByType('general_risk')}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<Spinner class="size-6" />
-									<Card.Description>Loading widget...</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{:then widget}
-							<WidgetWrapper widget={widget as any} />
-						{:catch error}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<AlertTriangleIcon class="size-6" />
-									<Card.Description>Something went wrong</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{/await}
+					{#await getWidgetByType('harvest')}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<Spinner class="size-6" />
+								<Card.Description>Loading widget...</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{:then widget}
+						<WidgetWrapper widget={widget as any} class='!max-h-96 overflow-y-auto' />
+					{:catch error}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<AlertTriangleIcon class="size-6" />
+								<Card.Description>Something went wrong</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{/await}
 
-						{#await getWidgetByType('chart')}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<Spinner class="size-6" />
-									<Card.Description>Loading widget...</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{:then widget}
-							<WidgetWrapper widget={widget as any} />
-						{:catch error}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<AlertTriangleIcon class="size-6" />
-									<Card.Description>Something went wrong</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{/await}
+					{#await getWidgetByType('video')}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<Spinner class="size-6" />
+								<Card.Description>Loading widget...</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{:then widget}
+						<WidgetWrapper widget={widget as any} class='!max-h-96 overflow-y-auto' />
+					{:catch error}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<AlertTriangleIcon class="size-6" />
+								<Card.Description>Something went wrong</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{/await}
 
-						{#await getWidgetByType('harvest')}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<Spinner class="size-6" />
-									<Card.Description>Loading widget...</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{:then widget}
-							<WidgetWrapper widget={widget as any} />
-						{:catch error}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<AlertTriangleIcon class="size-6" />
-									<Card.Description>Something went wrong</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{/await}
+					<!-- {#await getWidgetByType('general_risk')}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<Spinner class="size-6" />
+								<Card.Description>Loading widget...</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{:then widget}
+						<WidgetWrapper widget={widget as any} class='!max-h-96 overflow-y-auto' />
+					{:catch error}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<AlertTriangleIcon class="size-6" />
+								<Card.Description>Something went wrong</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{/await}
 
-						{#await getWidgetByType('image')}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<Spinner class="size-6" />
-									<Card.Description>Loading widget...</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{:then widget}
-							<WidgetWrapper widget={widget as any} />
-						{:catch error}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<AlertTriangleIcon class="size-6" />
-									<Card.Description>Something went wrong</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{/await}
+					{#await getWidgetByType('chart')}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<Spinner class="size-6" />
+								<Card.Description>Loading widget...</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{:then widget}
+						<WidgetWrapper widget={widget as any} class='!max-h-96 overflow-y-auto' />
+					{:catch error}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<AlertTriangleIcon class="size-6" />
+								<Card.Description>Something went wrong</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{/await}
 
-						{#await getWidgetByType('video')}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<Spinner class="size-6" />
-									<Card.Description>Loading widget...</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{:then widget}
-							<WidgetWrapper widget={widget as any} />
-						{:catch error}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<AlertTriangleIcon class="size-6" />
-									<Card.Description>Something went wrong</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{/await}
 
-						{#await getWidgetByType('nutrient_risk')}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<Spinner class="size-6" />
-									<Card.Description>Loading widget...</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{:then widget}
-							<WidgetWrapper widget={widget as any} />
-						{:catch error}
-							<Card.Root>
-								<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
-									<AlertTriangleIcon class="size-6" />
-									<Card.Description>Something went wrong</Card.Description>
-								</Card.Content>
-							</Card.Root>
-						{/await}
+					{#await getWidgetByType('image')}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<Spinner class="size-6" />
+								<Card.Description>Loading widget...</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{:then widget}
+						<WidgetWrapper widget={widget as any} class='!max-h-96 overflow-y-auto' />
+					{:catch error}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<AlertTriangleIcon class="size-6" />
+								<Card.Description>Something went wrong</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{/await}
 
-						{#each widgets as widget, i}
-							<WidgetWrapper {widget} />
-							<pre class="text-red-500">{JSON.stringify(widget, null, 2)}</pre>
-						{/each}
-					</div>
-					<!-- </Tabs.Content>
-		</Tabs.Root> -->
+	
+					{#await getWidgetByType('nutrient_risk')}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<Spinner class="size-6" />
+								<Card.Description>Loading widget...</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{:then widget}
+						<WidgetWrapper widget={widget as any} class='!max-h-96 overflow-y-auto' />
+					{:catch error}
+						<Card.Root>
+							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
+								<AlertTriangleIcon class="size-6" />
+								<Card.Description>Something went wrong</Card.Description>
+							</Card.Content>
+						</Card.Root>
+					{/await} -->
+
+					<!-- {#each widgets as widget, i}
+						<WidgetWrapper {widget} class="col-span-2" />
+					{/each} -->
+					<!-- <pre class="text-red-500">{JSON.stringify(widget, null, 2)}</pre> -->
 				</div>
+				<!-- </Tabs.Content>
+		</Tabs.Root> -->
+			</div>
 
-				<!-- <WidgetWrapper {widget} /> -->
-				<!-- <pre class="text-red-500">{JSON.stringify(widget, null, 2)}</pre> -->
-			{/each}
+			<!-- <WidgetWrapper {widget} /> -->
 		</div>
 		<!-- </Tabs.Content>
 		</Tabs.Root> -->

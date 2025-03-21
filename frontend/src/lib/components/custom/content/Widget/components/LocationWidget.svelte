@@ -14,7 +14,7 @@
 	const lng = content?.location[1];
 </script>
 
-<div class="flex size-full flex-col items-start absolute inset-0">
+<div class="absolute inset-0 flex size-full flex-col items-start">
 	<!-- <h3 class="mb-2 text-xl font-medium">{content?.title || 'Location'}</h3> -->
 
 	{#if content.location}

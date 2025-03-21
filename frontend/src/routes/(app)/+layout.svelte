@@ -95,7 +95,7 @@
 						<LanguagePicker buttonProps={{ size: 'sm', variant: 'ghost', class: '' }}>
 							<GlobeIcon class="size-5" />
 						</LanguagePicker>
-						<DarkModeToggle buttonProps={{ size: 'sm', variant: 'ghost', class: '' }} />
+						<!-- <DarkModeToggle buttonProps={{ size: 'sm', variant: 'ghost', class: '' }} /> -->
 					</div>
 				</section>
 			</section>

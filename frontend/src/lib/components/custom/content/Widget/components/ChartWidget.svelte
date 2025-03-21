@@ -24,12 +24,15 @@
 	};
 </script>
 
-<Card.Root class="flex size-full items-center justify-center p-3">
+<Card.Root
+	class="flex flex-col items-center justify-center overflow-hidden rounded-lg bg-background p-3"
+>
 	{#await parseChartData(content?.data)}
 		<Spinner />
 	{:then data}
 		<Plot
 			{data}
+			class=""
 			config={{
 				showAxisRangeEntryBoxes: false,
 				showAxisDragHandles: false,

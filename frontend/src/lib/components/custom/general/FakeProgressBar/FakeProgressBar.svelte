@@ -52,7 +52,7 @@
 <style>
   progress {
     --bar-color: hsla(346.8 77.2% 10.8);
-    --val-color: hsla(346.8 77.2% 49.8);
+    --val-color: rgb(94, 225, 29);
     position: fixed;
     top: 0;
     z-index: 99999;

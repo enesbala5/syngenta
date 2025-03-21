@@ -53,7 +53,6 @@
 		<h2 class="h2">Knowledge Base</h2>
 		<div class="flex max-w-lg items-center space-x-2">
 			<p>Search for the most relevant information with our AI-powered search engine.</p>
-
 			<!-- - -->
 		</div>
 	</div>
@@ -80,8 +79,8 @@
 					{company.name} Assistant
 				</Card.Title>
 				<Card.Description
-					>Central hub for everything <strong>Dell for Startups</strong>. Get all the answers you
-					need and serve your users well.</Card.Description
+					>Get all the answers you need to increase the productivity of your farm and boost your
+					bottom line.</Card.Description
 				>
 			</Card.Header>
 			<Card.Content class="h-fit w-full p-3 pt-6">

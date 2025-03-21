@@ -45,7 +45,7 @@
 </script>
 
 {#snippet nestedWidgets({ widgets }: { widgets: WidgetInterface[] })}
-	<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+	<div class="mt-4 flex max-h-96 flex-col overflow-auto">
 		{#each widgets as widget}
 			<Widget
 				{widget}
@@ -53,6 +53,7 @@
 					prefix: { nest: false },
 					suffix: { nest: false }
 				}}
+				class="!h-auto max-h-none"
 			/>
 		{/each}
 	</div>
@@ -85,12 +86,19 @@
 {#if onclick}
 	<button
 		{onclick}
-		class={cn(` relative min-h-72 w-full rounded-lg`, widgetProps?.class, className)}
+		class={cn(
+			`items-left !relative flex min-h-72 w-full flex-col rounded-lg text-left`,
+			widgetProps?.class,
+			className
+		)}
 	>
 		{@render content()}
-	</button>
-{:else}
-	<div class={cn(`max-h-96 min-h-72 w-full rounded-lg`, widgetProps?.class, className)}>
+	</button>{:else}<div
+		class={cn(
+			`items-left !relative flex min-h-72 w-full flex-col rounded-lg text-left`,
+			widgetProps?.class,
+			className
+		)}
+	>
 		{@render content()}
-	</div>
-{/if}
+	</div>{/if}

@@ -39,12 +39,14 @@
 
 {#if isDesktop.current}
 	<Dialog.Root bind:open>
-		<Dialog.Trigger disabled={disablePopup}>
-			{#snippet child({ props }: any)}
-				{@render content({ onclick: props.onclick })}
-			{/snippet}
-		</Dialog.Trigger>
-		<Dialog.Content class="p-0 max-h-[90vh] overflow-y-auto h-full">
+		<!-- <Dialog.Trigger> -->
+		<!-- {#snippet child({ props }: any)} -->
+		{@render content({ onclick: () => (open = !open) })}
+		<!-- {/snippet} -->
+		<!-- </Dialog.Trigger> -->
+		<Dialog.Content
+			class="flex h-auto max-h-[90vh] flex-col gap-6 overflow-y-auto !border-none !bg-transparent p-0"
+		>
 			<!-- <Dialog.Header>
 				<Dialog.Title>Edit profile</Dialog.Title>
 				<Dialog.Description>
@@ -61,7 +63,7 @@
 		{@render content({ onclick: () => (open = !open) })}
 		<!-- {/snippet} -->
 		<!-- </Drawer.Trigger> -->
-		<Drawer.Content class="p-2">
+		<Drawer.Content class="max-h-[90vh] overflow-y-auto p-0">
 			<!-- <Drawer.Header class="text-left">
 				<Drawer.Title>Edit profile</Drawer.Title>
 				<Drawer.Description>

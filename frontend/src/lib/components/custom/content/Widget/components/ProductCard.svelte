@@ -12,17 +12,13 @@
 
 <Card.Root class="w-full">
 	<Card.Content class="p-4">
-		{#if prefix}
-			{@render prefix()}
-		{/if}
-
-		<div class="flex flex-col md:flex-row gap-4">
+		<div class="flex flex-col gap-4 md:flex-row">
 			{#if content.source}
 				<div class="w-full md:w-1/3">
-					<img 
-						src={content.source} 
-						alt={content.title} 
-						class="w-full h-auto object-cover rounded-md"
+					<img
+						src={content.source}
+						alt={content.title}
+						class="aspect-square w-full rounded-md object-cover"
 					/>
 				</div>
 			{/if}
@@ -50,9 +46,5 @@
 				{/if}
 			</div>
 		</div>
-
-		{#if suffix}
-			{@render suffix()}
-		{/if}
 	</Card.Content>
 </Card.Root>
