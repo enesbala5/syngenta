@@ -187,12 +187,12 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 
 // Direction styles mapping
 export const directionStyles = {
-	positive: {
+	increase: {
 		text: 'text-green-600 dark:text-green-400',
 		icon: 'arrow-up',
 		iconClass: 'text-green-600 dark:text-green-400'
 	},
-	negative: {
+	decrease: {
 		text: 'text-red-600 dark:text-red-400',
 		icon: 'arrow-down',
 		iconClass: 'text-red-600 dark:text-red-400'
@@ -203,3 +203,37 @@ export const directionStyles = {
 		iconClass: 'text-gray-600 dark:text-gray-400'
 	}
 };
+
+
+export type RiskCondition = 'severe' | 'bad' | 'moderate' | 'good' | 'excellent';
+
+const riskStyles: Record<RiskCondition, { gradient: string; text: string }> = {
+	severe: {
+		gradient: 'from-red-100 to-red-200',
+		text: 'text-red-700'
+	},
+	bad: {
+		gradient: 'from-orange-100 to-orange-200',
+		text: 'text-orange-700'
+	},
+	moderate: {
+		gradient: 'from-yellow-100 to-yellow-200',
+		text: 'text-yellow-700'
+	},
+	good: {
+		gradient: 'from-blue-100 to-blue-200',
+		text: 'text-blue-700'
+	},
+	excellent: {
+		gradient: 'from-green-100 to-green-200',
+		text: 'text-green-700'
+	}
+};
+
+export function getRiskStyle(score: number) {
+	if (score <= 20) return riskStyles.severe;
+	if (score <= 40) return riskStyles.bad;
+	if (score <= 60) return riskStyles.moderate;
+	if (score <= 80) return riskStyles.good;
+	return riskStyles.excellent;
+}

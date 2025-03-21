@@ -15,7 +15,7 @@
 </script>
 
 {#if sidebar.open}
-	<Sidebar.Group>
+	<!-- <Sidebar.Group>
 		<Card.Root>
 			<Card.Header class="p-3">
 				<Card.Description>Everyone is waiting...</Card.Description>
@@ -33,7 +33,7 @@
 				</Button>
 			</Card.Content>
 		</Card.Root>
-	</Sidebar.Group>
+	</Sidebar.Group> -->
 {:else}
 	<!-- Update the content in the if statement above for a collapsed state -->
 	<span></span>

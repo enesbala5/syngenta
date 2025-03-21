@@ -8,11 +8,11 @@
 	const { content }: Props = $props();
 </script>
 
-<div class="flex flex-col gap-y-2 items-start text-left">
-	<h3 class="mb-2 text-xl font-medium text-left">{content?.title || 'Explanation'}</h3>
+<div class="flex flex-col items-start gap-y-2 text-left">
+	<h3 class="text-left text-xl leading-none font-medium">{content?.title || 'Explanation'}</h3>
 
 	{#if content?.subtitle}
-		<p class="mb-3 text-sm text-muted-foreground">{content?.subtitle}</p>
+		<p class="text-sm text-muted-foreground">{content?.subtitle}</p>
 	{/if}
 
 	{#if content.steps && content.steps.length > 0}

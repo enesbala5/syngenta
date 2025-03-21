@@ -7,15 +7,19 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { Button, buttonVariants } from '$lib/components/ui/button/index.js';
+	import { MessageSquareIcon, PhoneIcon } from 'lucide-svelte';
+	import { company } from '$lib/data/generic';
+	import { cn } from '$lib/utils';
 
 	let open = $state(false);
 	const isDesktop = new MediaQuery('(min-width: 768px)');
 
 	interface Props {
 		widget: WidgetInterface;
+		class?: string;
 	}
 
-	const { widget }: Props = $props();
+	const { widget, class: className }: Props = $props();
 
 	const popupBlacklist: WidgetType[] = ['hello', 'story'];
 	let disablePopup = $derived(popupBlacklist.includes(widget.type));
@@ -25,7 +29,7 @@
 	<Widget
 		{widget}
 		{onclick}
-		class={'border p-2'}
+		class={cn('border p-2', className)}
 		preferences={{
 			prefix: { nest: true },
 			suffix: { nest: true }
@@ -40,7 +44,7 @@
 				{@render content({ onclick: props.onclick })}
 			{/snippet}
 		</Dialog.Trigger>
-		<Dialog.Content class="p-0">
+		<Dialog.Content class="p-0 max-h-[90vh] overflow-y-auto h-full">
 			<!-- <Dialog.Header>
 				<Dialog.Title>Edit profile</Dialog.Title>
 				<Dialog.Description>
@@ -57,10 +61,11 @@
 		{@render content({ onclick: () => (open = !open) })}
 		<!-- {/snippet} -->
 		<!-- </Drawer.Trigger> -->
-		<Drawer.Content class="p-0">
+		<Drawer.Content class="p-2">
 			<!-- <Drawer.Header class="text-left">
 				<Drawer.Title>Edit profile</Drawer.Title>
 				<Drawer.Description>
+				
 					Make changes to your profile here. Click save when you're done.
 				</Drawer.Description>
 			</Drawer.Header>
@@ -70,6 +75,18 @@
 			</Drawer.Footer> -->
 
 			{@render content({})}
+
+			<div class="flex items-center gap-2">
+				<Button variant="secondary">
+					Text Now
+					<MessageSquareIcon class="size-4" />
+				</Button>
+
+				<Button href={company.ai.phone.href}>
+					Talk Now
+					<PhoneIcon class="size-4" />
+				</Button>
+			</div>
 		</Drawer.Content>
 	</Drawer.Root>
 {/if}

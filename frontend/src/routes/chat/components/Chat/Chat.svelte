@@ -305,7 +305,7 @@
 				class="min-h-12 resize-none rounded-lg border-0 bg-background p-3 shadow-none focus-visible:ring-0"
 			/>
 			<div class="flex items-center p-3 pt-0">
-				<Button href={'tel:+15642323655'} variant="ghost" size="icon">
+				<Button href={company.ai.phone.href} variant="ghost" size="icon">
 					<PhoneIcon class="size-4" />
 					<span class="sr-only">Talk on the Phone</span>
 				</Button>

@@ -5,6 +5,7 @@
 
 	interface Props {
 		content: BackendSchema['LocationContent'];
+		class?: string;
 	}
 
 	const { content }: Props = $props();
@@ -13,7 +14,7 @@
 	const lng = content?.location[1];
 </script>
 
-<div class="flex size-full flex-col items-start">
+<div class="flex size-full flex-col items-start absolute inset-0">
 	<!-- <h3 class="mb-2 text-xl font-medium">{content?.title || 'Location'}</h3> -->
 
 	{#if content.location}

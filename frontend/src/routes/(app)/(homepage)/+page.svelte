@@ -88,7 +88,7 @@
 						<AlertDialog.Root>
 							<AlertDialog.Trigger class={buttonVariants({ variant: 'outline', size: 'default' })}>
 								<MapPinIcon />
-								Change Location
+								Change Farm Location
 							</AlertDialog.Trigger>
 							<AlertDialog.Content class="w-[1200px] max-w-[100vw] p-3 lg:max-w-[90vw] ">
 								<!-- <AlertDialog.Header>
@@ -343,7 +343,7 @@
 	<!-- Comment out or remove this debug output -->
 	<section class="relative mt-6 lg:mt-8">
 		<InsightsSection data={{ widgets: widgets ?? [] }}>
-			<Location />
+			<!-- <Location /> -->
 		</InsightsSection>
 	</section>
 

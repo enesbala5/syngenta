@@ -12,6 +12,7 @@
 	import Logo from '../../general/Logo/Logo.svelte';
 	import Icon from '../../general/Logo/Icon.svelte';
 	import NavSecondary from './nav-secondary.svelte';
+	import { company } from '$lib/data/generic';
 
 	let { ref = $bindable(null), ...restProps }: ComponentProps<typeof Sidebar.Root> = $props();
 
@@ -31,11 +32,12 @@
 					{#snippet child({ props })}
 						{#if sidebar.open}
 							<a href={route('/(app)/(homepage)')} {...props}>
-								<Logo class="!h-full !w-auto" />
+								<!-- <Logo class="!h-full !w-auto" /> -->
+								<img src={company.brand.main.primary.svg} alt={company.name} class="!h-full !w-auto" />
 							</a>
 						{:else}
 							<a href={route('/(app)/(homepage)')} {...props}>
-								<Icon class="!w-full" />
+								<img src={company.brand.main.primary.svg} alt={company.name} class="!h-full !w-auto" />
 							</a>
 						{/if}
 					{/snippet}

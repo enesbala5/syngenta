@@ -18,15 +18,15 @@
 
 	{#if slides.length > 0}
 		<Carousel.Root class="w-full max-w-xs">
-			<Carousel.Content>
+			<Carousel.Content class="">
 				{#each slides as slide, i (i)}
-					<Carousel.Item class="">
-						<Card.Root class="relative aspect-square size-full overflow-hidden ">
+					<Carousel.Item>
+						<Card.Root class="relative aspect-[1/1] size-full overflow-hidden ">
 							{#if slide.imageUrl}
 								<img
 									src={slide.imageUrl}
 									alt={slide.title || ''}
-									class="size-full rounded-md object-cover opacity-30 mix-blend-lighten"
+									class="object-square size-full rounded-md opacity-30 mix-blend-lighten"
 								/>
 							{/if}
 

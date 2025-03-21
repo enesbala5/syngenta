@@ -83,10 +83,14 @@
 {/snippet}
 
 {#if onclick}
-	<button {onclick} class={cn(`size-full min-h-72 rounded-lg`, widgetProps?.class, className)}>
+	<button
+		{onclick}
+		class={cn(` relative min-h-72 w-full rounded-lg`, widgetProps?.class, className)}
+	>
 		{@render content()}
 	</button>
 {:else}
-	<div class={cn(`size-full min-h-72 rounded-lg`, widgetProps?.class, className)}>
+	<div class={cn(`max-h-96 min-h-72 w-full rounded-lg`, widgetProps?.class, className)}>
 		{@render content()}
-	</div>{/if}
+	</div>
+{/if}

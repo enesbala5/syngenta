@@ -7,7 +7,7 @@ export enum RequestMethod {
 }
 
 export const company = {
-	name: 'Dell',
+	name: 'FarmUp',
 	address: {
 		main: 'Blv. Gjergj Fishta, 1006, Tirana, Albania',
 		href: 'https://www.google.com/maps/dir//Blv.%20Gjergj%20Fishta,%201006,%20Tirana,%20Albania'
@@ -15,6 +15,12 @@ export const company = {
 	phone: {
 		main: '+49 1515 1839 001',
 		href: 'tel:+4915151839001'
+	},
+	ai: {
+		phone: {
+			main: '+49 1515 1839 001',
+			href: 'tel:+4915151839001'
+		}
 	},
 	staff: {
 		ceo: 'Komnene A.',

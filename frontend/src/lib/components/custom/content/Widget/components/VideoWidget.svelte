@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import type { BackendSchema } from '$lib/types/generic';
-	import { PlayIcon } from 'lucide-svelte';
+	import { CopyIcon, PlayIcon } from 'lucide-svelte';
 
 	interface Props {
 		content: BackendSchema['VideoContent'];
@@ -10,21 +10,21 @@
 	const { content }: Props = $props();
 </script>
 
-<div class="relative overflow-hidden size-full bg-yellow-500">
-	<div class="absolute inset-0 z-10 flex w-full flex-col items-center justify-between p-4">
-		<div class="flex size-full items-center justify-between">
-			<p class="mr-auto">{content.title}</p>
-			<Button variant="ghost" class="w-fit text-white" size="xs">
-				<PlayIcon class="size-4" />
+<div class="relative size-full max-h-[40vh]  overflow-hidden">
+	<div class="absolute inset-0 z-10 flex w-full flex-col justify-between p-4">
+		<div class="mb-auto flex w-full items-center justify-between">
+			<p class="mr-auto font-mono text-xs text-white opacity-60">{content.title}</p>
+			<Button variant="ghost" class="w-fit text-white backdrop-blur-sm" size="default">
+				<CopyIcon class="size-4" />
 				<span>Copy URL</span>
 			</Button>
-			<Button variant="ghost" class="w-fit text-white" size="xs">
+			<Button variant="ghost" class="w-fit text-white backdrop-blur-sm" size="default">
 				<PlayIcon class="size-4" />
 				<span>Read Aloud</span>
 			</Button>
 		</div>
 
-		<div class="flex flex-col z-10">
+		<div class="z-10 mt-auto flex w-full flex-col text-left gap-2">
 			<h3 class="text-2xl font-semibold leading-none text-white empty:hidden">{content?.title}</h3>
 			<p class="text-base leading-none text-white opacity-75 empty:hidden">
 				{String(content?.subtitle).trim()}
@@ -39,7 +39,7 @@
 				muted={content.muted !== false}
 				loop={content.loop !== false}
 				controls={content.controls !== false}
-				class="pointer-events-none size-full object-cover "
+				class="pointer-events-none size-full object-cover"
 			></video>
 		</div>
 	{:else}

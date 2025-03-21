@@ -31,20 +31,20 @@
 			icon: HomeIcon
 		},
 		{
-			title: 'Registered Startups',
-			url: route('/(app)/startups'),
+			title: 'My Fields',
+			url: route('/(app)/(homepage)', { hash: 'my-fields' }),
 			icon: ListOrderedIcon
 		},
 		{
-			title: 'Conversations by Startups',
-			url: route('/(app)/conversations'),
+			title: 'Field Insights',
+			url: route('/(app)/(homepage)', { hash: 'field-insights' }),
 			icon: MessagesSquareIcon
-		},
-		{
-			title: 'Terms and Conditions',
-			url: route('/(app)/terms'),
-			icon: BrainCircuitIcon
 		}
+		// {
+		// 	title: 'Terms and Conditions',
+		// 	url: route('/(app)/terms'),
+		// 	icon: BrainCircuitIcon
+		// }
 	];
 </script>
 
@@ -87,7 +87,7 @@
 			<Card.Content class="h-fit w-full p-3 pt-6">
 				<Chat
 					endpoint="/syngenta-ai/"
-					temporaryId={user?.id ?? temporaryId}
+					temporaryId={user?.phone_number ?? temporaryId}
 					class="h-[60vh] w-full max-w-none border border-primary/10"
 					innerContainer="p-0"
 				/>

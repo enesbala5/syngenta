@@ -42,7 +42,7 @@ services:
       PUBLIC_BACKEND_URL: ${PUBLIC_BACKEND_URL}
     command:
       - "http"
-      - "frontend:5180"
+      - "frontend:5173"
       - --domain=secretly-good-aphid.ngrok-free.app
     # ports:
     #   - 3307:3306

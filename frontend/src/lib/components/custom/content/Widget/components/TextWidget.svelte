@@ -26,6 +26,8 @@
 			<p class="whitespace-pre-wrap text-sm">{content.description}</p>
 		{/if}
 
+		<div class="flex w-full items-start">backdrop-blur-sm</div>
+
 		{@render suffix?.()}
 	</Card.Content>
 </Card.Root>
