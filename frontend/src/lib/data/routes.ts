@@ -13,37 +13,37 @@ export const routes = ({ user }: { user: PageUser }) => {
 				icon: HomeIcon,
 				isActive: true,
 			},
-			{
-				title: 'Explore',
-				url: route('/(app)/(homepage)'),
-				icon: CompassIcon,
-			},
-			{
-				title: 'LIVE',
-				url: route('/(app)/(homepage)'),
-				icon: VideoIcon,
-				suffix: ComingSoonBadge,
-			},
-			{
-				title: 'Following',
-				url: route('/(app)/(homepage)'),
-				icon: UsersIcon,
-			},
-			{
-				title: 'Messages',
-				url: route('/(app)/(homepage)'),
-				icon: MessageSquareIcon,
-			},
-			{
-				title: 'Notifications',
-				url: route('/(app)/(homepage)'),
-				icon: BellIcon,
-			},
-			{
-				title: 'Profile',
-				url: route('/(app)/(homepage)'),
-				icon: UserIcon,
-			},
+			// {
+			// 	title: 'Explore',
+			// 	url: route('/(app)/(homepage)'),
+			// 	icon: CompassIcon,
+			// },
+			// {
+			// 	title: 'LIVE',
+			// 	url: route('/(app)/(homepage)'),
+			// 	icon: VideoIcon,
+			// 	suffix: ComingSoonBadge,
+			// },
+			// {
+			// 	title: 'Following',
+			// 	url: route('/(app)/(homepage)'),
+			// 	icon: UsersIcon,
+			// },
+			// {
+			// 	title: 'Messages',
+			// 	url: route('/(app)/(homepage)'),
+			// 	icon: MessageSquareIcon,
+			// },
+			// {
+			// 	title: 'Notifications',
+			// 	url: route('/(app)/(homepage)'),
+			// 	icon: BellIcon,
+			// },
+			// {
+			// 	title: 'Profile',
+			// 	url: route('/(app)/(homepage)'),
+			// 	icon: UserIcon,
+			// },
 		],
 		navSecondary: [
 			{

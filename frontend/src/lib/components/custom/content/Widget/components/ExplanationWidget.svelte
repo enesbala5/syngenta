@@ -8,19 +8,19 @@
 	const { content }: Props = $props();
 </script>
 
-<div class="explanation-widget">
-	<h3 class="mb-2 text-xl font-medium">{content.title || 'Explanation'}</h3>
+<div class="flex flex-col gap-y-2 items-start text-left">
+	<h3 class="mb-2 text-xl font-medium text-left">{content?.title || 'Explanation'}</h3>
 
-	{#if content.subtitle}
-		<p class="mb-3 text-sm text-muted-foreground">{content.subtitle}</p>
+	{#if content?.subtitle}
+		<p class="mb-3 text-sm text-muted-foreground">{content?.subtitle}</p>
 	{/if}
 
 	{#if content.steps && content.steps.length > 0}
 		<div class="mt-3 space-y-3">
 			{#each content.steps as step, i}
-				<div class="step flex gap-3">
+				<div class="step flex gap-2">
 					<div
-						class="step-number flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground"
+						class="step-number flex size-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/5 text-sm font-medium text-primary"
 					>
 						{i + 1}
 					</div>

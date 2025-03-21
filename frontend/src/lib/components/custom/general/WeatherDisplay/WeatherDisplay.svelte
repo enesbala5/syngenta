@@ -11,6 +11,7 @@
 </script>
 
 <img src={iconDirectory + icon + '.svg'} alt="" class={className} />
+
 <!-- 
 <style>
 	.wi-icon {

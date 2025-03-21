@@ -129,6 +129,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/ai/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Prompt */
+        post: operations["prompt_ai__post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/text2speech": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Process File */
+        post: operations["process_file_text2speech_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -167,7 +201,7 @@ export interface components {
              * Data
              * @description The json data from plotly.
              */
-            data: string | null;
+            data: unknown;
             /**
              * Prefix
              * @description A list of widgets to display before the image
@@ -241,6 +275,39 @@ export interface components {
             crop_id: string;
             /** Owner Id */
             owner_id: string;
+        };
+        /** GeneralRiskProfileContent */
+        GeneralRiskProfileContent: {
+            /**
+             * Title
+             * @description The title of the risk profile widget
+             */
+            title: string;
+            /**
+             * Description
+             * @description The description of the risk profile widget
+             */
+            description: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the risk profile widget
+             */
+            subtitle: string;
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: (components["schemas"]["StressRiskProfileContent"] | components["schemas"]["YieldRiskProfileContent"] | components["schemas"]["NutrientRiskProfileContent"])[];
+        };
+        /** GeneralRiskProfileModel */
+        GeneralRiskProfileModel: {
+            /**
+             * Type
+             * @default general_risk
+             * @constant
+             */
+            type: "general_risk";
+            content: components["schemas"]["GeneralRiskProfileContent"];
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -386,6 +453,113 @@ export interface components {
             /** Otp */
             otp: string;
         };
+        /** NutrientRiskProfileContent */
+        NutrientRiskProfileContent: {
+            /**
+             * Title
+             * @description The title of the nutrient profile widget
+             */
+            title: string;
+            /**
+             * Description
+             * @description The description of the nutrient profile widget
+             */
+            description: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the nutrient profile widget
+             */
+            subtitle: string;
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: components["schemas"]["ChartWidgetModel"][];
+            /**
+             * Icon
+             * @description The icon for the nutrient profile widget
+             */
+            icon: string;
+            /**
+             * Value
+             * @description The nutrient percentage for the nutrient profile widget
+             */
+            value: number;
+            /**
+             * Unit
+             * @description The unit of measurement for the nutrient
+             * @default %
+             */
+            unit: string;
+        };
+        /** NutrientRiskProfileModel */
+        NutrientRiskProfileModel: {
+            /**
+             * Type
+             * @default nutrient_risk
+             * @constant
+             */
+            type: "nutrient_risk";
+            content: components["schemas"]["NutrientRiskProfileContent"];
+        };
+        /** Price */
+        Price: {
+            /**
+             * Currency
+             * @description The currency of the price
+             */
+            currency: string;
+            /**
+             * Amount
+             * @description The amount of the price
+             */
+            amount: number;
+        };
+        /** ProductWidgetContent */
+        ProductWidgetContent: {
+            /**
+             * Title
+             * @description The title of the product description widget
+             */
+            title: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the product description widget
+             */
+            subtitle: string;
+            /**
+             * Description
+             * @description The description of the product
+             */
+            description: string;
+            /** @description The price of the product */
+            price: components["schemas"]["Price"];
+            /**
+             * Source
+             * @description The image URL of the product
+             */
+            source: string;
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
+        };
+        /** ProductWidgetModel */
+        ProductWidgetModel: {
+            /**
+             * Type
+             * @default product
+             * @constant
+             */
+            type: "product";
+            content: components["schemas"]["ProductWidgetContent"];
+        };
         /** Progress */
         Progress: {
             /**
@@ -399,58 +573,10 @@ export interface components {
              */
             amount: number;
         };
-        /** RiskProfileContent */
-        RiskProfileContent: {
-            /**
-             * Title
-             * @description The title of the risk profile widget
-             */
-            title: string;
-            /**
-             * Description
-             * @description The description of the risk profile widget
-             */
-            description: string;
-            /** @description Optional scores for stress, yield, and nutrient */
-            scores?: components["schemas"]["Scores"] | null;
-            /**
-             * Prefix
-             * @description A list of widgets to display before the image
-             */
-            prefix?: unknown[];
-            /**
-             * Suffix
-             * @description A list of widgets to display before the image
-             */
-            suffix?: unknown[];
-        };
-        /** RiskProfileWidgetModel */
-        RiskProfileWidgetModel: {
-            /**
-             * Type
-             * @default risk_profile
-             * @constant
-             */
-            type: "risk_profile";
-            content: components["schemas"]["RiskProfileContent"];
-        };
-        /** Scores */
-        Scores: {
-            /**
-             * Stress
-             * @description The stress score
-             */
-            stress?: number | null;
-            /**
-             * Yyield
-             * @description The yield score
-             */
-            yyield?: number | null;
-            /**
-             * Nutrient
-             * @description The nutrient score
-             */
-            nutrient?: number | null;
+        /** PromptRequest */
+        PromptRequest: {
+            /** Prompt */
+            prompt: string;
         };
         /** SizeModel */
         SizeModel: {
@@ -512,6 +638,98 @@ export interface components {
              */
             type: "story";
             content: components["schemas"]["StoryContent"];
+        };
+        /** StressRiskProfileContent */
+        StressRiskProfileContent: {
+            /**
+             * Title
+             * @description The title of the risk profile widget
+             */
+            title: string;
+            /**
+             * Description
+             * @description The description of the risk profile widget
+             */
+            description: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the risk profile widget
+             */
+            subtitle: string;
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: components["schemas"]["ChartWidgetModel"][];
+            /**
+             * Icon
+             * @description The icon for the risk profile widget
+             */
+            icon: string;
+            /**
+             * Value
+             * @description The risk percentage for the risk profile widget
+             */
+            value: number;
+            /**
+             * Unit
+             * @description The unit of measurement for the risk profile
+             * @default %
+             */
+            unit: string;
+        };
+        /** StressRiskProfileModel */
+        StressRiskProfileModel: {
+            /**
+             * Type
+             * @default stress_risk
+             * @constant
+             */
+            type: "stress_risk";
+            content: components["schemas"]["StressRiskProfileContent"];
+        };
+        /** TextToSpeechRequest */
+        TextToSpeechRequest: {
+            /** Text */
+            text: string;
+        };
+        /** TextWidgetContent */
+        TextWidgetContent: {
+            /**
+             * Title
+             * @description The title of the text widget
+             */
+            title: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the text widget
+             */
+            subtitle: string;
+            /**
+             * Description
+             * @description The description of the text widget
+             */
+            description: string;
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: unknown[];
+            /**
+             * Suffix
+             * @description A list of widgets to display before the image
+             */
+            suffix?: unknown[];
+        };
+        /** TextWidgetModel */
+        TextWidgetModel: {
+            /**
+             * Type
+             * @default text
+             * @constant
+             */
+            type: "text";
+            content: components["schemas"]["TextWidgetContent"];
         };
         /** Token */
         Token: {
@@ -637,10 +855,10 @@ export interface components {
              */
             temperature?: number | null;
             /**
-             * Condition
+             * Icon
              * @description The weather icon.
              */
-            condition?: string | null;
+            icon?: string | null;
             /**
              * Humidity
              * @description The humidity percentage
@@ -662,7 +880,56 @@ export interface components {
             type: "weather";
             content: components["schemas"]["WeatherContent"];
         };
-    };
+        /** YieldRiskProfileContent */
+        YieldRiskProfileContent: {
+            /**
+             * Title
+             * @description The title of the yield profile widget
+             */
+            title: string;
+            /**
+             * Description
+             * @description The description of the yield profile widget
+             */
+            description: string;
+            /**
+             * Subtitle
+             * @description The subtitle of the yield profile widget
+             */
+            subtitle: string;
+            /**
+             * Prefix
+             * @description A list of widgets to display before the image
+             */
+            prefix?: components["schemas"]["ChartWidgetModel"][];
+            /**
+             * Icon
+             * @description The icon for the yield profile widget
+             */
+            icon: string;
+            /**
+             * Value
+             * @description The yield percentage for the yield profile widget
+             */
+            value: number;
+            /**
+             * Unit
+             * @description The unit of measurement for the yield
+             * @default %
+             */
+            unit: string;
+        };
+        /** YieldRiskProfileModel */
+        YieldRiskProfileModel: {
+            /**
+             * Type
+             * @default yield_risk
+             * @constant
+             */
+            type: "yield_risk";
+            content: components["schemas"]["YieldRiskProfileContent"];
+        };
+    };``
     responses: never;
     parameters: never;
     requestBodies: never;
@@ -802,7 +1069,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                widget_type: "weather" | "image" | "video" | "location" | "explanation" | "story" | "risk_profile" | "harvest";
+                widget_type: "weather" | "image" | "video" | "location" | "explanation" | "story" | "harvest" | "chart" | "stress_risk" | "yield_risk" | "nutrient_risk" | "general_risk" | "product" | "text";
             };
             cookie?: never;
         };
@@ -814,7 +1081,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["WeatherWidgetModel"] | components["schemas"]["ImageWidgetModel"] | components["schemas"]["VideoWidgetModel"] | components["schemas"]["LocationWidgetModel"] | components["schemas"]["ExplanationWidgetModel"] | components["schemas"]["StoryWidgetModel"] | components["schemas"]["RiskProfileWidgetModel"] | components["schemas"]["HarvestWidgetModel"] | components["schemas"]["ChartWidgetModel"];
+                    "application/json": components["schemas"]["WeatherWidgetModel"] | components["schemas"]["ImageWidgetModel"] | components["schemas"]["VideoWidgetModel"] | components["schemas"]["LocationWidgetModel"] | components["schemas"]["ExplanationWidgetModel"] | components["schemas"]["StoryWidgetModel"] | components["schemas"]["HarvestWidgetModel"] | components["schemas"]["ChartWidgetModel"] | components["schemas"]["StressRiskProfileModel"] | components["schemas"]["YieldRiskProfileModel"] | components["schemas"]["NutrientRiskProfileModel"] | components["schemas"]["GeneralRiskProfileModel"] | components["schemas"]["ProductWidgetModel"] | components["schemas"]["TextWidgetModel"];
                 };
             };
             /** @description Validation Error */
@@ -843,7 +1110,73 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["WeatherWidgetModel"] | components["schemas"]["ImageWidgetModel"] | components["schemas"]["VideoWidgetModel"] | components["schemas"]["LocationWidgetModel"] | components["schemas"]["ExplanationWidgetModel"] | components["schemas"]["StoryWidgetModel"] | components["schemas"]["RiskProfileWidgetModel"] | components["schemas"]["HarvestWidgetModel"] | components["schemas"]["ChartWidgetModel"];
+                    "application/json": (components["schemas"]["WeatherWidgetModel"] | components["schemas"]["ImageWidgetModel"] | components["schemas"]["VideoWidgetModel"] | components["schemas"]["LocationWidgetModel"] | components["schemas"]["ExplanationWidgetModel"] | components["schemas"]["StoryWidgetModel"] | components["schemas"]["HarvestWidgetModel"] | components["schemas"]["ChartWidgetModel"] | components["schemas"]["StressRiskProfileModel"] | components["schemas"]["YieldRiskProfileModel"] | components["schemas"]["NutrientRiskProfileModel"] | components["schemas"]["GeneralRiskProfileModel"] | components["schemas"]["ProductWidgetModel"] | components["schemas"]["TextWidgetModel"])[];
+                };
+            };
+        };
+    };
+    prompt_ai__post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PromptRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    process_file_text2speech_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TextToSpeechRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

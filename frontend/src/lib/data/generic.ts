@@ -32,27 +32,27 @@ export const company = {
 		main: {
 			alt: 'Main Logo',
 			black: {
-				svg: '/brand/logo/black.svg',
+				svg: '/brand/logo/logo.png',
 			},
 			white: {
-				svg: '/brand/logo/white.svg',
+				svg: '/brand/logo/logo.png',
 			},
 			primary: {
-				svg: '/brand/logo/primary.svg',
+				svg: '/brand/logo/logo.png',
 			},
 		},
 		icon: {
 			primary: {
 				alt: 'Icon Logo',
-				svg: '/brand/icon/primary.svg',
+				svg: '/brand/icon/logo.png',
 			},
 			white: {
 				alt: 'Icon Logo',
-				svg: '/brand/icon/white.svg',
+				svg: '/brand/icon/logo.png',
 			},
 			black: {
 				alt: 'Icon Logo',
-				svg: '/brand/icon/black.svg',
+				svg: '/brand/icon/logo.png',
 			},
 		},
 	},

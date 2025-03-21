@@ -1,81 +1,71 @@
 <script lang="ts">
-	import type { WidgetContent, WidgetInterface } from '../data';
-	import { User, Calendar, Bell, Star } from 'lucide-svelte';
+	import * as Card from '$lib/components/ui/card';
 
-	interface Props {
-		content: WidgetContent;
-		user: {
-			name: string;
-			// Add other user properties as needed
+	import { User, Calendar, Bell, Star } from 'lucide-svelte';
+	import type { BaseWidgetComponentProps } from '../types';
+	import { cn } from '$lib/utils';
+	import { company } from '$lib/data/generic';
+	import type { PageUser } from '$lib/types/generic';
+
+	interface Props extends BaseWidgetComponentProps {
+		content: {
+			title?: string;
+			subtitle?: string;
+			imageUrl?: string;
 		};
+		user: PageUser;
 	}
 
-	const { content, user }: Props = $props();
+	const { content, user, suffix }: Props = $props();
 
 	// Get current time to display appropriate greeting
 	const hours = new Date().getHours();
-	let greeting = "Hello";
-	
+	let greeting = $state('Hello');
+
 	if (hours < 12) {
-		greeting = "Good morning";
+		greeting = 'Good morning';
 	} else if (hours < 18) {
-		greeting = "Good afternoon";
+		greeting = 'Good afternoon';
 	} else {
-		greeting = "Good evening";
+		greeting = 'Good evening';
 	}
 </script>
 
-<div class="welcome-widget p-4 rounded-lg border bg-card text-card-foreground shadow-sm">
-	<div class="flex items-center gap-3 mb-4">
-		<div class="rounded-full bg-primary/10 p-2">
-			<User class="h-5 w-5 text-primary" />
-		</div>
-		<h2 class="text-2xl font-bold">
-			{greeting}, <span class="text-primary">{user.name}</span>!
+<Card.Root class='w-full'>
+	<Card.Content class="p-3 lg:p-6 w-full">
+		<p class="text-sm text-muted-foreground">Current Date: {new Date().toDateString()}</p>
+
+		<h2 class={cn('mt-6 whitespace-pre-wrap break-words text-5xl font-semibold')}>
+			{greeting}{#if user?.title}
+				, <span class={cn('ml-0 break-words font-bold text-primary')}
+					>{String(user?.title).trim()}</span
+				>
+			{:else}
+				!
+			{/if}
 		</h2>
-	</div>
 
-	{#if content.title}
-		<h3 class="mb-2 text-xl font-medium">{content.title}</h3>
-	{/if}
+		{#if content?.title}
+			<h3 class="mb-2 mt-8 text-xl font-medium">{content?.title}</h3>
+		{/if}
 
-	{#if content.subtitle}
-		<p class="mb-4 text-sm text-muted-foreground">{content.subtitle}</p>
-	{/if}
+		{#if content?.subtitle}
+			<p class="mb-4 text-sm text-muted-foreground">{content?.subtitle}</p>
+		{/if}
+	</Card.Content>
+	<Card.Footer class="p-3 pb-6 lg:p-6 w-full !pt-0">
+		<div class="mt-4 grid grid-cols-1 gap-4 w-full md:grid-cols-3">
+			{@render suffix?.()}
+		</div>
 
-	<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-		<div class="flex items-center gap-3 p-3 rounded-md bg-primary/5 border">
-			<Calendar class="h-5 w-5 text-primary" />
-			<div>
-				<p class="font-medium">Today's Date</p>
-				<p class="text-sm text-muted-foreground">{new Date().toLocaleDateString()}</p>
+		{#if content.imageUrl}
+			<div class="mt-4 overflow-hidden rounded-md">
+				<img
+					src={content.imageUrl}
+					alt={content?.title || 'Welcome image'}
+					class="h-auto w-full object-cover"
+				/>
 			</div>
-		</div>
-		
-		<div class="flex items-center gap-3 p-3 rounded-md bg-amber-500/5 border">
-			<Bell class="h-5 w-5 text-amber-500" />
-			<div>
-				<p class="font-medium">Notifications</p>
-				<p class="text-sm text-muted-foreground">3 unread messages</p>
-			</div>
-		</div>
-		
-		<div class="flex items-center gap-3 p-3 rounded-md bg-green-500/5 border">
-			<Star class="h-5 w-5 text-green-500" />
-			<div>
-				<p class="font-medium">Quick Actions</p>
-				<p class="text-sm text-muted-foreground">View dashboard</p>
-			</div>
-		</div>
-	</div>
-
-	{#if content.imageUrl}
-		<div class="mt-4 overflow-hidden rounded-md">
-			<img
-				src={content.imageUrl}
-				alt={content.title || 'Welcome image'}
-				class="h-auto w-full object-cover"
-			/>
-		</div>
-	{/if}
-</div> 
+		{/if}
+	</Card.Footer>
+</Card.Root>

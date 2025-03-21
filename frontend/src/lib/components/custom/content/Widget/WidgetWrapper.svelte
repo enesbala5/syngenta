@@ -22,7 +22,15 @@
 </script>
 
 {#snippet content({ onclick }: { onclick?: () => void })}
-	<Widget {widget} {onclick} />
+	<Widget
+		{widget}
+		{onclick}
+		class={'border p-2'}
+		preferences={{
+			prefix: { nest: true },
+			suffix: { nest: true }
+		}}
+	/>
 {/snippet}
 
 {#if isDesktop.current}
@@ -44,11 +52,11 @@
 	</Dialog.Root>
 {:else}
 	<Drawer.Root bind:open>
-		<Drawer.Trigger disabled={disablePopup}>
-			{#snippet child({ props }: any)}
-				{@render content({ onclick: props.onclick })}
-			{/snippet}
-		</Drawer.Trigger>
+		<!-- <Drawer.Trigger disabled={disablePopup}> -->
+		<!-- {#snippet child({ props }: any)} -->
+		{@render content({ onclick: () => (open = !open) })}
+		<!-- {/snippet} -->
+		<!-- </Drawer.Trigger> -->
 		<Drawer.Content class="p-0">
 			<!-- <Drawer.Header class="text-left">
 				<Drawer.Title>Edit profile</Drawer.Title>

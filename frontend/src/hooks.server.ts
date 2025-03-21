@@ -6,6 +6,7 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import type { Middleware } from 'openapi-fetch';
 import client from '$lib/services/api';
 import { route } from '$lib/services/routeHandler';
+import { authToken } from './lib';
 
 
 export const fetchUserInfo = async (session: string, fetchFn: FetchFunction): Promise<PageUser | undefined> => {
@@ -43,7 +44,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const pathname = event.url.pathname;
 
 	event.locals.language = 'en';
-	event.locals.session = session;
+	event.locals.session = authToken;
 
 	const openAPIMiddleware: Middleware = {
 		async onRequest({ request }) {

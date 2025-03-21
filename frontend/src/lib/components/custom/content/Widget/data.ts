@@ -1,9 +1,8 @@
 import type { Component, SvelteComponent } from 'svelte';
-import HelloWidget from './components/HelloWidget.svelte';
 import LocationWidget from './components/LocationWidget.svelte';
 import HarvestWidget from './components/HarvestWidget.svelte';
 import RiskProfileWidget from './components/RiskProfileWidget.svelte';
-import ExpectedYieldWidget from './components/ExpectedYieldWidget.svelte';
+// import ExpectedYieldWidget from './components/ExpectedYieldWidget.svelte';
 import ImageWidget from './components/ImageWidget.svelte';
 import VideoWidget from './components/VideoWidget.svelte';
 import WeatherWidget from './components/WeatherWidget.svelte';
@@ -13,29 +12,25 @@ import WelcomeWidget from './components/WelcomeWidget.svelte';
 import client from '$lib/services/api';
 import type { BackendSchema } from '$lib/types/generic';
 import ChartWidget from './components/ChartWidget.svelte';
+import TextWidget from './components/TextWidget.svelte';
 
 // Define widget types
 export type WidgetType =
-	| 'hello'
-	| 'location'
-	| 'harvest'
-	| 'riskProfile'
-	| 'expectedYield'
-	| 'image'
-	| 'video'
-	| 'weather'
-	| 'explanation'
-	| 'story'
-	| 'quality'
-	| 'temperature'
-	| 'moisture'
-	| 'field'
-	| 'welcome'
-	| 'chart';
+	"hello" |
+	"weather" |
+	"image" |
+	"video" |
+	"location" |
+	"explanation" |
+	"story" |
+	"harvest" |
+	"chart" |
+	"stress_risk" |
+	"yield_risk" |
+	"nutrient_risk" |
+	"general_risk"
 
 export type WidgetDirection = 'positive' | 'negative' | 'neutral';
-
-
 
 export type WeatherWidgetInterface = {
 	type: 'weather';
@@ -79,11 +74,9 @@ export interface WidgetComponentMapping {
 export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => {
 	return {
 		hello: {
-			component: HelloWidget,
+			component: TextWidget,
 			props: {
-				// colorTheme: 'indigo',
-				// icon: 'user',
-				class: 'col-span-4 !bg-red-500'
+				class: 'col-span-2'
 			}
 		},
 		location: {
@@ -104,7 +97,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 
 			}
 		},
-		riskProfile: {
+		general_risk: {
 			component: RiskProfileWidget,
 			props: {
 				// colorTheme: 'rose',
@@ -113,11 +106,19 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 
 			}
 		},
-		expectedYield: {
-			component: ExpectedYieldWidget,
+		nutrient_risk: {
+			component: RiskProfileWidget,
 			props: {
+				// colorTheme: 'rose',
+				// icon: 'alert-triangle',
 				class: 'col-span-2'
 
+			}
+		},
+		yield_risk: {
+			component: RiskProfileWidget,
+			props: {
+				class: 'col-span-2'
 			}
 		},
 		chart: {
@@ -172,17 +173,8 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 
 			}
 		},
-		quality: {
-			component: ExplanationWidget,
-			props: {
-				// colorTheme: 'green',
-				// icon: 'soil',
-				class: 'col-span-2'
-
-			}
-		},
-		temperature: {
-			component: WeatherWidget,
+		stress_risk: {
+			component: RiskProfileWidget,
 			props: {
 				// colorTheme: 'red',
 				// icon: 'thermometer',
@@ -190,33 +182,6 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 
 			}
 		},
-		moisture: {
-			component: WeatherWidget,
-			props: {
-				// colorTheme: 'blue',
-				// icon: 'droplet',
-				class: 'col-span-2'
-
-			}
-		},
-		chart: {
-			component: ExplanationWidget,
-			props: {
-				// colorTheme: 'purple',
-				// icon: 'bar-chart',
-				class: 'col-span-2'
-
-			}
-		},
-		welcome: {
-			component: WelcomeWidget,
-			props: {
-				// colorTheme: 'purple',
-				// icon: 'bar-chart',
-				class: 'col-span-2'
-
-			}
-		}
 	};
 };
 

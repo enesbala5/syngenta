@@ -3,19 +3,37 @@
 	import type { WidgetInterface } from './data';
 	import { widgetMappings } from './data';
 	import { cn } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 
 	interface Props {
 		widget: WidgetInterface;
 		onclick?: () => void;
+		class?: string;
+		preferences: {
+			prefix: {
+				nest: boolean;
+			};
+			suffix: {
+				nest: boolean;
+			};
+		};
 	}
 
-	const { widget, onclick }: Props = $props();
+	const { widget, onclick, class: className, preferences }: Props = $props();
 
-	let expanded = $state(false);
+	const getWidgetComponent = () => {
+		const mappings = widgetMappings();
 
-	const { component: WidgetComponent, props: widgetProps } = $derived(
-		widgetMappings()[widget.type]
-	);
+		if (!mappings[widget.type]) {
+			return { component: null, props: null };
+		}
+
+		const { component, props } = mappings[widget.type];
+
+		return { component, props };
+	};
+
+	const { component: WidgetComponent, props: widgetProps } = $derived(getWidgetComponent());
 
 	let prefix = $state({
 		expanded: false
@@ -29,7 +47,13 @@
 {#snippet nestedWidgets({ widgets }: { widgets: WidgetInterface[] })}
 	<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 		{#each widgets as widget}
-			<Widget {widget} />
+			<Widget
+				{widget}
+				preferences={{
+					prefix: { nest: false },
+					suffix: { nest: false }
+				}}
+			/>
 		{/each}
 	</div>
 {/snippet}
@@ -40,11 +64,11 @@
 	{/if}
 
 	{#if WidgetComponent}
-		<WidgetComponent content={widget.content} {...widgetProps} />
+		<WidgetComponent content={widget.content} {...widgetProps}></WidgetComponent>
 	{:else}
 		<div class="flex items-center justify-between">
 			<h3 class={`text-lg font-medium`}>
-				{widget.content.title || 'Widget'}
+				{widget.content?.title || 'Widget'}
 			</h3>
 		</div>
 
@@ -59,11 +83,10 @@
 {/snippet}
 
 {#if onclick}
-	<button {onclick} class={cn(`size-full overflow-hidden  rounded-lg`, widgetProps?.class)}>
+	<button {onclick} class={cn(`size-full min-h-72 rounded-lg`, widgetProps?.class, className)}>
 		{@render content()}
 	</button>
 {:else}
-	<div class={cn(`size-full overflow-hidden rounded-lg`, widgetProps?.class)}>
+	<div class={cn(`size-full min-h-72 rounded-lg`, widgetProps?.class, className)}>
 		{@render content()}
-	</div>
-{/if}
+	</div>{/if}

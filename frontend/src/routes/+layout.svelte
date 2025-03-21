@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import '@fontsource-variable/manrope';
+	import '@fontsource/poppins';
 	// --------------------------------------------------------------------
 	import { PUBLIC_UMAMI_DATA_WEBSITE_ID, PUBLIC_UMAMI_SCRIPT } from '$env/static/public';
 	import { Toaster } from '$lib/components/ui/sonner/index.js';
@@ -67,7 +67,7 @@
 	}
 
 	:global(body) {
-		font-family: 'Manrope Variable', sans-serif;
+		font-family: 'Poppins', sans-serif;
 	}
 
 	:global(html) {

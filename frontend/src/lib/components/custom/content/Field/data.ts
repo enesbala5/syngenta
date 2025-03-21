@@ -45,42 +45,42 @@ export const crops = [
 		description: 'A starchy root.',
 		image: 'media/crops/potatoes.png'
 	},
-	{
-		id: 'tomatoes',
-		title: 'Tomatoes',
-		description: 'A juicy fruit.',
-		image: 'media/crops/tomatoes.png'
-	},
-	{
-		id: 'carrots',
-		title: 'Carrots',
-		description: 'A crunchy root.',
-		image: 'media/crops/carrots.png'
-	},
-	{
-		id: 'onions',
-		title: 'Onions',
-		description: 'A pungent vegetable.',
-		image: 'media/crops/onions.png'
-	},
-	{
-		id: 'lettuce',
-		title: 'Lettuce',
-		description: 'A leafy green.',
-		image: 'media/crops/lettuce.png'
-	},
-	{
-		id: 'cabbage',
-		title: 'Cabbage',
-		description: 'A leafy vegetable.',
-		image: 'media/crops/cabbage.png'
-	},
-	{
-		id: 'cucumbers',
-		title: 'Cucumbers',
-		description: 'A refreshing vegetable.',
-		image: 'media/crops/cucumbers.png'
-	},
+	// {
+	// 	id: 'tomatoes',
+	// 	title: 'Tomatoes',
+	// 	description: 'A juicy fruit.',
+	// 	image: 'media/crops/tomatoes.png'
+	// },
+	// {
+	// 	id: 'carrots',
+	// 	title: 'Carrots',
+	// 	description: 'A crunchy root.',
+	// 	image: 'media/crops/carrots.png'
+	// },
+	// {
+	// 	id: 'onions',
+	// 	title: 'Onions',
+	// 	description: 'A pungent vegetable.',
+	// 	image: 'media/crops/onions.png'
+	// },
+	// {
+	// 	id: 'lettuce',
+	// 	title: 'Lettuce',
+	// 	description: 'A leafy green.',
+	// 	image: 'media/crops/lettuce.png'
+	// },
+	// {
+	// 	id: 'cabbage',
+	// 	title: 'Cabbage',
+	// 	description: 'A leafy vegetable.',
+	// 	image: 'media/crops/cabbage.png'
+	// },
+	// {
+	// 	id: 'cucumbers',
+	// 	title: 'Cucumbers',
+	// 	description: 'A refreshing vegetable.',
+	// 	image: 'media/crops/cucumbers.png'
+	// },
 	{
 		id: 'cotton',
 		title: 'Cotton',
@@ -112,10 +112,10 @@ export const crops = [
 		image: 'media/crops/pulses.png'
 	},
 	{
-		id: 'sugercane',
-		title: 'Sugercane',
+		id: 'sugarcane',
+		title: 'Sugarcane',
 		description: 'A source of sugar.',
-		image: 'media/crops/sugercane.png'
+		image: 'media/crops/sugarcane.png'
 	},
 ] as const;
 
@@ -128,17 +128,26 @@ export interface FieldInterface {
 		area: number;
 	}
 	cropId: Crop['id'];
-	ownerId: PageUser['id'];
+	ownerId: PageUser['phone_number'];
 }
 
 export const mockFields: FieldInterface[] = [
 	{
-		label: 'Field 1',
+		label: 'Wheat Field',
 		createdAt: new Date(),
 		size: {
 			area: 100
 		},
 		cropId: 'wheat',
 		ownerId: '1'
-	}
+	},
+	{
+		label: 'Coffee Field',
+		createdAt: new Date('03.02.2024'),
+		size: {
+			area: 75
+		},
+		cropId: 'coffee',
+		ownerId: '1'
+	},
 ];

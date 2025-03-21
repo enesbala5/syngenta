@@ -1,3 +1,7 @@
+import type { WidgetType } from '$lib/components/custom/content/Widget/data';
+import { authToken } from '$lib/index';
+import client from '$lib/services/api';
+
 /**
  * Converts total seconds to a human-readable time string.
  * 
@@ -8,44 +12,64 @@
  * @returns {string} Formatted time string
  */
 export function formatSeconds(totalSeconds, options = {}) {
-  // Ensure input is a number and handle edge cases
-  const seconds = Math.max(0, Math.floor(Number(totalSeconds)));
-  
-  // Default options
-  const {
-    showSeconds = true,
-    shortFormat = false
-  } = options;
+	// Ensure input is a number and handle edge cases
+	const seconds = Math.max(0, Math.floor(Number(totalSeconds)));
 
-  // Calculate minutes and remaining seconds
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
+	// Default options
+	const {
+		showSeconds = true,
+		shortFormat = false
+	} = options;
 
-  // Format the output
-  if (minutes === 0) {
-    // Less than a minute
-    return showSeconds 
-      ? `${seconds}${shortFormat ? '' : ' seconds'}` 
-      : '0 minutes';
-  } else if (minutes < 60) {
-    // Between 1 and 59 minutes
-    const formattedSeconds = showSeconds 
-      ? `:${remainingSeconds.toString().padStart(2, '0')}` 
-      : '';
-    
-    return `${minutes}${formattedSeconds}${shortFormat ? '' : ' minutes'}`;
-  } else {
-    // 60 minutes or more
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
-    
-    const hourPart = `${hours} hour${hours !== 1 ? 's' : ''}`;
-    const minutePart = remainingMinutes > 0 
-      ? ` ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}` 
-      : '';
-    
-    return shortFormat 
-      ? `${hours}:${remainingMinutes.toString().padStart(2, '0')}`
-      : `${hourPart}${minutePart}`;
-  }
+	// Calculate minutes and remaining seconds
+	const minutes = Math.floor(seconds / 60);
+	const remainingSeconds = seconds % 60;
+
+	// Format the output
+	if (minutes === 0) {
+		// Less than a minute
+		return showSeconds
+			? `${seconds}${shortFormat ? '' : ' seconds'}`
+			: '0 minutes';
+	} else if (minutes < 60) {
+		// Between 1 and 59 minutes
+		const formattedSeconds = showSeconds
+			? `:${remainingSeconds.toString().padStart(2, '0')}`
+			: '';
+
+		return `${minutes}${formattedSeconds}${shortFormat ? '' : ' minutes'}`;
+	} else {
+		// 60 minutes or more
+		const hours = Math.floor(minutes / 60);
+		const remainingMinutes = minutes % 60;
+
+		const hourPart = `${hours} hour${hours !== 1 ? 's' : ''}`;
+		const minutePart = remainingMinutes > 0
+			? ` ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}`
+			: '';
+
+		return shortFormat
+			? `${hours}:${remainingMinutes.toString().padStart(2, '0')}`
+			: `${hourPart}${minutePart}`;
+	}
 }
+
+
+export const getWidgetByType = async (type: WidgetType) => {
+	const { data, error } = await client.GET(`/widgets/{widget_type}`, {
+		params: {
+			path: {
+				widget_type: type as any
+			}
+		},
+		headers: {
+			'ngrok-skip-browser-warning': true,
+			Authorization: `Bearer ${authToken}`
+		}
+	});
+	if (error || !data) {
+		console.error(error);
+		throw new Error('Error fetching widget');
+	}
+	return data;
+};

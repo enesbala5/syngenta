@@ -46,9 +46,8 @@
 		"zod": "^3.23.8"
 	},
 	"dependencies": {
-		"@fontsource-variable/manrope": "^5.1.0",
 		"@fontsource/cedarville-cursive": "^5.1.0",
-		"@lucia-auth/adapter-prisma": "^4.0.1",
+		"@fontsource/poppins": "^5.2.5",
 		"@number-flow/svelte": "^0.1.5",
 		"@pilcrowjs/object-parser": "^0.0.4",
 		"@sveltejs/adapter-node": "^5.2.9",
@@ -57,7 +56,6 @@
 		"@tailwindcss/forms": "^0.5.9",
 		"@tanstack/table-core": "^8.20.5",
 		"@zerodevx/svelte-img": "^2.1.2",
-		"arctic": "^2.3.0",
 		"leaflet": "^1.9.4",
 		"marked": "^15.0.3",
 		"number-flow": "^0.3.8",

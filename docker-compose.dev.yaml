@@ -32,20 +32,20 @@ services:
       - ./frontend:/frontend
       - node_modules:/frontend/node_modules/
 
-  # ngrok:
-  #   container_name: syngenta-ngrok-c
-  #   image: ngrok/ngrok:latest
-  #   env_file:
-  #     - .env.dev
-  #   environment:
-  #     NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
-  #     PUBLIC_BACKEND_URL: ${PUBLIC_BACKEND_URL}
-  #   command:
-  #     - "http"
-  #     - "backend:6003"
-  #     - --domain=secretly-good-aphid.ngrok-free.app
-  #   # ports:
-  #   #   - 3307:3306
+  ngrok:
+    container_name: syngenta-ngrok-c
+    image: ngrok/ngrok:latest
+    env_file:
+      - .env.dev
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+      PUBLIC_BACKEND_URL: ${PUBLIC_BACKEND_URL}
+    command:
+      - "http"
+      - "frontend:5180"
+      - --domain=secretly-good-aphid.ngrok-free.app
+    # ports:
+    #   - 3307:3306
 
 volumes:
   node_modules:

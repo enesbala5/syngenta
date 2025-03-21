@@ -37,25 +37,25 @@
 				return;
 			}
 
-			const res = await fetch(
-				route('/api/updateSessionToken/[token]', {
-					params: {
-						token: data.access_token
-					}
-				}),
-				{
-					headers: {
-						'Content-Type': 'application/json',
-						Negotiate: 'trans'
-					}
-				}
-			);
+			// const res = await fetch(
+			// 	route('/api/updateSessionToken/[token]', {
+			// 		params: {
+			// 			token: data.access_token
+			// 		}
+			// 	}),
+			// 	{
+			// 		headers: {
+			// 			'Content-Type': 'application/json',
+			// 			Negotiate: 'trans'
+			// 		}
+			// 	}
+			// );
 
-			if (!res.ok) {
-				toast.error('Something went wrong. Please try again.');
-				console.error(res);
-				return;
-			}
+			// if (!res.ok) {
+			// 	toast.error('Something went wrong. Please try again.');
+			// 	console.error(res);
+			// 	return;
+			// }
 
 			toast.success('You signed in successfully. Please wait.');
 
