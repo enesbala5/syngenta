@@ -44,9 +44,7 @@
 		{@render content({ onclick: () => (open = !open) })}
 		<!-- {/snippet} -->
 		<!-- </Dialog.Trigger> -->
-		<Dialog.Content
-			class="flex h-auto max-h-[90vh] flex-col gap-6 overflow-y-auto !border-none !bg-transparent p-0"
-		>
+		<Dialog.Content class="flex flex h-auto max-h-[90vh] flex-col gap-2 overflow-y-auto p-0">
 			<!-- <Dialog.Header>
 				<Dialog.Title>Edit profile</Dialog.Title>
 				<Dialog.Description>
@@ -63,7 +61,7 @@
 		{@render content({ onclick: () => (open = !open) })}
 		<!-- {/snippet} -->
 		<!-- </Drawer.Trigger> -->
-		<Drawer.Content class="max-h-[90vh] overflow-y-auto p-0">
+		<Drawer.Content class="h-auto max-h-[90vh] overflow-y-hidden p-0">
 			<!-- <Drawer.Header class="text-left">
 				<Drawer.Title>Edit profile</Drawer.Title>
 				<Drawer.Description>
@@ -76,19 +74,21 @@
 				<Drawer.Close class={buttonVariants({ variant: 'outline' })}>Cancel</Drawer.Close>
 			</Drawer.Footer> -->
 
-			{@render content({})}
+			<div class="p-2 flex flex-col gap-2">
+				{@render content({})}
+			</div>
 
-			<div class="flex items-center gap-2">
-				<Button variant="secondary">
+			<Drawer.Footer class="flex items-center gap-2">
+				<Button variant="secondary" class="w-full">
 					Text Now
 					<MessageSquareIcon class="size-4" />
 				</Button>
 
-				<Button href={company.ai.phone.href}>
+				<Button href={company.ai.phone.href} class="w-full">
 					Talk Now
 					<PhoneIcon class="size-4" />
 				</Button>
-			</div>
+			</Drawer.Footer>
 		</Drawer.Content>
 	</Drawer.Root>
 {/if}

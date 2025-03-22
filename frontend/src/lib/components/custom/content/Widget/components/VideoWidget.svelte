@@ -10,7 +10,7 @@
 	const { content }: Props = $props();
 </script>
 
-<div class="relative size-full max-h-[40vh]  overflow-hidden">
+<div class="relative size-full h-96  overflow-hidden">
 	<div class="absolute inset-0 z-10 flex w-full flex-col justify-between p-4">
 		<div class="mb-auto flex w-full items-center justify-between">
 			<p class="mr-auto font-mono text-xs text-white opacity-60">{content.title}</p>

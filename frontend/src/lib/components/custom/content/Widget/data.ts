@@ -76,7 +76,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 		hello: {
 			component: TextWidget,
 			props: {
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 			}
 		},
 		location: {
@@ -84,7 +84,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'emerald',
 				// icon: 'map-pin',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
@@ -93,7 +93,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'amber',
 				// icon: 'wheat',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
@@ -102,7 +102,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'rose',
 				// icon: 'alert-triangle',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
@@ -111,20 +111,20 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'rose',
 				// icon: 'alert-triangle',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
 		yield_risk: {
 			component: RiskProfileWidget,
 			props: {
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 			}
 		},
 		chart: {
 			component: ChartWidget,
 			props: {
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
@@ -133,7 +133,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'sky',
 				// icon: 'image',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
@@ -142,7 +142,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'violet',
 				// icon: 'video',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
@@ -151,7 +151,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'cyan',
 				// icon: 'cloud',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
@@ -160,7 +160,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'yellow',
 				// icon: 'info',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
@@ -169,7 +169,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'fuchsia',
 				// icon: 'book-open',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},
@@ -178,7 +178,7 @@ export const widgetMappings = (): Record<WidgetType, WidgetComponentMapping> => 
 			props: {
 				// colorTheme: 'red',
 				// icon: 'thermometer',
-				class: 'col-span-2'
+				class: 'col-span-2 min-h-96'
 
 			}
 		},

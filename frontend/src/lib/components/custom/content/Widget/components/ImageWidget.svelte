@@ -10,7 +10,7 @@
 	const { content }: Props = $props();
 </script>
 
-<div class="grid size-full grid-cols-1 grid-rows-1 overflow-hidden bg-yellow-500  max-h-[40vh]">
+<div class="grid size-full grid-cols-1 grid-rows-1 overflow-hidden bg-yellow-500  h-96">
 	<div class="z-10 col-start-1 row-start-1 flex w-full flex-col justify-between p-4">
 		<div class="mb-auto flex w-full items-center justify-between">
 			<p class="mr-auto font-mono text-xs text-white opacity-60">{content.title}</p>

@@ -77,7 +77,7 @@
 		>
 			{#snippet suffix()}
 				<Card.Root class="col-span-full ">
-					<div class="flex items-center justify-between px-6 pt-6">
+					<div class="flex items-center justify-between flex-wrap gap-3 px-6 pt-6">
 						<Card.Header class="px-0 pt-0">
 							<Card.Title>My Fields</Card.Title>
 							<Card.Description
@@ -90,7 +90,7 @@
 								<MapPinIcon />
 								Change Farm Location
 							</AlertDialog.Trigger>
-							<AlertDialog.Content class="w-[1200px] max-w-[100vw] p-3 lg:max-w-[90vw] ">
+							<AlertDialog.Content class="w-[1200px] max-w-[100vw] p-3 lg:max-w-[90vw]">
 								<!-- <AlertDialog.Header>
 									<AlertDialog.Title>Update your location</AlertDialog.Title>
 									<AlertDialog.Description>
@@ -320,7 +320,8 @@
 					{:then widget}
 						<WidgetWrapper widget={widget as any} />
 					{:catch error}
-						<Card.Root class="col-span-2">
+						<Card.Root class="col-span-2"
+							>e
 							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
 								<AlertTriangleIcon class="size-6" />
 								<Card.Description>Something went wrong</Card.Description>

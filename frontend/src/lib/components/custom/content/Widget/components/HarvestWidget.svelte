@@ -24,9 +24,11 @@
 	const harvestIcon = $derived(getHarvestIcon(content.progress || 0));
 </script>
 
-<div class="flex w-full flex-col items-center bg-gradient-to-tr from-red-50 to-red-100 text-center p-4 ">
+<div
+	class="flex w-full grow flex-col items-center bg-gradient-to-tr from-red-50 to-red-100 p-4 text-center"
+>
 	{#if harvestIcon}
-		<Card.Root class="size-28 !p-2 mb-4">
+		<Card.Root class="mb-4 size-28 !p-2">
 			<WeatherDisplay icon={harvestIcon} class="object-fill " />
 		</Card.Root>
 	{/if}
@@ -61,10 +63,19 @@
 		</div>
 		<span class={cn('text-2xl', getRiskStyle(content.progress.amount).text)}>
 			<!-- <i class={`wi wi-${harvestIcon}`}></i> -->
-			<p>{content.progress}</p>
+			<p>{content.progress.amount}{content.progress.unit}</p>
 		</span>
 	</div>
 
+	<div class="h-5 rounded-full bg-gray-200 dark:bg-gray-700">
+		<div
+			class={cn(
+				'h-5 rounded-full bg-gradient-to-r',
+				getRiskStyle(content.progress.amount).gradient
+			)}
+			style="width: {Math.min(100, 100)}%"
+		></div>
+	</div>
 	<div class="flex w-full items-center justify-between">
 		<p class="text-sm text-neutral-800 opacity-70 dark:text-neutral-200">
 			{Math.min(content.progress.amount, 100)}%

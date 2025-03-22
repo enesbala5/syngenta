@@ -17,16 +17,16 @@
 	<!-- <h3 class="mb-2 text-xl font-medium">{content?.title || 'Story'}</h3> -->
 
 	{#if slides.length > 0}
-		<Carousel.Root class="w-full max-w-xs">
+		<Carousel.Root class="w-full max-w-xs h-96">
 			<Carousel.Content class="">
 				{#each slides as slide, i (i)}
 					<Carousel.Item>
-						<Card.Root class="relative aspect-[1/1] size-full overflow-hidden ">
+						<Card.Root class="relative w-96  overflow-hidden  h-[22.75rem]">
 							{#if slide.imageUrl}
 								<img
 									src={slide.imageUrl}
 									alt={slide.title || ''}
-									class="object-square size-full rounded-md opacity-30 mix-blend-lighten"
+									class="object-fill size-full rounded-md opacity-30 mix-blend-lighten"
 								/>
 							{/if}
 

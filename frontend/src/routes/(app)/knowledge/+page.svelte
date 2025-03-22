@@ -57,8 +57,8 @@
 		</div>
 	</div>
 
-	<section class="relative mt-6 flex items-start gap-4 lg:mt-8">
-		<Card.Root class="w-1/3">
+	<section class="relative mt-6 flex px-2 items-start gap-4 lg:mt-8">
+		<Card.Root class="w-1/3 hidden lg:block">
 			<Card.Header>
 				<Card.Title>Shortcuts</Card.Title>
 				<Card.Description>Access the most useful data for you</Card.Description>
@@ -72,7 +72,7 @@
 				{/each}
 			</Card.Content>
 		</Card.Root>
-		<Card.Root class="h-fit w-2/3 border-primary shadow-md shadow-primary/20">
+		<Card.Root class="h-fit lg:w-2/3 border-primary shadow-md shadow-primary/20">
 			<Card.Header class="space-y-3 bg-gradient-to-bl from-primary/5 to-transparent">
 				<Card.Title class="h4 flex items-center gap-1.5">
 					<MessageCircleIcon class="text-primary" />

@@ -45,7 +45,7 @@
 </script>
 
 {#snippet nestedWidgets({ widgets }: { widgets: WidgetInterface[] })}
-	<div class="mt-4 flex max-h-96 flex-col overflow-auto">
+	<div class="mt-4 flex flex-col overflow-auto">
 		{#each widgets as widget}
 			<Widget
 				{widget}
@@ -60,9 +60,9 @@
 {/snippet}
 
 {#snippet content()}
-	{#if widget?.content?.prefix && widget?.content?.prefix?.length > 0}
+	<!-- {#if widget?.content?.prefix && widget?.content?.prefix?.length > 0}
 		{@render nestedWidgets({ widgets: widget?.content?.prefix })}
-	{/if}
+	{/if} -->
 
 	{#if WidgetComponent}
 		<WidgetComponent content={widget.content} {...widgetProps}></WidgetComponent>
@@ -78,16 +78,16 @@
 		</p>
 	{/if}
 
-	{#if widget?.content?.suffix && widget?.content?.suffix?.length > 0}
+	<!-- {#if widget?.content?.suffix && widget?.content?.suffix?.length > 0}
 		{@render nestedWidgets({ widgets: widget?.content?.suffix })}
-	{/if}
+	{/if} -->
 {/snippet}
 
 {#if onclick}
 	<button
 		{onclick}
 		class={cn(
-			`items-left !relative flex min-h-72 w-full flex-col rounded-lg text-left`,
+			`items-left !relative flex h-96 w-full flex-col rounded-lg text-left`,
 			widgetProps?.class,
 			className
 		)}
@@ -95,7 +95,7 @@
 		{@render content()}
 	</button>{:else}<div
 		class={cn(
-			`items-left !relative flex min-h-72 w-full flex-col rounded-lg text-left`,
+			`items-left !relative flex h-96 w-full flex-col rounded-lg text-left`,
 			widgetProps?.class,
 			className
 		)}
