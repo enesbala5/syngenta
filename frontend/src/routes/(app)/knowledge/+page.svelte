@@ -72,7 +72,7 @@
 				{/each}
 			</Card.Content>
 		</Card.Root>
-		<Card.Root class="h-fit lg:w-2/3 border-primary shadow-md shadow-primary/20">
+		<Card.Root class="h-fit lg:w-2/3  border-primary rounded-xl shadow-md shadow-primary/20">
 			<Card.Header class="space-y-3 bg-gradient-to-bl from-primary/5 to-transparent">
 				<Card.Title class="h4 flex items-center gap-1.5">
 					<MessageCircleIcon class="text-primary" />
@@ -87,7 +87,7 @@
 				<Chat
 					endpoint="/syngenta-ai/"
 					temporaryId={user?.phone_number ?? temporaryId}
-					class="h-[60vh] w-full max-w-none border border-primary/10"
+					class="h-[60vh] w-full max-w-none"
 					innerContainer="p-0"
 				/>
 			</Card.Content>

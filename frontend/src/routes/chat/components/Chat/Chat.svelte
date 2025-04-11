@@ -1,4 +1,5 @@
 <script lang="ts">
+
 	import {
 		CopyIcon,
 		CornerDownLeft,
@@ -79,6 +80,9 @@
 	// Handle sending message
 	async function handleSendMessage(e: Event) {
 		e.preventDefault();
+
+		toast.info('Feature is coming soon. Thank you for your patience.');
+		return;
 
 		if (isLoading) {
 			toast.error('Please wait. You will be able to request a new message in a few seconds.');
@@ -229,7 +233,7 @@
 <div class={cn('mx-auto h-[100dvh] w-full', className)}>
 	<div
 		class={cn(
-			'relative flex h-full flex-col rounded-xl bg-muted/40 p-4 lg:col-span-2',
+			'relative flex h-full flex-col rounded-lg bg-muted/40 p-4 lg:col-span-2  border border-primary/10',
 			innerContainer
 		)}
 	>
@@ -285,7 +289,7 @@
 
 		{#if chatState.showChatRating}
 			<div
-				class="z-20 mb-4 flex items-center justify-center"
+				class="z-20 mb-1 flex items-center justify-center p-1"
 				transition:fly={{ duration: 150, easing: quartInOut, y: 50 }}
 			>
 				<ChatRating chat_id={user?.id ?? temporaryId} />
@@ -295,7 +299,7 @@
 		<form
 			bind:this={formEl}
 			onsubmit={handleSendMessage}
-			class="relative z-30 rounded-lg border bg-background shadow-sm shadow-primary/20 transition-all duration-300 ease-in-out focus-within:shadow-primary/40 focus-within:ring-1 focus-within:ring-ring"
+			class="relative z-30 rounded-lg border w-[98%] mb-2 mx-auto bg-background shadow-sm shadow-primary/20 transition-all duration-300 ease-in-out focus-within:shadow-primary/40 focus-within:ring-1 focus-within:ring-ring"
 		>
 			<ChatInput
 				bind:ref={inputEl}

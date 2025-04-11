@@ -57,23 +57,23 @@
 				</Card.Root>
 			{/await} -->
 
-			{#await getWidgetByType('harvest')}
-				<Card.Root class="col-span-4 w-full">
+			<!-- {#await getWidgetByType('harvest')}
+				<Card.Root class="col-span-2 w-full">
 					<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
 						<Spinner class="size-6" />
 						<Card.Description>Loading widget...</Card.Description>
 					</Card.Content>
 				</Card.Root>
 			{:then widget}
-				<WidgetWrapper widget={widget as any} class="col-span-4" />
+				<WidgetWrapper widget={widget as any} class="col-span-2" />
 			{:catch error}
-				<Card.Root class="col-span-4 w-full">
+				<Card.Root class="col-span-2 w-full">
 					<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
 						<AlertTriangleIcon class="size-6" />
 						<Card.Description>Something went wrong</Card.Description>
 					</Card.Content>
 				</Card.Root>
-			{/await}
+			{/await} -->
 
 			{#await getWidgetByType('image')}
 				<Card.Root class="col-span-2">
@@ -93,29 +93,29 @@
 				</Card.Root>
 			{/await}
 
-			{#await getWidgetByType('video')}
-				<Card.Root class="col-span-4 w-full">
+			<!-- {#await getWidgetByType('video')}
+				<Card.Root class="col-span-2 w-full">
 					<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
 						<Spinner class="size-6" />
 						<Card.Description>Loading widget...</Card.Description>
 					</Card.Content>
 				</Card.Root>
 			{:then widget}
-				<WidgetWrapper widget={widget as any} class="col-span-4" />
+				<WidgetWrapper widget={widget as any} class="col-span-2" />
 			{:catch error}
-				<Card.Root class="col-span-4 w-full">
+				<Card.Root class="col-span-2 w-full">
 					<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
 						<AlertTriangleIcon class="size-6" />
 						<Card.Description>Something went wrong</Card.Description>
 					</Card.Content>
 				</Card.Root>
-			{/await}
+			{/await} -->
 
 			<!-- <div class="flex h-16 items-center">
 			<TeamSwitcher />
 		</div> -->
 
-			<div class="flex-1 space-y-4 pt-6">
+			<!-- <div class="flex-1 space-y-4 pt-6"> -->
 				<!-- <Tabs.Root value="overview" class="relative space-y-4">
 			<Tabs.List>
 				<Tabs.Trigger value="overview">Overview</Tabs.Trigger>
@@ -125,11 +125,11 @@
 			</Tabs.List>
 
 			<Tabs.Content value="overview" class="absolute inset-x-0 space-y-4 overflow-auto"> -->
-				<div class="relative !flex w-full flex-col px-2">
+				<!-- <div class="relative !flex w-full flex-col bg-red-500 col-span-2 px-2"> -->
 					{@render children?.()}
 
 					{#await getWidgetByType('harvest')}
-						<Card.Root class="col-span-4 w-full">
+						<Card.Root class="col-span-2 w-full">
 							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
 								<Spinner class="size-6" />
 								<Card.Description>Loading widget...</Card.Description>
@@ -138,7 +138,7 @@
 					{:then widget}
 						<WidgetWrapper widget={widget as any} class="!max-h-96 overflow-y-auto" />
 					{:catch error}
-						<Card.Root class="col-span-4 w-full">
+						<Card.Root class="col-span-2 w-full">
 							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
 								<AlertTriangleIcon class="size-6" />
 								<Card.Description>Something went wrong</Card.Description>
@@ -147,7 +147,7 @@
 					{/await}
 
 					{#await getWidgetByType('video')}
-						<Card.Root class="col-span-4 w-full">
+						<Card.Root class="col-span-2 w-full">
 							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
 								<Spinner class="size-6" />
 								<Card.Description>Loading widget...</Card.Description>
@@ -156,7 +156,7 @@
 					{:then widget}
 						<WidgetWrapper widget={widget as any} class="!max-h-96 overflow-y-auto" />
 					{:catch error}
-						<Card.Root class="col-span-4 w-full">
+						<Card.Root class="col-span-2 w-full">
 							<Card.Content class="flex size-full flex-col items-center justify-center gap-3">
 								<AlertTriangleIcon class="size-6" />
 								<Card.Description>Something went wrong</Card.Description>
@@ -245,10 +245,10 @@
 				</div>
 				<!-- </Tabs.Content>
 		</Tabs.Root> -->
-			</div>
+			<!-- </div> -->
 
 			<!-- <WidgetWrapper {widget} /> -->
-		</div>
+		<!-- </div> -->
 		<!-- </Tabs.Content>
 		</Tabs.Root> -->
 	</div>
