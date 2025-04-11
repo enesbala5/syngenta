@@ -20,3 +20,6 @@ export const load: LayoutLoad = async ({ url, data }) => {
 		};
 	}
 };
+
+export const prerender = true;
+export const ssr = false;
