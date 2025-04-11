@@ -10,7 +10,7 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import { AlertTriangleIcon, MapPinIcon, MessageSquare, PlusIcon, TrashIcon } from 'lucide-svelte';
 	import * as Alert from '$lib/components/ui/alert';
-	import { RequestMethod } from '$lib/data/generic';
+	import { company, RequestMethod } from '$lib/data/generic';
 	import { Label } from '$lib/components/ui/label';
 	import * as Card from '$lib/components/ui/card';
 	import type { PageData } from './$types';
@@ -57,6 +57,8 @@
 		toast.info('Changes discarded');
 	}
 </script>
+
+<title>Homepage - {company.name}</title>
 
 <main class="!px-0 pt-2 md:px-4 lg:pb-24">
 	<!-- <section class="flex flex-col gap-3 lg:gap-4">
