@@ -48,6 +48,8 @@
 	];
 </script>
 
+<title>Knowledge Base - {company.name}</title>
+
 <main class="container-width-sm !px-0 pt-2 md:px-4 lg:pb-24">
 	<div class="flex flex-col space-y-2">
 		<h2 class="h2">Knowledge Base</h2>
