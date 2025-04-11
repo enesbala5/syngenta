@@ -44,7 +44,7 @@
 				});
 
 				if (error || !data) {
-					toast.error('Something went wrong. Please try to submit again.');
+					toast.error('Rating feature is coming soon. Thank you for your patience.');
 					return;
 				}
 
