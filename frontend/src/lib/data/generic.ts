@@ -9,30 +9,31 @@ export enum RequestMethod {
 export const company = {
 	name: 'FarmUp',
 	address: {
-		main: 'Blv. Gjergj Fishta, 1006, Tirana, Albania',
-		href: 'https://www.google.com/maps/dir//Blv.%20Gjergj%20Fishta,%201006,%20Tirana,%20Albania'
+		
+		main: 'Bankgasse 9-1 9000 St. Gallen, Switzerland',
+		href: 'https://maps.app.goo.gl/BRYgouZav7rPAL5R9'
 	},
 	phone: {
-		main: '+49 1515 1839 001',
-		href: 'tel:+4915151839001'
+		main: '+91 868 678 3657',
+		href: 'tel:+918686783657'
 	},
 	ai: {
 		phone: {
-			main: '+49 1515 1839 001',
-			href: 'tel:+4915151839001'
+			main: '+91 868 678 3657',
+			href: 'tel:+918686783657'
 		}
 	},
 	staff: {
-		ceo: 'Komnene A.',
-		cofounder: 'Enes Bala',
+		ceo: 'Hackstreet Boys',
+		cofounder: 'Team',
 	},
 	email: {
-		main: 'contact@dell.com',
-		support: 'support@dell.com'
+		main: 'contact@syngenta.com',
+		support: 'support@syngenta.com'
 	},
 	domain: {
-		full: 'https://www.dell.com',
-		short: 'dell.com',
+		full: 'https://www.syngenta.com',
+		short: 'syngenta.com',
 	},
 	brand: {
 		main: {
