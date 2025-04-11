@@ -69,34 +69,34 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const user = session ? await fetchUserInfo(session, event?.fetch) : undefined
 	console.timeEnd(labelWithTime)
 
-	// If user is signed in and the current path exists in the authRedirects.signedIn -> Redirect user to page
-	if (user) {
-		// Get redirect - if rule matches
-		let redirectForSignedInUser = authRedirects.signedIn.find((redirect) => redirect.rule(pathname));
+	// // If user is signed in and the current path exists in the authRedirects.signedIn -> Redirect user to page
+	// if (user) {
+	// 	// Get redirect - if rule matches
+	// 	let redirectForSignedInUser = authRedirects.signedIn.find((redirect) => redirect.rule(pathname));
 
-		// If there is a redirect -> Redirect user
-		if (redirectForSignedInUser) {
-			console.log('redirectForSignedInUser', redirectForSignedInUser)
+	// 	// If there is a redirect -> Redirect user
+	// 	if (redirectForSignedInUser) {
+	// 		console.log('redirectForSignedInUser', redirectForSignedInUser)
 
-			redirect(300, redirectForSignedInUser.redirect)
-		}
+	// 		redirect(300, redirectForSignedInUser.redirect)
+	// 	}
 
-		// TODO: Update types once they are generated from the OpenAPI spec
-		event.locals.user = user
+	// 	// TODO: Update types once they are generated from the OpenAPI spec
+	// 	event.locals.user = user
 
-		const response = await resolve(event);
-		response.headers.set('Authorization', `Bearer ${session}`);
+	// 	const response = await resolve(event);
+	// 	response.headers.set('Authorization', `Bearer ${session}`);
 
-		return response;
-	}
+	// 	return response;
+	// }
 
-	// If user is signed out and the current path exists in the authRedirects.signedOUt -> Redirect user to page
-	const redirectForSignedOutUser = authRedirects.signedOut.find((redirect) => redirect.rule(pathname))
+	// // If user is signed out and the current path exists in the authRedirects.signedOUt -> Redirect user to page
+	// const redirectForSignedOutUser = authRedirects.signedOut.find((redirect) => redirect.rule(pathname))
 
-	// If there is a redirect for signed out user -> Redirect user
-	if (!user && redirectForSignedOutUser) {
-		redirect(300, redirectForSignedOutUser.redirect)
-	}
+	// // If there is a redirect for signed out user -> Redirect user
+	// if (!user && redirectForSignedOutUser) {
+	// 	redirect(300, redirectForSignedOutUser.redirect)
+	// }
 
 	return await resolve(event)
 };
