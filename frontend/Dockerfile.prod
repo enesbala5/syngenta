@@ -53,7 +53,7 @@ RUN pnpx @sveltejs/kit sync
 
 # RUN node --max-old-space-size=4096 ./node_modules/.bin/tsc --noEmit
 
-RUN npm --max-old-space-size=16384 run build
+RUN npm --max-old-space-size=32768 run build
 
 RUN pnpm prune --production
 

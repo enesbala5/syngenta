@@ -1,7 +1,6 @@
 <script lang="ts">
 	// import LanguagePicker from '../Modals/LanguagePicker/LanguagePicker.svelte';
 	import { Badge } from '$lib/components/ui/badge';
-	import SubscribeEmail from './components/SubscribeEmail.svelte';
 	// import DarkModeSelect from '../Input/DarkModeSelect.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import { Button } from '$lib/components/ui/button';
