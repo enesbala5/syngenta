@@ -1,0 +1,41 @@
+**/node_modules**/**
+
+**/.next
+
+**/.idea/
+**/.vscode/
+
+frontend/.DS_Store
+frontend/build
+frontend/.svelte-kit
+# frontend/package
+# frontend/package-lock.json
+frontend/.vercel
+frontend/.netlify
+frontend/vite.config.js.timestamp-*
+frontend/vite.config.ts.timestamp-**
+frontend/db/data
+
+frontend/.pnpm-store
+.flaskenv*
+
+# -----------------
+
+# Output
+**/.output
+**/.vercel
+**/.svelte-kit
+**/build
+
+# OS
+**/Thumbs.db
+
+# Env
+.env
+**/.env.*
+**/!.env.example
+**/!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*

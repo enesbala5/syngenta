@@ -1,0 +1,1 @@
+docker exec -it app-frontend-dev-c bash -c "npx prisma db push"
