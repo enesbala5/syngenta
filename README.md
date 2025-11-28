@@ -11,10 +11,3 @@ Run `make dev` for development server or `make prod` for production
 Instructions for development workflow for specific services are declared in the folders themselves. 
 
 ---
-
-Backend Steps:
-
-- Get all documents in the backend and group by Type
-
-- Extract Key User Information - most valuable key points and relevance
-	- Maybe we can provide some context so it understands which content would be relevant to extract
